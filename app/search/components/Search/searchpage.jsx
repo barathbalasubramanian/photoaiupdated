@@ -246,7 +246,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
       formData.append('folderName', selectedFolder);
 
       try {
-        const response = await axios.post('http://localhost:8080/upload', formData, {
+        const response = await axios.post(`${process.env.BACKEND_URL}/upload`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

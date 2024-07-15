@@ -427,7 +427,7 @@ export default function Dashboard({ event}){
     }
 
     const HandleZip = async () => {
-      const response = await axios.post('http://localhost:8080/downloadall', {
+      const response = await axios.post(`${process.env.BACKEND_URL}/downloadall`, {
         folderName: SelectedFolder,
       }, {
         headers: {
@@ -449,7 +449,7 @@ export default function Dashboard({ event}){
       }
       console.log(selectedFiles, "--"); 
       try {
-          const response = await axios.post('http://localhost:8080/selected', {
+          const response = await axios.post(`${process.env.BACKEND_URL}/selected`, {
               selectedFiles: selectedFiles,
           }, {
               headers: {
