@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  font-family: Poppins, sans-serif !important;
+}
+*::-webkit-scrollbar{
+	width: 0;
+  height: 0;
+}
+html, body{
+  width: 100vw;
+  scroll-behavior: smooth;
+  font-family: Poppins, sans-serif !important;
+}
+:root{
+  --bg: rgba(232, 242, 253, 1);
+  --blue: rgb(23, 123, 229);
+  --white: rgba(255, 255, 255, 1);
+  --pink: #ec2265;
+  --black: #000;
+  --lightpink: #FFEAF1;
+  --darkblue: #4F55C3;
+  --black: #000;
+  --orange: rgba(240, 123, 63, 1);
+  --red:#EB4D55;
+  --paid:#6D60FF;
+  --bal:#57EA54;
+}
+
+h1{
+  font-size: 28px;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+  border: 1px solid #A0A5FF !important;
+}
+
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root:nth-child(1) {
+  margin-top: 3px;
+  width: 150% !important;
+}
+
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root * {
+  border: none !important;
+  padding: 0 2px !important;
+  font-size: 16px !important;
+}
+
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root input {
+  font-size: 16px !important;
+  outline: none;
+  padding: .25em .5em !important;
+}
+
+.css-1ps6pg7-MuiPaper-root *{
+  background: none !important;
+  color: rgba(133, 131, 131, 1);
+}
+
+.css-1ps6pg7-MuiPaper-root{
+  margin-top: 3.5em !important;
+}
+.css-ezskuf-MuiSkeleton-root{
+  background-color: rgba(23, 123, 229, .6) !important;
+}
+
+.homestyle_datePicker__wK2EV .MuiInputAdornment-root{
+  margin-right: 1em !important;
+}
+
+.homestyle_datePicker__wK2EV .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root:nth-child(1) {
+  margin-top: 3px;
+  width: 100% !important;
+}
+
+.recharts-wrapper{
+  background-color: white;
+  border-radius: 20px;
+}
+
+.recharts-surface {
+    width: 400px !important;
+    height: 225px !important;
+    padding: 0 0 0 2em !important;
+    box-shadow: "rgba(0, 0, 0, 0.3) 0px 2px 2px 0px"
+}
+
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root input {
+  width: 14em !important;
+  color: var(--black) !important;
+  font-size: 13px !important;
+}
