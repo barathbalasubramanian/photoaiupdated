@@ -192,9 +192,10 @@ export default function Search({ AllEventData, SuperAdmin }) {
           'Content-Type': 'application/json',
         },
       });
+      console.log(response)
       if (response.status === 200) {
         const data = response.data
-        console.log(data.data);
+        console.log(data);
       }
       setAllfolders(storeData.data[0]["Folders"])
       setIsDialogOpen(false);
