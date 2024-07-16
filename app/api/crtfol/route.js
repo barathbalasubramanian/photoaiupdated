@@ -17,35 +17,35 @@ const drive = google.drive({
 
 export const POST = async (req, res) => {
 
-  return NextResponse.json({
-    status: 200
-  });
+  // return NextResponse.json({
+  //   status: 200
+  // });
 
-  // try {
-  //   const { folderName } = await req.json();
-  //   console.log(folderName);
+  try {
+    const { folderName } = await req.json();
+    console.log(folderName);
 
-  //   const fileMetadata = {
-  //     name: folderName,
-  //     mimeType: 'application/vnd.google-apps.folder',
-  //   };
+    const fileMetadata = {
+      name: folderName,
+      mimeType: 'application/vnd.google-apps.folder',
+    };
 
-  //   const file = await drive.files.create({
-  //     requestBody: fileMetadata,
-  //     fields: 'id',
-  //   });
+    const file = await drive.files.create({
+      requestBody: fileMetadata,
+      fields: 'id',
+    });
 
-  //   console.log('Folder Id:', file.data.id);
+    console.log('Folder Id:', file.data.id);
 
-  //   return NextResponse.json({
-  //     status: 200,
-  //     data: 'Folder Creation Success ...',
-  //   });
-  // } catch (err) {
-  //   console.error('Error creating folder:', err);
-  //   return NextResponse.json({
-  //     status: 500,
-  //     data: err.message,
-  //   });
-  // }
+    return NextResponse.json({
+      status: 200,
+      // data: 'Folder Creation Success ...',
+    });
+  } catch (err) {
+    console.error('Error creating folder:', err);
+    return NextResponse.json({
+      status: 500,
+      data: err.message
+    });
+  }
 };

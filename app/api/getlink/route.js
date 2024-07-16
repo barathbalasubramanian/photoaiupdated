@@ -49,23 +49,23 @@ const getDownloadLinkFromName = async (fileName, folderId) => {
 };
 
 export const POST = async (req, res) => {
-
-  // return NextResponse.json({
-  //   status:200,link: "downloadLink" })
-
+  
   const { filename, folderName } = await req.json()
   console.log(filename,folderName);
+  return NextResponse.json({
+    status:200,link: `${folderName} downloadLink` })
 
-  try {
-      const folderId = await GetFolderId(folderName)
-      console.log(folderId)
-      const downloadLink = await getDownloadLinkFromName(filename, folderId);
-      console.log(downloadLink)
-      return NextResponse.json({
-          status:200,link: downloadLink })
-  } catch (error) {
-      return NextResponse.json({
-          status:500
-      },{ error: "Error Fetching ..." })
-  }
+
+  // try {
+  //     const folderId = await GetFolderId(folderName)
+  //     console.log(folderId)
+  //     const downloadLink = await getDownloadLinkFromName(filename, folderId);
+  //     console.log(downloadLink)
+  //     return NextResponse.json({
+  //         status:200,link: downloadLink })
+  // } catch (error) {
+  //     return NextResponse.json({
+  //         status:500
+  //     },{ error: "Error Fetching ..." })
+  // }
 };
