@@ -185,7 +185,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
     }
 
     else {
-      const response = await axios.post('https://master.d1kgp3bf18viqk.amplifyapp.com/api/getlink', {
+      const response = await axios.post('https://master.d1kgp3bf18viqk.amplifyapp.com/api/crtfol', {
         folderName: folderName,
       }, {
         headers: {
