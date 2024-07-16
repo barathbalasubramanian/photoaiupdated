@@ -405,8 +405,8 @@ export default function Dashboard({ event}){
       const parts = item.split('/');
       const folderName = parts[parts.length - 2]; 
       const imageName = parts[parts.length - 1];
-      console.log(imageName,folderName)
-      const response = await axios.post('/api/getlink', {
+      console.log(imageName,folderName,"Download",process.env.NEXT_PUBLIC_AMPLIFY_URL,process.env.NEXT_PUBLIC_AWS_BUCKET_NAME)
+      const response = await axios.post(`https://master.d1kgp3bf18viqk.amplifyapp.com/api/getlink`, {
         filename: imageName,
         folderName: folderName,
       }, {
@@ -449,7 +449,7 @@ export default function Dashboard({ event}){
       }
       console.log(selectedFiles, "--"); 
       try {
-          const response = await axios.post(`${process.env.BACKEND_URL}/selected`, {
+          const response = await axios.post('http://3.110.136.28:8080/selected', {
               selectedFiles: selectedFiles,
           }, {
               headers: {

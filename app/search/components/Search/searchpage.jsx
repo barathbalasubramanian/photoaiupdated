@@ -280,6 +280,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
             Compresedimage = await imageCompression(upload[i], options);
           }
           const name = upload[i].name
+          console.log(name)
           const uniqueFileName = new Date()
             .toISOString()
             .replace(/[-:.]/g, "")
@@ -304,7 +305,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
               const per = ((i + 1) / upload.length) * 100;
               totaluploadedvalue(i + 1);
               percentagevalue(Math.ceil(per));
-              success = true; // Mark success if the upload is successful
+              success = true;
             }
         } catch (error) {
           console.error("Error occurred during upload:", error);
