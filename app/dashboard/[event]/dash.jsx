@@ -406,7 +406,7 @@ export default function Dashboard({ event}){
       const folderName = parts[parts.length - 2]; 
       const imageName = parts[parts.length - 1];
       console.log(imageName,folderName,"Download",process.env.NEXT_PUBLIC_AMPLIFY_URL,process.env.NEXT_PUBLIC_AWS_BUCKET_NAME)
-      const response = await axios.post('https://master.d1kgp3bf18viqk.amplifyapp.com/api/getlink', {
+      const response = await axios.post('api/getlink', {
         filename: imageName,
         folderName: folderName,
       }, {
