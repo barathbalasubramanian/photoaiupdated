@@ -181,9 +181,21 @@ export default function Search({ AllEventData, SuperAdmin }) {
 
     if (storeData === "Folder Already Exists") {
       toast.warning("Folder Aldready Exists Pls Provide Unique Name!");
+      return
     }
 
     else {
+      const response = await axios.post('api/createfolder', {
+        folderName: folderName,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.status === 200) {
+        const data = response.data
+        console.log(data.data);
+      }
       setAllfolders(storeData.data[0]["Folders"])
       setIsDialogOpen(false);
       setFolderName('');

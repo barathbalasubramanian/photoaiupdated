@@ -16,11 +16,11 @@ const drive = google.drive({
 
 export const POST = async (req, res) => {
   try {
-    const { foldername } = await req.json();
-    console.log(foldername);
+    const { folderName } = await req.json();
+    console.log(folderName);
 
     const fileMetadata = {
-      name: foldername,
+      name: folderName,
       mimeType: 'application/vnd.google-apps.folder',
     };
 
