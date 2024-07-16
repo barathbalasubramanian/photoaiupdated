@@ -50,16 +50,6 @@ const getDownloadLinkFromName = async (fileName, folderId) => {
 
 export const POST = async (req, res) => {
 
-  res.setHeader('Access-Control-Allow-Origin', 'https://photoainewversion.vercel.app');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
-  // Handle preflight request
-  if (req.method === 'OPTIONS') {
-    return res.status(204).end();
-  }
-
-
   return NextResponse.json({
     status:200,link: "downloadLink" })
 
