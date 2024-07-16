@@ -39,7 +39,7 @@ export const POST = async (req, res) => {
 
     return NextResponse.json({
       status: 200,
-      // data: 'Folder Creation Success ...',
+      data: 'Folder Creation Success ...',
     });
   } catch (err) {
     console.error('Error creating folder:', err);
