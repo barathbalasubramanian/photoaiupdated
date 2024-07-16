@@ -14,11 +14,11 @@ const drive = google.drive({
     auth: oauth2Client,
 });
 
+
 export const POST = async (req, res) => {
 
   return NextResponse.json({
-    status: 200,
-    data: 'Folder Creation Success ...',
+    status: 200
   });
 
   // try {
