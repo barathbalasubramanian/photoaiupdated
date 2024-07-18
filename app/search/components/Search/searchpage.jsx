@@ -89,9 +89,9 @@ export default function Search({ AllEventData, SuperAdmin }) {
   ];
 
   const handleOptionSelect = (item) => {
-    console.log(item);
+    // console.log(item);
     monthvalue(item.EventName);
-    // console.log(item.EventDate)
+    console.log(item.EventDate)
     setSelectedOption(item.EventName.split("-")[1]);
     setSearchValue(item.EventName.split("-")[1].split("_").join(" "));
     seteveDate(item.EventDate);
@@ -113,8 +113,8 @@ export default function Search({ AllEventData, SuperAdmin }) {
   };
 
   const handleClick = async (id) => {
-    console.log("Clicked button:", id);
-    console.log(selectedOption,"Sel")
+    // console.log("Clicked button:", id);
+    // console.log(selectedOption,"Sel")
     if (selectedOption) {
       if (id === "uploadFolder") {
         if ( allFolders == null ) {
@@ -143,16 +143,16 @@ export default function Search({ AllEventData, SuperAdmin }) {
         // window.location = `/digitalinvite?data=${encodedData}`;
       }
       else if ( id === "qrcode" ){
-        console.log(month)
+        // console.log(month)
         router.push(`/qrcode/${month}`);
         // window.location = `/qrcode/${month}`;
       }
       else if ( id === "report"){
         let excel = await DownloadExcel(month);
-        console.log(excel); 
+        // console.log(excel); 
       }
       else if (id === "generatesecret") {
-        console.log("Gen")
+        // console.log("Gen")
         setsecretDiv(true)
       }
       else if (id === "dashboard") {
@@ -174,8 +174,8 @@ export default function Search({ AllEventData, SuperAdmin }) {
 
   const handleCreateClick = async() => {
     loadderevalue(true)
-    console.log('Creating folder with name:', folderName);
-    console.log(folderName,searchValue);
+    // console.log('Creating folder with name:', folderName);
+    // console.log(folderName,searchValue);
     let storeData = await Storefolder(folderName,searchValue.split(" ").join("_"))
     loadderevalue(false);
 
@@ -192,10 +192,10 @@ export default function Search({ AllEventData, SuperAdmin }) {
           'Content-Type': 'application/json',
         },
       });
-      console.log(response)
+      // console.log(response)
       if (response.status === 200) {
         const data = response.data
-        console.log(data);
+        // console.log(data);
       }
       setAllfolders(storeData.data[0]["Folders"])
       setIsDialogOpen(false);
@@ -214,7 +214,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
 
   const handleFolderDoubleClick = (value) => {
     setSelectedFolder(value);
-    console.log(value);
+    // console.log(value);
     inputboxvalue(true);
   };
 
@@ -267,13 +267,13 @@ export default function Search({ AllEventData, SuperAdmin }) {
 
         results = results.concat(response.data);
         setUploadStatus(prevStatus => [...prevStatus, ...response.data]);
-        console.log('Batch upload successful:', response.data);
+        // console.log('Batch upload successful:', response.data);
       } catch (error) {
-        console.error('Error uploading batch:', error);
+        // console.error('Error uploading batch:', error);
       }
     }
 
-    console.log('All file uploads completed:', results);
+    // console.log('All file uploads completed:', results);
 
     for (let i = 0; i < upload.length; i++) {
       if (UploadedArray.includes(upload[i].name)) {
@@ -293,7 +293,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
             Compresedimage = await imageCompression(upload[i], options);
           }
           const name = upload[i].name
-          console.log(name)
+          // console.log(name)
           const uniqueFileName = new Date()
             .toISOString()
             .replace(/[-:.]/g, "")
@@ -321,7 +321,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
               success = true;
             }
         } catch (error) {
-          console.error("Error occurred during upload:", error);
+          // console.error("Error occurred during upload:", error);
           // Retry after 1 minute
           await new Promise((resolve) => setTimeout(resolve, 180000));
           retries++;
@@ -350,7 +350,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
   };
 
   const SendSMSFunction = async () => {
-    console.log("Sending...")
+    // console.log("Sending...")
     LoaderStatsValue(true);
     const monthValue = month;
     try {
@@ -363,13 +363,13 @@ export default function Search({ AllEventData, SuperAdmin }) {
       });
       if (response.ok) {
           let data = await response.json()
-          console.log('Messages sent successfully!');
+          // console.log('Messages sent successfully!');
           toast.success(`Messages sent successfully ${data.data}!`);
       } else {
-          console.error('Failed to send messages');
+          // console.error('Failed to send messages');
       }
     } catch (error) {
-        console.error('Error:', error);
+        // console.error('Error:', error);
     }
 
     // if (response) {
@@ -378,7 +378,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
     // else {
     //   toast.warning(response);
     // }
-    // console.log(response)
+    console.log(response)
     LoaderStatsValue(false);
   };
 
@@ -392,11 +392,11 @@ export default function Search({ AllEventData, SuperAdmin }) {
 
   const handleSetKey = async() => {
     setSecretKey(document.getElementById('secretKeyInput').value);
-    console.log(document.getElementById('secretKeyInput').value,"SecretKey");
+    // console.log(document.getElementById('secretKeyInput').value,"SecretKey");
 
     if ( document.getElementById('secretKeyInput').value != "" ) {
       const saveKey = await StoreKey(document.getElementById('secretKeyInput').value,searchValue.split(" ").join("_"));
-      console.log(saveKey)
+      // console.log(saveKey)
       
       if (saveKey == "Success") {
         toast.success("Secret Key Saved!");
@@ -427,7 +427,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
       },
     });
 
-    console.log(upload.length)
+    // console.log(upload.length)
     for (let i = 0; i < upload.length; i++) {
       let retries = 0;
       let success = false;
@@ -446,13 +446,13 @@ export default function Search({ AllEventData, SuperAdmin }) {
           });
   
           const response = await s3Client.send(uploadCommand);
-          console.log(`Upload successful! ${response.key}`);
+          // console.log(`Upload successful! ${response.key}`);
           const per = ((i + 1) / upload.length) * 100;
           totaluploadedvalue(i + 1);
           percentagevalue(Math.ceil(per));
           success = true;
         } catch (error) {
-          console.error("Error occurred during upload:", error);
+          // console.error("Error occurred during upload:", error);
           await new Promise((resolve) => setTimeout(resolve, 180000)); 
           retries++;
         }

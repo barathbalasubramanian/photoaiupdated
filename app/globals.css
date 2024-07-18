@@ -48,7 +48,16 @@ h3 {
 
 .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root:nth-child(1) {
   margin-top: 3px;
-  width: 150% !important;
+  width: 159% !important;
+  padding: 4px 8px;
+}
+
+@media only screen and (max-width:800px) {
+  .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root:nth-child(1) {
+    margin-top: 3px;
+    width: 123% !important;
+    padding: 4px 4px;
+  }
 }
 
 .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root * {

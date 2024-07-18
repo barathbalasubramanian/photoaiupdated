@@ -3,3 +3,34 @@
     height: 12px;
     object-fit: contain;
 }
+
+@media only screen and (max-width:800px) {
+    .CrtCon{
+        width: 20em !important;
+        padding: 4em 1.5em !important;
+        align-items: start;
+    }
+    .tit{
+        font-size:22px !important;
+    }
+    .inputDiv {
+        width: 120% !important;
+    }
+    .btns{
+        padding: 4px 10px !important;
+        min-width: fit-content !important;
+        margin-top: 0em !important;
+    }
+    .backButton{
+        left: -8% !important;
+    }
+    .container1{
+        width: 21em !important;
+        padding: 3em 1.5em;
+    }
+    .btns1{
+        padding: 4px 10px !important;
+        min-width: 8.65em !important;
+        margin-top: 0em !important;
+    }
+}

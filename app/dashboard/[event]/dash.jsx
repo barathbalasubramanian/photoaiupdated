@@ -117,7 +117,7 @@ export default function Dashboard({ event}){
         tokenvalue(FetchedImages.NextContinuationToken);
         PushToStacks(fetchedImages);
       } catch (error) {
-        console.error('Error fetching images:', error);
+        // console.error('Error fetching images:', error);
       }
     }
 
@@ -148,7 +148,7 @@ export default function Dashboard({ event}){
         PushToStacks(fetchedImages);
         setfolderSelect(key)
       } catch (error) {
-        console.error('Error fetching images:', error);
+        // console.error('Error fetching images:', error);
       }
     }
 
@@ -183,7 +183,7 @@ export default function Dashboard({ event}){
               folders = folders.concat(response.CommonPrefixes.map(prefix => prefix.Prefix));
               continuationToken = response.NextContinuationToken;
           } catch (error) {
-              console.error('Error listing objects:', error);
+              // console.error('Error listing objects:', error);
               throw error;
           }
       } while (continuationToken);
@@ -287,7 +287,7 @@ export default function Dashboard({ event}){
     window.onscroll = function(ev) {
       if ((window.innerHeight + window.scrollY + 200) >= document.body.offsetHeight && pagetext !== 'Favorites' && !isituser) {
         if (folderSelect == "") {
-          console.log("Querying ...",folderSelect)
+          // console.log("Querying ...",folderSelect)
           FetchDashboard(nexttoken);
         }
         else {
@@ -351,7 +351,7 @@ export default function Dashboard({ event}){
           const fetchedImages = DobeMaped.map(key => {
                 const parts = key.split('/');
                 attt.push(parts[2]+"/"+parts[3]);
-                console.log(parts[2]+"/"+parts[3],parts)
+                // console.log(parts[2]+"/"+parts[3],parts)
           });
           const selfieData = {
             Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
@@ -372,7 +372,7 @@ export default function Dashboard({ event}){
           loadderevalue(false)
     };
     const QueryVideos = async() => {
-      console.log("Querying Videos...")
+      // console.log("Querying Videos...")
       pagetextvalue("All Videos");
       loadderevalue(true)
       stackonevalue([]);
@@ -389,12 +389,12 @@ export default function Dashboard({ event}){
         });
         try {
             const response = await s3Client.send(command);
-            console.log(response)
+            // console.log(response)
             const videoKeys = response.Contents.map((content) => content.Key);
-            console.log(videoKeys);
+            // console.log(videoKeys);
             setVideos(videoKeys);
         } catch (error) {
-            console.error('Error listing Videos:', error);
+            // console.error('Error listing Videos:', error);
             loadderevalue(false);      
         }
       loadderevalue(false);
@@ -402,10 +402,10 @@ export default function Dashboard({ event}){
 
     const HandleDownload = async(item) => {
       console.log(item)
-      const parts = item.split('/');
+      // const parts = item.split('/');
       const folderName = parts[parts.length - 2]; 
       const imageName = parts[parts.length - 1];
-      console.log(imageName,folderName,"Download",process.env.NEXT_PUBLIC_AMPLIFY_URL,process.env.NEXT_PUBLIC_AWS_BUCKET_NAME)
+      // console.log(imageName,folderName,"Download",process.env.NEXT_PUBLIC_AMPLIFY_URL,process.env.NEXT_PUBLIC_AWS_BUCKET_NAME)
       const response = await axios.post('http://localhost:8080/downloadfile', {
         filename: imageName,
         folderName: folderName,
@@ -416,7 +416,7 @@ export default function Dashboard({ event}){
       });
       if (response.status === 200) {
         const data = response.data
-        console.log(data.link);
+        // console.log(data.link);
         const link = document.createElement('a');
         link.href = data.link;
         link.target = '_blank';
@@ -434,10 +434,10 @@ export default function Dashboard({ event}){
           'Content-Type': 'application/json',
         },
       });
-      console.log(response)
+      // console.log(response)
       if (response.status === 200) {
         const data = response.data
-        console.log(data)
+        // console.log(data)
       }
     }
 
@@ -447,7 +447,7 @@ export default function Dashboard({ event}){
       if (selectedFiles.length === 0) {
         return;
       }
-      console.log(selectedFiles, "--"); 
+      // console.log(selectedFiles, "--"); 
       try {
           const response = await axios.post('http://3.110.136.28:8080/selected', {
               selectedFiles: selectedFiles,
@@ -456,9 +456,9 @@ export default function Dashboard({ event}){
                   'Content-Type': 'application/json',
               },
           });
-          console.log(response.data);
+          // console.log(response.data);
           const data = response.data
-          console.log(data.link);
+          // console.log(data.link);
           const link = document.createElement('a');
           link.href = data.link;
           link.target = '_blank';
@@ -467,7 +467,7 @@ export default function Dashboard({ event}){
           document.body.removeChild(link);
           setSelectedFiles([]);
       } catch (error) {
-          console.error('Error Download batch:', error);
+          // console.error('Error Download batch:', error);
       }
     };
 

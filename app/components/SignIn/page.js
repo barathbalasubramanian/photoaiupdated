@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Login from "./Login";
 import Swal from 'sweetalert2';
 import Loader from "@/app/loader/page";
+import Styles from './page.module.css'
 export default function SignIn(){
     const [chechbox,checkboxvalue] = useState(true);
     const [user,uservalue] = useState('');
@@ -49,7 +50,7 @@ export default function SignIn(){
         {loadeer?<Loader/>:""}
         <div className="min-h-screen w-full flex items-center justify-center" style={{backgroundColor:"var(--bg)"}}>
             <div className={`bg-white p-6 py-16 flex`} style={{borderRadius:"20px",boxShadow:"0px 72px 80px -48px rgba(0, 0, 0, 0.5)"}}>
-                <div style={{minWidth:"30em",minHeight:"20em"}}>
+                <div className={Styles.logoCon} style={{minWidth:"30em",minHeight:"20em"}}>
 
                 </div>
                 <form onSubmit={(e)=>{e.preventDefault();HandelSubmit(e.target.UserID.value,e.target.Password.value)}} style={{width:"20em"}}>
