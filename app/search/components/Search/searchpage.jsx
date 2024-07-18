@@ -185,7 +185,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
     }
 
     else {
-      const response = await axios.post('https://master.d1kgp3bf18viqk.amplifyapp.com/api/crtfol', {
+      const response = await axios.post('http://localhost:8080/createFolder', {
         folderName: folderName,
       }, {
         headers: {

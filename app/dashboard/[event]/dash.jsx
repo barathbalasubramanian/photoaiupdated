@@ -406,7 +406,7 @@ export default function Dashboard({ event}){
       const folderName = parts[parts.length - 2]; 
       const imageName = parts[parts.length - 1];
       console.log(imageName,folderName,"Download",process.env.NEXT_PUBLIC_AMPLIFY_URL,process.env.NEXT_PUBLIC_AWS_BUCKET_NAME)
-      const response = await axios.post('https://master.d1kgp3bf18viqk.amplifyapp.com/api/getlink', {
+      const response = await axios.post('http://localhost:8080/downloadfile', {
         filename: imageName,
         folderName: folderName,
       }, {
@@ -417,12 +417,12 @@ export default function Dashboard({ event}){
       if (response.status === 200) {
         const data = response.data
         console.log(data.link);
-        // const link = document.createElement('a');
-        // link.href = data.link;
-        // link.target = '_blank';
-        // document.body.appendChild(link);
-        // link.click();
-        // document.body.removeChild(link);
+        const link = document.createElement('a');
+        link.href = data.link;
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
       }
     }
 
