@@ -406,7 +406,7 @@ export default function Dashboard({ event}){
       const folderName = parts[parts.length - 2]; 
       const imageName = parts[parts.length - 1];
       // console.log(imageName,folderName,"Download",process.env.NEXT_PUBLIC_AMPLIFY_URL,process.env.NEXT_PUBLIC_AWS_BUCKET_NAME)
-      const response = await axios.post('http://localhost:8080/downloadfile', {
+      const response = await axios.post('http://3.7.46.168/downloadfile', {
         filename: imageName,
         folderName: folderName,
       }, {
@@ -427,17 +427,23 @@ export default function Dashboard({ event}){
     }
 
     const HandleZip = async () => {
-      const response = await axios.post(`${process.env.BACKEND_URL}/downloadall`, {
+      const response = await axios.post(`http://3.7.46.168/downloadall`, {
         folderName: SelectedFolder,
       }, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
-      // console.log(response)
+      console.log(response.data.downloadLink)
       if (response.status === 200) {
         const data = response.data
-        // console.log(data)
+        console.log(data)
+        const link = document.createElement('a');
+        link.href = data.downloadLink;
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
       }
     }
 
@@ -449,7 +455,7 @@ export default function Dashboard({ event}){
       }
       // console.log(selectedFiles, "--"); 
       try {
-          const response = await axios.post('http://3.110.136.28:8080/selected', {
+          const response = await axios.post('http://3.7.46.168/selected', {
               selectedFiles: selectedFiles,
           }, {
               headers: {

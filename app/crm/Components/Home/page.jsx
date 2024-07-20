@@ -79,13 +79,12 @@ export default function HomePage({UserID}) {
   return (
     <>
         <div className='flex min-h-screen' style={{backgroundColor:"var(--bg) !important"}}>
-            <div className='flex flex-col items-center pt-8 gap-6' style={{width:'20em'}}>
-                <div><Image src={UsereInfo?.Logo||''} alt='Logo' width={100} height={100} style={{width:'100px',borderRadius:'5px'}}/></div>
-                {/* <div className={Styles.JustForFUN}><Image width={100} height={100} style={{width: '60px',height:'auto'}} src={!AddOpen?'/svg/AddCrm.svg':'/svg/CrossCrm.svg'} alt="search" onClick={()=>{!AddOpen?AddOpenValue(true):AddOpenValue(false)}}/></div> */}
+            <div className={`hidden flex-col items-center pt-8 gap-6 md:flex ${Styles.SideBar}`} style={{width:'20em'}}>
+                <div className='hidden lg:block'><Image src={UsereInfo?.Logo||''} alt='Logo' width={100} height={100} style={{width:'100px',borderRadius:'5px'}}/></div>
                 {AddOpen?<div className={Styles.JustForFUN} style={{marginTop:'20px',height:'30svh',justifyContent:'space-around'}}>
                     <EditLeftDrawer UserID={UserID}/>
                     <Link href="/">
-                        <div className={`flex gap-2`} style={{cursor:"pointer"}}>
+                        <div className={`${Styles.albumMob} flex gap-2`} style={{cursor:"pointer"}}>
                             <div
                                 className={`flex gap-4 items-center w-full ${Styles.NavOptions}`} 
                                 style={{ cursor: "pointer" }}
@@ -99,7 +98,7 @@ export default function HomePage({UserID}) {
                     <ReportLeftDrawer UserID={UserID}/>
                 </div>:<></>}
             </div>
-            <div className={Styles.MainContent} style={{display:"flex",flexDirection:"column",width:'100%'}}>
+            <div className={Styles.MainContent} style={{display:"flex",alignItems:"center",flexDirection:"column",width:'100%'}}>
                 <div className={Styles.NavSearchModel} style={{backgroundColor:"var(--bg)",display:"flex"}}>
                     <div className={Styles.SearchModel}>
                             <div onClick={handlePreviousMonth}><ArrowLeftIcon color="primary" style={{fontSize:"30px",color:'black',cursor:'pointer'}}/></div>
@@ -130,7 +129,7 @@ export default function HomePage({UserID}) {
                     <div><TemporaryDrawer_ UserID={UserID}/></div>
                     
                 </div>
-                <div className='flex gap-6 items-center w-full justify-end mb-4'>
+                <div className='gap-6 items-center w-full justify-end mb-4 hidden md:flex'>
                     <div className='flex gap-2 items-center text-sm'> <div style={{width:"12px",height:"12px",borderRadius:"50%",backgroundColor:"#C870E0",color:"#000"}}></div>Lead</div>
                     <div className='flex gap-2 items-center text-sm'> <div style={{width:"12px",height:"12px",borderRadius:"50%",backgroundColor:"#5079F9",color:"#000"}}></div>Advance paid</div>
                     <div className='flex gap-2 items-center text-sm'> <div style={{width:"12px",height:"12px",borderRadius:"50%",backgroundColor:"#6E5FD3",color:"#000"}}></div>Editing</div>
@@ -141,7 +140,7 @@ export default function HomePage({UserID}) {
                 <div className={Styles.MainContentCalender} style={{width:"80%",margin:"2em 0 0 4em"}}>
                     {NotToShow.map((item,index)=>{
                         return <div className={Styles.calenderboxNone} key={index}></div>
-                    })}
+                    })} 
                     {Array.map((item,index)=>{
                         return <div key={index} className={`${Styles.calenderbox} ${Styles.boxes}`} style={item[1] == `${TodayDate}`?{backgroundColor:"var(--darkblue)"}:{}}>
                             <div className={Styles.calenderboxDate} style={item[1] == `${TodayDate}`?{color:"#fff"}:{}}>{item[1]}</div>

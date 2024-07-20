@@ -131,7 +131,7 @@ export default function EditLeftDrawer(UserID) {
 
             <div className={Style.TableTag} style={{maxHeight: "60vh", overflow: "scroll" }}>
               <div className={Style.customTable} style={{width:"fit-content",backgroundColor:"var(--white)",borderRadius:"10px"}}>
-                <div className={Style.customThead}>
+                <div className={`${Style.customThead}`}>
                   <div className={Style.customTr}>
                     <div className={Style.customTh} style={{borderBottom:"1px solid #9AC5F4"}}>#</div>
                     <div>
@@ -177,10 +177,6 @@ export default function EditLeftDrawer(UserID) {
             </div>
 
             <div style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'center',marginTop:'20px'}}>
-                {/* <div className={Style.FooterButton}>
-                    <button style={{border:'none',borderRadius:'5px',fontSize:'13px', marginTop:'15px',cursor:'pointer',backgroundColor:'#A240E5',color:'#fff'}}><Confirm ConstCheckedData={ConstCheckedData}/></button>
-                    <button onClick={()=>{downloadCSV(Data)}} style={{border:'none',borderRadius:'5px',fontSize:'13px', marginTop:'15px',cursor:'pointer',backgroundColor:'#A240E5',color:'#fff'}}>Download as CSV</button>
-                </div> */}
                 {ConstCheckedData?<>
                   <div className='flex gap-3'>
                       <div><UpdateCustomer FetchCustomerData={FetchCustomerData} Data={ConstCheckedData}/></div>

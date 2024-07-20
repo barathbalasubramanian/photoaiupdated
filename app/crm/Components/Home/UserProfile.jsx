@@ -111,21 +111,21 @@ export default function TemporaryDrawer_({UserID}) {
           <img src="assets/homeicon.svg" alt="Home" className={Styles.homeIcon} />
         </div>
 
-        <div className='flex flex-col pt-4 gap-4 min-h-screen' style={{width:"60%",margin:"auto",overflow:'scroll'}}>
+        <div className='flex flex-col pt-4 gap-4 min-h-screen lg:2/3 sm:4/5' style={{margin:"auto",overflow:'scroll'}}>
             {/* Header */}
             <div className='flex w-full items-center justify-between py-2' style={{borderBottom:"1px solid #4F55C3"}}>
               <div className='w-full px-4 py-2 flex gap-4 items-center'>
                 <div className={Styles.ForBackButton} onClick={()=>{setState({ ...state, [anchor]: false })}}>
                   <img src="/assets/backbtn.svg" alt="Back" style={{width:"20px",height:"20px"}}/>
                 </div>
-                <div style={{color:"var(--blue)",fontSize:"24px"}}>Studio Profile</div>
+                <div className={Styles.pro} style={{color:"var(--blue)",fontSize:"24px"}}>Studio Profile</div>
               </div>
-              <div className="flex items-center gap-4 w-fit" style={{border:"1px solid #D8D8D8",borderRadius:'5px',minWidth:"fit-content"}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Styles.profile} /><div className="pr-6 text-sm font-bold">Studio name</div></div>
+              <div className="flex items-center gap-4 w-fit" style={{border:"1px solid #D8D8D8",borderRadius:'5px',minWidth:"fit-content"}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Styles.profile} /><div className="pr-6 text-sm font-bold hidden lg:block">Studio name</div></div>
             </div> 
 
-            <div className='flex w-full px-4 py-6 gap-10'>
+            <div className='flex flex-col-reverse w-full items-center px-4 py-6 gap-10 lg:flex-row'>
                 {/* Left */}
-                <div style={{width:"50%"}} className='flex flex-col'>
+                <div className='flex flex-col sm:w-4/5 lg:1/2'>
                     {/* Logo */}
                     <div className='p-4 bg-white flex flex-col gap-4 justify-between mb-4' style={{borderRadius:'10px'}}>
                         <div style={{fontSize:"18px",color:"var(--blue)"}}>Logos</div>
@@ -179,7 +179,7 @@ export default function TemporaryDrawer_({UserID}) {
                 </div>
 
                 {/* Right */}
-                <div style={{width:"50%",borderRadius:"10px",height:"fit-content",padding:"0 0 4em 0"}} className='bg-white'>
+                <div style={{borderRadius:"10px",height:"fit-content",padding:"0 0 4em 0"}} className="lg:1/2 sm:4/5">
                     <div className='p-8' style={{borderBottom:"1px solid black"}}>
                         <div className='flex flex-col items-center justify-center gap-4'>
                             <img src="/assets/profileImg.svg" alt="Pro" className={Styles.profileImg} />
@@ -201,7 +201,7 @@ export default function TemporaryDrawer_({UserID}) {
                         </div>
                     </div>
                     <div className='w-full px-8'>
-                        <div style={{backgroundColor:"#ECEDFF",borderRadius:"5px"}} className='px-16 py-2 flex items-center justify-between w-full'>
+                        <div style={{backgroundColor:"#ECEDFF",borderRadius:"5px"}} className='sm:px-0 lg:px-16 py-2  flex items-center justify-between w-full'>
                             <img src="/assets/insta.svg" alt="Insta"  style={{width:"35px"}}/>
                             <img src="/assets/utube.svg" alt="UTube" style={{width:"50px"}} />
                             <img src="/assets/fb.svg" alt="FB"  style={{width:"40px"}}/>
@@ -211,41 +211,6 @@ export default function TemporaryDrawer_({UserID}) {
                 </div>
             </div>
         </div>
-
-
-        {/* <NestedProfileList UserID={UserID}/> */}
-        {/* <div>
-            <div style={{backgroundColor:'transparent',color:'white',outline:'none',border:'none',margin:'10px'}}>{Name}</div>
-            <div style={{display:'flex',justifyContent:'space-between',marginLeft:'10px',marginTop:'10px'}}>
-              <div>Logo</div>
-              <div><input type="file" onChange={(e)=>{HandeLogoUpload(e.target.files[0])}} style={{width:'80px',overflow:'hidden'}}/></div>
-            </div>
-            <div className='flex w-full items-center justify-between py-2' style={{borderBottom:"1px solid #4F55C3"}}>
-              <div className='w-full px-4 py-2 flex gap-4 items-center'>
-                <div className={Styles.ForBackButton} onClick={()=>{setState({ ...state, [anchor]: false })}}>
-                  <img src="/assets/backbtn.svg" alt="Back" style={{width:"20px",height:"20px"}}/>
-                </div>
-                <div style={{color:"var(--blue)",fontSize:"24px"}}>Send Greetings</div>
-              </div>
-              <div className="flex items-center gap-4 w-fit" style={{border:"1px solid #D8D8D8",borderRadius:'5px',minWidth:"fit-content"}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Styles.profile} /><div className="pr-6 text-sm font-bold">Studio name</div></div>
-            </div>  
-        </div> */}
-
-        {/* <NestedContactList/> */}
-        {/* <div>
-            <div><input style={{backgroundColor:'transparent',color:'white',outline:'none',border:'none',margin:'10px'}} type="text" value={PhoneNo} onChange={(e)=>{SetPhoneNo(e.target.value);UpdateUserInFo(e.target.value,Location,Website)}} placeholder='Phone Number'/></div>
-            <div><input style={{backgroundColor:'transparent',color:'white',outline:'none',border:'none',margin:'10px'}} type="text" value={Location} onChange={(e)=>{SetLocation(e.target.value);UpdateUserInFo(PhoneNo,e.target.value,Website)}} placeholder='Location'/></div>
-            <div><input style={{backgroundColor:'transparent',color:'white',outline:'none',border:'none',margin:'10px'}} type="text" value={Website} onChange={(e)=>{SetWebsite(e.target.value);UpdateUserInFo(PhoneNo,Location,e.target.value)}} placeholder='Website'/></div>
-        </div> */}
-
-        {/* <NestedPasswordList/> */}
-        {/* <form onSubmit={HandelSubmit}>
-            <div><input style={{backgroundColor:'transparent',color:'white',outline:'none',border:'none',margin:'10px'}} type="text" value={CurrentPassword} onChange={(e)=>{SetCurrentPassword(e.target.value)}} placeholder='Current Password' required/></div>
-            <div><input style={{backgroundColor:'transparent',color:'white',outline:'none',border:'none',margin:'10px'}} type="text" value={NewPassword} onChange={(e)=>{SetNewPassword(e.target.value)}} placeholder='New Password' required/></div>
-            <div><input style={{backgroundColor:'transparent',color:'white',outline:'none',border:'none',margin:'10px'}} type="text" value={ConfirmPassword} onChange={(e)=>{SetConfirmPassword(e.target.value)}} placeholder='Confirm Password' required/></div>
-            <div><button style={{backgroundColor:'#725aff',color:'white',border:'none',padding:"5px 10px",margin:'10px',borderRadius:'5px',cursor:'pointer'}}>Confirm</button></div>
-        </form> */}
-        {/* <div><button style={{backgroundColor:'#725aff',color:'white',border:'none',padding:"5px 10px",margin:'10px',borderRadius:'5px',cursor:'pointer'}} onClick={()=>{Logout()}}>Logout</button></div> */}
     </Box>
   );
 
@@ -254,8 +219,7 @@ export default function TemporaryDrawer_({UserID}) {
       {['right'].map((anchor) => (
         <React.Fragment key={anchor}>
           <div onClick={toggleDrawer(anchor, true)}>
-            {/* <img src="/svg/menu.svg"/> */}
-            <div className="flex items-center gap-4 w-fit" style={{border:"1px solid #D8D8D8",borderRadius:'5px',minWidth:"fit-content"}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Styles.profile} /><div className="pr-6 text-sm font-bold text-black">Studio name</div></div>
+            <div className="flex items-center gap-4 w-fit" style={{border:"1px solid #D8D8D8",borderRadius:'5px',minWidth:"fit-content"}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Styles.profile} /><div className="pr-6 text-sm font-bold text-black hidden lg:block ">Studio name</div></div>
           </div>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} transitionDuration={{ appear: 500, enter: 500, exit: 500 }}>
             {list(anchor)}
@@ -267,86 +231,16 @@ export default function TemporaryDrawer_({UserID}) {
 }
 export function generateUniqueNumber(date) {
   const day = date.getDate();
-  const month = date.getMonth() + 1; // Month is zero-based
+  const month = date.getMonth() + 1; 
   const year = date.getFullYear();
   const hours = date.getHours();
   const minutes = date.getMinutes();
   const seconds = date.getSeconds();
   
-  // Concatenate and convert to a number
   const uniqueNumber = parseInt(`${year}${month}${day}${hours}${minutes}${seconds}`, 10);
   
   return uniqueNumber;
 }
-
-
-// export function NestedProfileList({UserID}) {
-  
-//   return (
-//     <List
-//       sx={{ width: '100%', bgcolor: '#13192f',color:'white',borderRadius:'5px' }}
-//       component="nav"
-//       aria-labelledby="nested-list-subheader"
-//     >
-//       <ListItemButton onClick={handleClick}>
-//         <ListItemText primary="Profile" />
-//         {open ? <ExpandLess /> : <ExpandMore />}
-//       </ListItemButton>
-//       <Collapse in={open} timeout="auto" unmountOnExit>
-//         <List component="div" disablePadding>
-//           <div>
-//             <div style={{backgroundColor:'transparent',color:'white',outline:'none',border:'none',margin:'10px'}}>{Name}</div>
-//             <div style={{display:'flex',justifyContent:'space-between',marginLeft:'10px',marginTop:'10px'}}>
-//               <div>Logo</div>
-//               <div><input type="file" onChange={(e)=>{HandeLogoUpload(e.target.files[0])}} style={{width:'80px',overflow:'hidden'}}/></div>
-//             </div>
-//           </div>
-//         </List>
-//       </Collapse>
-//     </List>
-//   );
-// }
-
-
-// export function NestedContactList() {
-//   const [open, setOpen] = React.useState(false);
-//   const [PhoneNo,SetPhoneNo] = React.useState('');
-//   const [Location,SetLocation] = React.useState('');
-//   const [Website,SetWebsite] = React.useState('');
-//   const handleClick = () => {
-//     setOpen(!open);
-//   };
-//   const FetchInfo = async()=>{
-//     const res = await FetchUserInFo();
-//     SetPhoneNo(res.Phone_No || '');
-//     SetLocation(res.Location || '');
-//     SetWebsite(res.Website || '');
-//   }
-//   React.useEffect(()=>{
-//     FetchInfo();
-//   },[])
-//   return (
-//     <List
-//       sx={{ width: '100%', bgcolor: '#13192f',color:'white',borderRadius:'5px' }}
-//       component="nav"
-//       aria-labelledby="nested-list-subheader"
-//     >
-//       <ListItemButton onClick={handleClick}>
-//         <ListItemText primary="Contact" />
-//         {open ? <ExpandLess /> : <ExpandMore />}
-//       </ListItemButton>
-//       <Collapse in={open} timeout="auto" unmountOnExit>
-//         <List component="div" disablePadding>
-//           <div>
-//             <div><input style={{backgroundColor:'transparent',color:'white',outline:'none',border:'none',margin:'10px'}} type="text" value={PhoneNo} onChange={(e)=>{SetPhoneNo(e.target.value);UpdateUserInFo(e.target.value,Location,Website)}} placeholder='Phone Number'/></div>
-//             <div><input style={{backgroundColor:'transparent',color:'white',outline:'none',border:'none',margin:'10px'}} type="text" value={Location} onChange={(e)=>{SetLocation(e.target.value);UpdateUserInFo(PhoneNo,e.target.value,Website)}} placeholder='Location'/></div>
-//             <div><input style={{backgroundColor:'transparent',color:'white',outline:'none',border:'none',margin:'10px'}} type="text" value={Website} onChange={(e)=>{SetWebsite(e.target.value);UpdateUserInFo(PhoneNo,Location,e.target.value)}} placeholder='Website'/></div>
-//           </div>
-//         </List>
-//       </Collapse>
-//     </List>
-//   );
-// }
 
 
 export function NestedPasswordList() {
