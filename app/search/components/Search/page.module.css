@@ -216,3 +216,37 @@
     border-radius: 5px;
     width: 100%;
 }
+
+.sideBar1{
+    display: none;
+}
+
+.selected1 {
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.unselected1 {
+    cursor: none;
+    font-size: 12px;
+}
+
+@media only screen and (max-width:600px) {
+    .folder {
+        cursor: pointer !important;
+        max-width: 8em !important;
+        font-size: 15px !important;
+    }
+    .FoldersCon{
+        justify-content: center;
+    }
+    .sideBar{
+        display: none;
+    }
+    .sideBar1{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        display: block;
+    }
+}

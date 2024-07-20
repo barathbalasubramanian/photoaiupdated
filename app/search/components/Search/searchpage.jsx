@@ -79,13 +79,13 @@ export default function Search({ AllEventData, SuperAdmin }) {
   const [selectedFiles, setSelectedFiles] = useState([]);
  
   const buttons = [
-    { id: "uploadFolder", label: "Upload Images" },
-    { id: "uploadVideos", label: "Upload Videos"},
-    { id: "dashboard", label: "Dashboard" },
-    { id: "digitalInvite", label: "Digital Invite" },
-    { id: "report", label: "Report" },
-    { id: "qrcode", label: "QR Code" },
-    { id: "generatesecret", label: "Secret Key"}
+    { id: "uploadFolder", label: "Upload Images", img:"assets/upimg.svg" },
+    { id: "uploadVideos", label: "Upload Videos", img:"assets/upvid.svg"},
+    { id: "dashboard", label: "Dashboard" , img:"assets/des.svg"},
+    { id: "digitalInvite", label: "Digital Invite", img:"assets/dig.svg" },
+    { id: "report", label: "Report", img:"assets/rep.svg" },
+    { id: "qrcode", label: "QR Code" , img:"assets/qr.svg"},
+    { id: "generatesecret", label: "Secret Key", img:"assets/secret.svg"}
   ];
 
   const handleOptionSelect = (item) => {
@@ -371,13 +371,6 @@ export default function Search({ AllEventData, SuperAdmin }) {
     } catch (error) {
         // console.error('Error:', error);
     }
-
-    // if (response) {
-    //   toast.success("Message Send Successfully");
-    // } 
-    // else {
-    //   toast.warning(response);
-    // }
     console.log(response)
     LoaderStatsValue(false);
   };
@@ -488,15 +481,31 @@ export default function Search({ AllEventData, SuperAdmin }) {
                 <div className="mt-6">
                     <Image src="/assets/logorect.svg" alt="Logo" width={100} height={100} className={Styles.logoImg} />
                 </div>
-                <div className="flex flex-col gap-3 mt-8">
-                {buttons.map((button) => (
+                <div className="flex flex-col gap-3 mt-8 none">
+                    { buttons.map((button) => (
                     <button key={button.id} className={selectedOption ? `${Styles.selected}` : `${Styles.unselected}`} onClick={() => handleClick(button.id)}>
                         {button.label}
                     </button>
                     ))}
-                    {SuperAdmin?<button className={Styles.btns} onClick={()=>{if(month === ''){Toast.fire({icon: 'warning',title: 'No Event Selected ...'})}else{SendSMSFunction()}}}>{sendmessage}</button>:<></>}
+                    { SuperAdmin?<button className={Styles.btns} onClick={()=>{if(month === ''){Toast.fire({icon: 'warning',title: 'No Event Selected ...'})}else{SendSMSFunction()}}}>{sendmessage}</button>:<></>}
                 </div>
               </div>
+
+              <div className={`${Styles.sideBar1} flex w-full justify-between items-center bg-white pt-2`}>
+                <div className="flex gap-3 items-center pb-1 ">
+                { buttons.map((button) => (
+                    <div onClick={() => handleClick(button.id)} className={`flex flex-col items-center justify-center gap-1 ${selectedOption ? Styles.selected1 : Styles.unselected1}`}>
+                      <div><img src={button.img} alt="Imgs" /></div>
+                      <button key={button.id}>
+                          {button.label}
+                      </button>
+                    </div>
+
+                    ))}
+                    {/* { SuperAdmin?<button className={Styles.btns} onClick={()=>{if(month === ''){Toast.fire({icon: 'warning',title: 'No Event Selected ...'})}else{SendSMSFunction()}}}>{sendmessage}</button>:<></>} */}
+                </div>
+              </div>
+
               <div className="min-h-screen w-full" style={{backgroundColor:"var(--bg)"}}>
                 <div className="flex w-full items-center justify-between py-9 px-10">
                     <div className="text-2xl" style={{color:"var(--blue)"}}>Events</div>
@@ -562,13 +571,9 @@ export default function Search({ AllEventData, SuperAdmin }) {
                               key={index + 1}
                           >
                               <div onClick={() => handleOptionSelect(item)}>
-                              {/* {index + 1}.{" "} */}
                               {
                                 state
                                   ? item.EventName
-                                  //  : item.EventName.split(`${item.UserID}-`)[1]
-                                  //      .split("_")
-                                  //      .join(" ")
                                   : 
                                   <div className={`flex gap-4 items-center mt-2 ${Styles.searchResDiv} cursor-pointer`}>
                                     <div style={{width:"3em"}}>{index + 1}.{" "}</div>

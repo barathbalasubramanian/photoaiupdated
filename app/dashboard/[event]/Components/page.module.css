@@ -318,6 +318,7 @@
     .MainContainer {
       width: 96vw;
       margin-bottom: 60px;
+      margin: 1em 0 0 0;
     }
     .MainContainer > div{
       width: 33%;
@@ -326,7 +327,7 @@
         width: 96vw;
     }
     .SearchModel{
-        width: 35vw;
+        width: 55vw;
     }
     .Dashboard > div:nth-child(1){
         display: none;
@@ -343,6 +344,7 @@
     }
     .MainContainer {
       width: 96vw;
+      margin: 1em 0 0 0;
     }
     .SearchModel{
         width: 45vw;
@@ -353,7 +355,7 @@
       width: 50%;
     }
     .MainContainer{
-        margin: 0;
+        margin: 1em 0 0 0;
     }
     .SearchModel{
         width: 50vw;
@@ -363,9 +365,6 @@
     }
     .NavOneForMenu > div:nth-child(1){
         font-size: 23px;
-    }
-    .SearchModel > input{
-        padding: 3vw;
     }
   }
   @media screen and (min-width: 0px) and (max-width: 500px) {
@@ -379,3 +378,12 @@
       margin-top: 10px;
     }
   }
+
+  @media screen and (min-width: 0px) and (max-width: 800px) {
+    .SearchModel {
+        width: 86vw !important;
+        margin: 1em 0 0 0 !important;
+    }
+}
+
+

@@ -498,7 +498,7 @@ export default function Dashboard({ event}){
                         </div>
                     </div>
                     <div className={`${Styles.FoldersCss} text-black`}>
-                      {pagetext === 'All Photos'?<div className="flex flex-col gap-4" style={{width:"70vw"}}>
+                      {pagetext === 'All Photos'?<div className="flex flex-col gap-4" style={{width:"100%"}}>
                       <div className="flex w-full gap-4 overflow-scroll">
                         {AllFolders.map((item,index)=>{
                             return <div onClick={()=>{FetchImagesByFolderName(null,item.split('/')[2],true);KeyStateValue(index)}} style={KeyState == index?{borderBottom:'2px solid var(--blue)'}:{}}>{item.split('/')[2]}</div>
@@ -618,10 +618,11 @@ export default function Dashboard({ event}){
         {window.innerWidth <= 800?<>
           <Box sx={{ width: 500 }}>
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-              <BottomNavigation showLabels style={{backgroundColor:'#171a25',borderRadius:'5px'}}>
-                <BottomNavigationAction onClick={OnHomeClickFun} style={pagetext === 'All Photos'?{color:'#725AFF'}:{color:'#ffffff'}} label="All Photos" icon={<img src={pagetext === 'All Photos'?'/svg/SelectedPhoto.svg':'/svg/Photo.svg'} className={Styles.BottomImage}/>} />
-                <BottomNavigationAction onClick={OnExploreClickFun} style={pagetext === 'Explore'?{color:'#725AFF'}:{color:'#ffffff'}} label="Explore" icon={<img src={pagetext === 'Explore'?'/svg/expSelected.svg':'/svg/exploreSearch.svg'} className={Styles.BottomImage}/>} />
-                <BottomNavigationAction onClick={OnFavouriteClickFun} style={pagetext === 'Favorites'?{color:'#725AFF'}:{color:'#ffffff'}} label="Favorites" icon={<img src={pagetext === 'Favorites'?'/svg/FavSelected.svg':'/svg/Fav.svg'} className={Styles.BottomImage}/>} />
+              <BottomNavigation showLabels style={{backgroundColor:'var(--white)',borderRadius:'5px'}}>
+                <BottomNavigationAction onClick={OnHomeClickFun} style={pagetext === 'All Photos'?{backgroundColor:'var(--blue)',color:"#fff"}:{backgroundColor:'#ffffff'}} label="Photos" icon={<img src={pagetext === 'All Photos'?'/assets/pho1.svg':'/assets/pho.svg'} className={Styles.BottomImage}/>} />
+                <BottomNavigationAction onClick={QueryVideos} style={pagetext === 'All Videos'?{backgroundColor:'var(--blue)',color:"var(--white)"}:{backgroundColor:'#ffffff'}} label="Videos" icon={<img src={pagetext === 'All Videos'?'/assets/vid1.svg':'/assets/vid.svg'} className={Styles.BottomImage}/>} />
+                <BottomNavigationAction onClick={OnExploreClickFun} style={pagetext === 'Explore'?{backgroundColor:'var(--blue)',color:"var(--white)"}:{backgroundColor:'#ffffff'}} label="Explore" icon={<img src={pagetext === 'Explore'?'/assets/exp1.svg':'/assets/exp.svg'} className={Styles.BottomImage}/>} />
+                <BottomNavigationAction onClick={OnFavouriteClickFun} style={pagetext === 'Favorites'?{backgroundColor:'var(--blue)',color:"var(--white)"}:{backgroundColor:'#ffffff'}} label="Favorites" icon={<img src={pagetext === 'Favorites'?'/assets/favi1.svg':'/assets/favi.svg'} className={Styles.BottomImage}/>} />
               </BottomNavigation>
             </Paper>
           </Box>

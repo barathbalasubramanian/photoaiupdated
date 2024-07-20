@@ -50,7 +50,7 @@ const MapData_ = ({ Data, ScrollBtn, sel, selectedFiles }) => {
                                     checked={isSelected}
                                     onChange={() => handleCheckboxChange(item)}
                                     className={Styles.CheckBox}
-                                    style={{ position: 'absolute', top: "3.5em", left: "0px", color: 'white', width:"35px", height:"35px",backgroundColor: 'var(--blue)' }}
+                                    style={{ position: 'absolute', top: "4.5em", left: "0px", color: 'white', width:"35px", height:"35px",backgroundColor: 'var(--blue)' }}
                                 />
                                 <Image
                                     src={`https://selife-bucket.s3.ap-south-1.amazonaws.com/${item}`}

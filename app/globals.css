@@ -110,3 +110,18 @@ h3 {
   color: var(--black) !important;
   font-size: 13px !important;
 }
+
+.css-gy4i07-MuiPaper-root {
+  z-index: 999 !important;
+}
+
+@media only screen and (max-width:800px) {
+  .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root {
+    top: 5em !important;
+    left: -1em !important;
+  }
+  .page_empty____Z_C{
+    padding: 0 0 0 1.2em;
+    font-size: 20px;
+  }
+}
