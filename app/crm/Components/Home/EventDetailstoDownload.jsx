@@ -67,7 +67,7 @@ export const TableCkeckBox = ({UserID,item,ConstCheckedData,cusname,SetConstChec
 </div>
 }
 
-export default function EventDetailsToDownload({UserID,id,name,Mobile,Location,Email_ID,Balance,verbose}) {
+export default function EventDetailsToDownload({UserID,id,name,Mobile,Location,Email_ID,Balance,verbose,MobileUi}) {
     const [Data,SetData] = React.useState([]);
     const [ConstData,SetConstData] = React.useState([]);
     const [csvData,SetcsvData] = React.useState([]);
@@ -338,18 +338,27 @@ export default function EventDetailsToDownload({UserID,id,name,Mobile,Location,E
   return (
     <div>
       {['bottom'].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <div onClick={toggleDrawer(anchor, true)} className='cursor-pointer'>
-            <div className={Style.customTd} style={{minWidth:"10em"}}>{name}</div>
-            <div className={Style.customTd} style={{minWidth:"8em"}}>{Mobile}</div>
-            <div className={Style.customTd} style={{minWidth:"18em"}}>{Email_ID}</div>
-            <div className={Style.customTd} style={{minWidth:"8em"}}>{Location}</div>
-            <div className={Style.customTd} style={{minWidth:"10em"}}>{Balance.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</div>
-          </div>
-          <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} transitionDuration={{ appear: 1000, enter: 1000, exit: 1000 }}>
-            {list(anchor)}
-          </Drawer>
-        </React.Fragment>
+        MobileUi != true ? (
+          <React.Fragment key={anchor}>
+            <div onClick={toggleDrawer(anchor, true)} className='cursor-pointer'>
+              <div className={Style.customTd} style={{minWidth: "10em"}}>{name}</div>
+              <div className={Style.customTd} style={{minWidth: "8em"}}>{Mobile}</div>
+              <div className={Style.customTd} style={{minWidth: "18em"}}>{Email_ID}</div>
+              <div className={Style.customTd} style={{minWidth: "8em"}}>{Location}</div>
+              <div className={Style.customTd} style={{minWidth: "10em"}}>{Balance.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</div>
+            </div>
+            <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} transitionDuration={{ appear: 1000, enter: 1000, exit: 1000 }}>
+              {list(anchor)}
+            </Drawer>
+          </React.Fragment>
+        ) : 
+          <React.Fragment key={anchor}>
+            <div onClick={toggleDrawer(anchor, true)} className={Style.Details}> See Details
+            </div>
+            <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} transitionDuration={{ appear: 1000, enter: 1000, exit: 1000 }}>
+              {list(anchor)}
+            </Drawer>
+          </React.Fragment>
       ))}
     </div>
   );

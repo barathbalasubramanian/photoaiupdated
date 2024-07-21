@@ -473,9 +473,52 @@
     }
   }
   
+  .customTbodyMob {
+    display: none;
+  }
+
   @media only screen and (max-width:800px) {
+    .line{
+      border-bottom: 1px solid #DDDDDD;
+      width: 90%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .Details{
+      cursor: pointer;
+      color: crimson;
+      border-radius: 5px;
+      border: 1px solid crimson;
+      padding: 3px 20px;
+
+    }
+    .customTbodyMob{
+      display: block;
+    }
+    .customTbody { 
+      display: none;
+    }
+    .SearchModel{
+      width: 98% !important;
+    }
     .customThead{
       display: none !important;
+    }
+    .MainCon{
+      width: 95% !important;
+      overflow: hidden !important;
+    }
+    .NavSearchModel{
+      flex-direction: column;
+      gap: 1em;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+    .AddModelButton{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
   }
 
@@ -489,10 +532,10 @@
       justify-content: center;
       text-align: center;
       font-size: 10px;
+      padding: 4px 6px !important;
     }
     .TableTag{
       overflow: auto;
-      justify-content: flex-start;
       width: 100vw;
     }
     .DrawermapdataCenter{
