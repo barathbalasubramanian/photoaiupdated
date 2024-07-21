@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
+import Style from './edit.module.css'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -34,8 +35,8 @@ function EventDetailsSendBtn({name,ConstCheckedData,Mobile}) {
       }
 
   return (
-    <div>
-      <button onClick={()=>{handleClickOpen()}} style={{cursor:"pointer",borderRadius:"5px",padding:"4px 4em",fontSize:"14px",backgroundColor:"var(--pink)",color:"var(--white)",outline:"none",border:"none"}}>Send Update</button>
+    <div className={Style.sendDiv}>
+      <button className={Style.SendBtn} onClick={()=>{handleClickOpen()}} style={{cursor:"pointer",borderRadius:"5px",padding:"4px 4em",fontSize:"14px",backgroundColor:"var(--pink)",color:"var(--white)",outline:"none",border:"none"}}>Send Update</button>
       <Dialog open={open} TransitionComponent={Transition} transitionDuration={{ appear: 600, enter: 600, exit: 600 }} keepMounted onClose={handleClose} aria-describedby="alert-dialog-slide-description">
             <div style={{backgroundColor:'#1e2742',padding:'30px 50px',borderRadius:'0'}}>
                 <div style={{color:'white', fontSize:'20px'}}>Do You Want to Send Update</div>

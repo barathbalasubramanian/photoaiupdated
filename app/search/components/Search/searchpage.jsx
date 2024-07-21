@@ -259,7 +259,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
       formData.append('folderName', selectedFolder);
 
       try {
-        const response = await axios.post(`https://3.7.46.168/upload`, formData, {
+        const response = await axios.post(`https://clickai.anthillnetworks.com/upload`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

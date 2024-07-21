@@ -124,4 +124,9 @@ h3 {
     padding: 0 0 0 1.2em;
     font-size: 20px;
   }
+  .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root input {
+    width: 9em !important;
+    color: var(--black) !important;
+    font-size: 13px !important;
+  }
 }

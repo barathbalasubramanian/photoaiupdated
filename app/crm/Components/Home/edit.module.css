@@ -478,6 +478,37 @@
   }
 
   @media only screen and (max-width:800px) {
+    .customTableContainer{
+      width: 100%;
+    }
+    .customTableCell{
+      display: none;
+    }
+    .customTableRow,.customTbodyMob{
+      display: flex;
+      width: 100%;
+    }
+    .sendDiv{
+      width: 100%;
+      display: flex;
+      justify-content: end;
+      align-items: end;
+    }
+    .SendBtn{
+      padding: 4px 2em !important;
+    }
+    .Cusnam1{
+      font-size: 22px !important;
+    }
+    .Cusnam2 {
+      font-size: 16px !important;
+    }
+    .AlignDetails {
+      gap: 10px !important;
+    }
+    .DetailsCon{
+      width: 100% !important;
+    }
     .line{
       border-bottom: 1px solid #DDDDDD;
       width: 90%;
@@ -495,6 +526,9 @@
     }
     .customTbodyMob{
       display: block;
+    }
+    .customTable{
+      width: 90vw !important;
     }
     .customTbody { 
       display: none;
@@ -514,16 +548,43 @@
       gap: 1em;
       padding-left: 0 !important;
       padding-right: 0 !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .SearchModel{
+      width: 90vw !important;
     }
     .AddModelButton{
       display: flex;
       align-items: center;
       justify-content: space-between;
+      width: 90vw !important;
     }
+  }
+  .eveName {
+    font-size: 24px;
+  }
+  .MobileUiEvent{
+    display: none;
   }
 
   @media screen and (min-width: 0px) and (max-width: 600px) {
-    
+    .MobileUiEvent {
+      display: block;
+    }
+    .eveName{
+      font-size: 18px !important;
+    }
+    .searchBtn,.AddBtn{
+      font-size: 12px !important;
+    }
+    .DetailsCon{
+      width: fit-content;
+    }
+    .customTableHeader{
+      display: none;
+    }
     .NavOptions,.NavOptions1,.NavOptions2 {
       flex-direction: column !important;
       gap: 0 !important;
@@ -589,9 +650,6 @@
     .ReportsFilters{
       width: 100vw;
       display: grid;
-    }
-    .inputcontainer{
-      margin-top: 50px;
     }
     .ReportsFilters > div{
       width: 95vw;

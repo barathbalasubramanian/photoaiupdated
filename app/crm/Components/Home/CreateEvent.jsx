@@ -95,7 +95,7 @@ export default function CreateEvent({id,FetchEventsByUUID}){
     <div>
       {['right'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <div onClick={toggleDrawer(anchor, true)}><button style={{cursor:"pointer",borderRadius:"5px",padding:"4px 2em",fontSize:"14px",backgroundColor:"var(--pink)",color:"var(--white)",outline:"none",border:"none"}}>Add Event</button></div>
+          <div onClick={toggleDrawer(anchor, true)}><button className={Style.AddBtn} style={{cursor:"pointer",borderRadius:"5px",padding:"4px 2em",fontSize:"14px",backgroundColor:"var(--pink)",color:"var(--white)",outline:"none",border:"none"}}>Add Event</button></div>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} transitionDuration={{ appear: 1000, enter: 1000, exit: 1000 }}>
             {list(anchor)}
           </Drawer>

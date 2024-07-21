@@ -22,49 +22,118 @@ export const TableCkeckBox = ({UserID,item,ConstCheckedData,cusname,SetConstChec
   item.Advance_Payment.map((it)=>{
     AdvanceAmount += +it.Advance;
   })
-  return <div className={Style.customTableRow}>
+  return (
+      <div className={Style.customTableRow}>
+        <div className={Style.customTableCell}>
+          <AddPayment uuid={item.Customer_ID_UUID} name={item.EventName} cusname={cusname} OnStatusChange={OnStatusChange} 
+          Mobile={Mobile} EventDate={item.EventDate} ConstCheckedData={ConstCheckedData} 
+          SetConstCheckedData={SetConstCheckedData} Location={Location} Email_ID={Email_ID} 
+          Full_Amount={item.Full_Amount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})} 
+          AdvanceAmount={AdvanceAmount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
+          Bal={(item.Full_Amount - AdvanceAmount).toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
+          verbose={verbose}
+          UserID={UserID}
+          />
+        </div>
 
-  <div className={Style.customTableCell}>
-    <AddPayment uuid={item.Customer_ID_UUID} name={item.EventName} cusname={cusname} OnStatusChange={OnStatusChange} 
-    Mobile={Mobile} EventDate={item.EventDate} ConstCheckedData={ConstCheckedData} 
-    SetConstCheckedData={SetConstCheckedData} Location={Location} Email_ID={Email_ID} 
-    Full_Amount={item.Full_Amount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})} 
-    AdvanceAmount={AdvanceAmount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
-    Bal={(item.Full_Amount - AdvanceAmount).toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
-    verbose={verbose}
-    UserID={UserID}
-    />
-  </div>
+        <div className={Style.customTableCell}>
+          <select
+            className={Style.customSelect}
+            style={{...ColorAndBGcolor(StatusValue), border: 'none', outline: 'none',color:"white",cursor: 'pointer', fontSize: '16px',borderRadius:"5px",padding:"4px"}}
+            value={StatusValue}
+            onChange={(e) => {
+              SetStatusValue(e.target.value);
+              OnStatusChange(item.EventID, e.target.value);
+            }}
+          >
+            <option value="">Status</option>
+            <option value="Lead" style={ColorAndBGcolor('Lead')}>Lead</option>
+            <option value="Advance paid" style={ColorAndBGcolor('Advance paid')}>Advance paid</option>
+            <option value="Editing" style={ColorAndBGcolor('Editing')}>Editing</option>
+            <option value="Event completed" style={ColorAndBGcolor('Event completed')}>Event completed</option>
+            <option value="Balance settled" style={ColorAndBGcolor('Balance settled')}>Balance settled</option>
+            <option value="Delivered" style={ColorAndBGcolor('Delivered')}>Delivered</option>
+          </select>
+        </div>
+        <div className={Style.customTableCell} style={{backgroundColor:"var(--white)"}}>
+          <img
+            className={Style.customImage}
+            style={{width: '20px', cursor: 'pointer'}}
+            onClick={() => {if(ConstCheckedData){SetConstCheckedData(null)}else{SetConstCheckedData(item)}}}
+            src={ConstCheckedData?.EventID !== item.EventID ? '/svg/CheckedFalse.svg' : '/svg/CheckedTrue.svg'}
+            alt=""
+          />
+        </div>
 
-  <div className={Style.customTableCell}>
-    <select
-      className={Style.customSelect}
-      style={{...ColorAndBGcolor(StatusValue), border: 'none', outline: 'none',color:"black",cursor: 'pointer', fontSize: '16px',borderRadius:"5px",padding:"4px"}}
-      value={StatusValue}
-      onChange={(e) => {
-        SetStatusValue(e.target.value);
-        OnStatusChange(item.EventID, e.target.value);
-      }}
-    >
-      <option value="">Status</option>
-      <option value="Lead" style={ColorAndBGcolor('Lead')}>Lead</option>
-      <option value="Advance paid" style={ColorAndBGcolor('Advance paid')}>Advance paid</option>
-      <option value="Editing" style={ColorAndBGcolor('Editing')}>Editing</option>
-      <option value="Event completed" style={ColorAndBGcolor('Event completed')}>Event completed</option>
-      <option value="Balance settled" style={ColorAndBGcolor('Balance settled')}>Balance settled</option>
-      <option value="Delivered" style={ColorAndBGcolor('Delivered')}>Delivered</option>
-    </select>
-  </div>
-  <div className={Style.customTableCell} style={{backgroundColor:"var(--white)"}}>
-    <img
-      className={Style.customImage}
-      style={{width: '20px', cursor: 'pointer'}}
-      onClick={() => {if(ConstCheckedData){SetConstCheckedData(null)}else{SetConstCheckedData(item)}}}
-      src={ConstCheckedData?.EventID !== item.EventID ? '/svg/CheckedFalse.svg' : '/svg/CheckedTrue.svg'}
-      alt=""
-    />
-  </div>
-</div>
+        <div className={Style.customTbodyMob}>
+			<div className='flex w-full justify-between'>
+				<div className='flex flex-col gap-1 '>
+					<div className={`flex gap-3 justify-between py-2`}>
+						<div className='flex flex-col pl-4 py-2 gap-2'>
+							<div className='flex gap-2'>
+								<div>
+									<img
+										className={Style.customImage}
+										style={{width: '20px', cursor: 'pointer'}}
+										onClick={() => {if(ConstCheckedData){SetConstCheckedData(null)}else{SetConstCheckedData(item)}}}
+										src={ConstCheckedData?.EventID !== item.EventID ? '/svg/CheckedFalse.svg' : '/svg/CheckedTrue.svg'}
+										alt=""
+									/>
+								</div>
+								<div>{item.EventName.split("-")[1]}</div>
+							</div>
+							<div style={{paddingLeft:"4px"}}>
+								<div className='flex gap-2 items-center' style={{fontSize:"13px"}}><img src="/assets/phoneui1.svg" alt="1" />{Mobile}</div>
+								<div className='flex gap-2 items-center' style={{fontSize:"13px"}}><img src="/assets/phoneui2.svg" alt="2" />{Location}</div>
+								<div className='flex gap-2 items-center' style={{fontSize:"13px"}}><img src="/assets/phoneui3.svg" alt="3" />{Email_ID}</div>
+								<div className='flex gap-2 items-center mt-3'>
+									<select
+										className={Style.customSelect}
+										style={{...ColorAndBGcolor(StatusValue), border: 'none', outline: 'none',color:"white",cursor: 'pointer', fontSize: '16px',borderRadius:"5px",padding:"4px"}}
+										value={StatusValue}
+										onChange={(e) => {
+										SetStatusValue(e.target.value);
+										OnStatusChange(item.EventID, e.target.value);
+										}}
+									>
+										<option value="">Status</option>
+										<option value="Lead" style={ColorAndBGcolor('Lead')}>Lead</option>
+										<option value="Advance paid" style={ColorAndBGcolor('Advance paid')}>Advance paid</option>
+										<option value="Editing" style={ColorAndBGcolor('Editing')}>Editing</option>
+										<option value="Event completed" style={ColorAndBGcolor('Event completed')}>Event completed</option>
+										<option value="Balance settled" style={ColorAndBGcolor('Balance settled')}>Balance settled</option>
+										<option value="Delivered" style={ColorAndBGcolor('Delivered')}>Delivered</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div className=''>
+					<div style={{paddingTop:"1em"}}>
+						<div style={{fontSize:"13px",fontWeight:"bold"}}>Full amount - <span style={{color:"var(--pink)"}}>{item.Full_Amount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}</span></div>
+						<div style={{fontSize:"13px",fontWeight:"bold"}}>Paid amount - <span  style={{color:"var(--pink)"}}>{AdvanceAmount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}</span> </div>
+						<div style={{fontSize:"13px",fontWeight:"bold"}}>Balance - <span  style={{color:"var(--pink)"}}>{(item.Full_Amount - AdvanceAmount).toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}</span></div>
+					</div>
+					<div>
+						<AddPayment uuid={item.Customer_ID_UUID} name={item.EventName} cusname={cusname} OnStatusChange={OnStatusChange} 
+							Mobile={Mobile} EventDate={item.EventDate} ConstCheckedData={ConstCheckedData} 
+							SetConstCheckedData={SetConstCheckedData} Location={Location} Email_ID={Email_ID} 
+							Full_Amount={item.Full_Amount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})} 
+							AdvanceAmount={AdvanceAmount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
+							Bal={(item.Full_Amount - AdvanceAmount).toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
+							verbose={verbose}
+							UserID={UserID}
+						/>
+					</div>
+				</div>
+			</div>
+			<div className='flex items-center justify-center'>
+				<div className={Style.line}></div>
+			</div>
+		</div>
+      </div>
+  )
 }
 
 export default function EventDetailsToDownload({UserID,id,name,Mobile,Location,Email_ID,Balance,verbose,MobileUi}) {
@@ -211,37 +280,35 @@ export default function EventDetailsToDownload({UserID,id,name,Mobile,Location,E
 
   const list = (anchor) => (
     <Box className={`${Style.DrawerCenter} min-h-screen overflow-scroll`} style={{backgroundColor:"var(--bg)",overflow:"scroll !important"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
-      <div  onClick={handleRefresh}>
+      <div  onClick={handleRefresh} className='hidden lg:block'>
           <img src="assets/homeicon.svg" alt="Home" className={Style.homeIcon} />
       </div>
-      <div className='min-h-screen overflow-scroll w-10/12 m-auto flex items-center flex-col pt-4 gap-4' style={{width:'70em',margin:"auto",overflow:"scroll !important"}}>
+      <div className={`min-h-screen overflow-scroll w-10/12 m-auto flex items-center flex-col pt-4 gap-4 ${Style.DetailsCon}`} style={{width:'70em',margin:"auto",overflow:"scroll !important"}}>
         
         {/* Header */}
-        <div className='flex w-full items-center justify-between py-2' style={{borderBottom:"1px solid var(--blue)"}}>
+        <div className='flex w-full items-center justify-between py-2 px-2' style={{borderBottom:"1px solid var(--blue)"}}>
           <div className='w-full px-4 py-2 flex gap-4 items-center'>
             <div className={Style.ForBackButton} onClick={()=>{setState({ ...state, [anchor]: false })}}>
-              {/* <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_263_943)"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.94063 13.0599C7.65973 12.7787 7.50195 12.3974 7.50195 11.9999C7.50195 11.6024 7.65973 11.2212 7.94063 10.9399L13.5966 5.2819C13.878 5.00064 14.2596 4.84268 14.6575 4.84277C14.8545 4.84282 15.0495 4.88167 15.2315 4.9571C15.4135 5.03253 15.5789 5.14307 15.7181 5.2824C15.8574 5.42173 15.9679 5.58713 16.0432 5.76915C16.1186 5.95117 16.1573 6.14625 16.1573 6.34325C16.1572 6.54025 16.1184 6.73531 16.0429 6.9173C15.9675 7.09929 15.857 7.26463 15.7176 7.4039L11.1226 11.9999L15.7186 16.5959C15.862 16.7342 15.9763 16.8997 16.055 17.0826C16.1337 17.2656 16.1752 17.4624 16.177 17.6616C16.1788 17.8607 16.141 18.0583 16.0656 18.2427C15.9903 18.427 15.879 18.5946 15.7382 18.7355C15.5975 18.8764 15.43 18.9878 15.2457 19.0633C15.0614 19.1389 14.8639 19.1769 14.6647 19.1753C14.4656 19.1736 14.2687 19.1323 14.0857 19.0538C13.9026 18.9753 13.7371 18.8611 13.5986 18.7179L7.93863 13.0599H7.94063Z" fill="white"/></g><defs><clipPath id="clip0_263_943"><rect width="24" height="24" fill="white"/></clipPath></defs></svg> */}
               <img src="/assets/backbtn.svg" alt="Back" style={{width:"20px",height:"20px"}}/>
             </div>
             <div style={{color:"var(--blue)",fontSize:"24px"}}>Customers Details</div>
           </div>
-          {/* <div className="flex items-center gap-4" style={{minWidth:"fit-content",border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Style.profile} /><div className="pr-6 text-sm font-bold w-fit">Studio name</div></div> */}
           <div><TemporaryDrawer_ UserID={UserID}/></div>
         </div>
 
         {/* Details */}
-        <div className='flex w-full pl-8 justify-between pb-6' style={{borderBottom:"1px solid var(--blue)"}}>
-          <div className='flex flex-col gap-3'>
-            <div className='text-xl font-bold' style={{color:"var(--blue)",fontSize:"26px"}}>{name}</div>
-            <div className='text-lg font-bold' style={{color:"var(--blue)",fontSize:"16px"}}>{Location}</div>
+        <div className='flex w-full lg:pl-8 justify-between pb-6 lg:pr-8 px-4' style={{borderBottom:"1px solid var(--blue)"}}>
+          <div className={`flex flex-col lg:gap-3 ${Style.AlignDetails}`}>
+            <div className={`sm:text-sm lg:text-xl font-bold ${Style.Cusnam1}`} style={{color:"var(--blue)",fontSize:"26px"}}>{name}</div>
+            <div className={`sm:text-sm lg:text-lg font-bold ${Style.Cusnam2}`} style={{color:"var(--blue)",fontSize:"16px"}}>{Location}</div>
             <div className='flex gap-3 text-sm'><img src="/assets/call.svg" alt="Call" /><div style={{color:"var(--blue)"}}>{Mobile}</div></div>
             <div className='flex gap-3 text-sm'><img src="/assets/msg.svg" alt="Call" /><div style={{color:"var(--blue)"}}>{Email_ID}</div></div>
           </div>
           <div className='flex flex-col justify-between gap-10'>
-            <div className='text-xl flex gap-2'><div className='text-xl font-bold' style={{color:"var(--blue)",fontSize:"26px"}}>Balance :</div><div style={{color:"var(--pink)"}}>$ {`${total}`}</div></div>
+            <div className='text-xl flex gap-2'><div className='sm:text-sm lg:text-xl font-bold' style={{color:"var(--blue)"}}>Balance : <span style={{color:"var(--pink"}}>$ {`${total}`}</span></div></div>
             <div><EventDetailsSendBtn name={name} ConstCheckedData={ConstCheckedData} Mobile={Mobile} /></div>
           </div>
-          <div className='flex items-center'>
+          <div className='items-center lg:flex hidden'>
             { ConstCheckedData ? <>
                 <div className='flex flex-col justify-between gap-6'>
                   <div className='flex gap-3 items-end justify-end'><div style={{fontSize:'14px',color:"#A0A0A0"}}>Edit</div><UpdateEventDetails FetchCustomerData={FetchEventsByUUID} Data={ConstCheckedData}/></div>
@@ -252,13 +319,12 @@ export default function EventDetailsToDownload({UserID,id,name,Mobile,Location,E
         </div>
 
         {/* DateCon */}
-        <div className='pl-8 my-4 flex items-center justify-between w-full'>
-          <div style={{color:"var(--blue)",fontSize:"24px"}}>Event</div>
-          <div className='flex gap-6 pr-10'>
-            {/* <div onClick={()=>{downloadCSVFunction()}} style={{cursor:"pointer",border:"1px solid var(--pink)",borderRadius:"5px",padding:"4px 2em",fontSize:"14px",backgroundColor:"var(--bg)",color:"var(--pink)",outline:"none"}}> Download </div> */}
+        <div className='pl-4 lg:pl-8 my-4 flex items-center justify-between w-full'>
+          <div style={{color:"var(--blue)"}} className={Style.eveName}>Event</div>
+          <div className='flex gap-6 pr-4 lg:pr-10'>
             <div style={{ position: 'relative', display: 'inline-block' }}>
               <button 
-                  className={Style.searchBtn} 
+                  className={`${Style.searchBtn}`} 
                   style={{ display:"flex", gap:"1em",alignItems:"center",justifyContent:"space-between",border: "1px solid var(--pink)", color: "var(--pink)", backgroundColor: "var(--bg)" }}
                   onClick={() => setDropdownVisible(!dropdownVisible)} 
               >
@@ -281,7 +347,7 @@ export default function EventDetailsToDownload({UserID,id,name,Mobile,Location,E
             <div><CreateEvent id={id} FetchEventsByUUID={FetchEventsByUUID}/></div>
           </div>
         </div>
-        <div className='pl-8 my-4 flex items-center w-full'>  
+        <div className='pl-4 lg:pl-8 my-4 flex gap-4 flex-col items-start w-full lg:flex-row lg:items-center'>  
           <div>
               <div className='flex'>
                 <div><div className={Style.inputcontainer}><label className={Style.label} for="inputField">Start Date</label><DatePickerIcon setValue={SetStartDate}/></div></div>
@@ -330,6 +396,7 @@ export default function EventDetailsToDownload({UserID,id,name,Mobile,Location,E
               ))}
             </div>
           </div>
+
         </div>
       </div>
     </Box>
