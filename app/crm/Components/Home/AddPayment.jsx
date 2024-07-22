@@ -11,7 +11,7 @@ import { sendsmscrmofcustomersetelement } from '../../SendSMS';
 import PaymentUpdateSendBtn from './PaymentUpdateSendBtn';
 import Image from 'next/image';
 import TemporaryDrawer_ from './UserProfile';
-export default function AddPayment({UserID,uuid,name,cusname,Mobile,EventDate,ConstCheckedData,SetConstCheckedData,OnOnStatusChange,Location,Email_ID,Full_Amount,AdvanceAmount,Bal,verbose}) {
+export default function AddPayment({MobileUI,UserID,uuid,name,cusname,Mobile,EventDate,ConstCheckedData,SetConstCheckedData,OnOnStatusChange,Location,Email_ID,Full_Amount,AdvanceAmount,Bal,verbose}) {
   const [Data,DataValue] = React.useState([]);
   const [total,Settotal] = React.useState(0);
   const [totalAmount,settotalAmount] = React.useState(0);
@@ -192,25 +192,29 @@ export default function AddPayment({UserID,uuid,name,cusname,Mobile,EventDate,Co
           <div onClick={toggleDrawer(anchor, true)} style={{cursor:'pointer'}}>
 
             {
-              !verbose ? 
-                <>
-                  <div className={verbose ? Style.customTableCell2 : Style.customTableCell1 } style={{minWidth:"10em"}}>
-                    {name.split('-')[1].split('_').join(' ')}
-                  </div>
-                  <div className={Style.customTableCell1} style={{minWidth:"10em"}}>{EventDate}</div>
-                  <div className={Style.customTableCell1} style={{minWidth:"10em"}}>
-                    {Full_Amount}
-                  </div>
-                  <div className={Style.customTableCell1} style={{minWidth:"10em"}}>
-                    {AdvanceAmount}
-                  </div>
-                  <div className={Style.customTableCell1} style={{minWidth:"10em"}}>
-                    {Bal}
-                  </div>
-                </> :
+              !verbose ? (
+                !MobileUI ? (
+                  <>
+                    <div className={verbose ? Style.customTableCell2 : Style.customTableCell1} style={{ minWidth: "10em" }}>
+                      {name.split('-')[1].split('_').join(' ')}
+                    </div>
+                    <div className={Style.customTableCell1} style={{ minWidth: "10em" }}>{EventDate}</div>
+                    <div className={Style.customTableCell1} style={{ minWidth: "10em" }}>{Full_Amount}</div>
+                    <div className={Style.customTableCell1} style={{ minWidth: "10em" }}>{AdvanceAmount}</div>
+                    <div className={Style.customTableCell1} style={{ minWidth: "10em" }}>{Bal}</div>
+                  </>
+                ) : <></>
+              ) : (
                 <>
                   {name.split('-')[1].split('_').join(' ')}
                 </>
+              )
+            }
+            {
+              MobileUI ? 
+                <div className={Style.SeeDetCon}>
+                  See Details
+                </div> : <></>
             }
 
           </div>

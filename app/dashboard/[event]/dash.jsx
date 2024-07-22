@@ -406,7 +406,7 @@ export default function Dashboard({ event}){
       const folderName = parts[parts.length - 2]; 
       const imageName = parts[parts.length - 1];
       // console.log(imageName,folderName,"Download",process.env.NEXT_PUBLIC_AMPLIFY_URL,process.env.NEXT_PUBLIC_AWS_BUCKET_NAME)
-      const response = await axios.post('http://3.7.46.168/downloadfile', {
+      const response = await axios.post('https://clickai.anthillnetworks.com/downloadfile', {
         filename: imageName,
         folderName: folderName,
       }, {
@@ -427,7 +427,7 @@ export default function Dashboard({ event}){
     }
 
     const HandleZip = async () => {
-      const response = await axios.post(`http://3.7.46.168/downloadall`, {
+      const response = await axios.post(`https://clickai.anthillnetworks.com/downloadall`, {
         folderName: SelectedFolder,
       }, {
         headers: {
@@ -455,7 +455,7 @@ export default function Dashboard({ event}){
       }
       // console.log(selectedFiles, "--"); 
       try {
-          const response = await axios.post('http://3.7.46.168/selected', {
+          const response = await axios.post('https://clickai.anthillnetworks.com/selected', {
               selectedFiles: selectedFiles,
           }, {
               headers: {

@@ -478,8 +478,11 @@
   }
 
   @media only screen and (max-width:800px) {
-    .customTableContainer{
-      width: 100%;
+    .SeeDetCon{
+      padding: 4px 18px !important;
+      font-size: 14px;
+      text-align: center;
+      margin-top: 2em;
     }
     .customTableCell{
       display: none;
@@ -516,7 +519,7 @@
       align-items: center;
       justify-content: center;
     }
-    .Details{
+    .Details,.SeeDetCon{
       cursor: pointer;
       color: crimson;
       border-radius: 5px;
@@ -581,6 +584,7 @@
     }
     .DetailsCon{
       width: fit-content;
+      padding: 0 1em !important;
     }
     .customTableHeader{
       display: none;

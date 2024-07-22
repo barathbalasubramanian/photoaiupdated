@@ -185,7 +185,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
     }
 
     else {
-      const response = await axios.post('http://localhost:8080/createFolder', {
+      const response = await axios.post('https://clickai.anthillnetworks.com/createFolder', {
         folderName: folderName,
       }, {
         headers: {

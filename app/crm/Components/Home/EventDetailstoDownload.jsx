@@ -33,6 +33,7 @@ export const TableCkeckBox = ({UserID,item,ConstCheckedData,cusname,SetConstChec
           Bal={(item.Full_Amount - AdvanceAmount).toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
           verbose={verbose}
           UserID={UserID}
+		      MobileUI= {false}
           />
         </div>
 
@@ -109,7 +110,7 @@ export const TableCkeckBox = ({UserID,item,ConstCheckedData,cusname,SetConstChec
 						</div>
 					</div>
 				</div>
-				<div className=''>
+				<div className='pr-6'>
 					<div style={{paddingTop:"1em"}}>
 						<div style={{fontSize:"13px",fontWeight:"bold"}}>Full amount - <span style={{color:"var(--pink)"}}>{item.Full_Amount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}</span></div>
 						<div style={{fontSize:"13px",fontWeight:"bold"}}>Paid amount - <span  style={{color:"var(--pink)"}}>{AdvanceAmount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}</span> </div>
@@ -124,6 +125,7 @@ export const TableCkeckBox = ({UserID,item,ConstCheckedData,cusname,SetConstChec
 							Bal={(item.Full_Amount - AdvanceAmount).toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
 							verbose={verbose}
 							UserID={UserID}
+							MobileUI={true}
 						/>
 					</div>
 				</div>
