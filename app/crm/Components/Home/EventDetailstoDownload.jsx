@@ -110,7 +110,7 @@ export const TableCkeckBox = ({UserID,item,ConstCheckedData,cusname,SetConstChec
 						</div>
 					</div>
 				</div>
-				<div className='pr-6'>
+				<div className='pr-6 pb-4 flex flex-col items-center justify-between'>
 					<div style={{paddingTop:"1em"}}>
 						<div style={{fontSize:"13px",fontWeight:"bold"}}>Full amount - <span style={{color:"var(--pink)"}}>{item.Full_Amount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}</span></div>
 						<div style={{fontSize:"13px",fontWeight:"bold"}}>Paid amount - <span  style={{color:"var(--pink)"}}>{AdvanceAmount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}</span> </div>
@@ -306,8 +306,16 @@ export default function EventDetailsToDownload({UserID,id,name,Mobile,Location,E
             <div className='flex gap-3 text-sm'><img src="/assets/call.svg" alt="Call" /><div style={{color:"var(--blue)"}}>{Mobile}</div></div>
             <div className='flex gap-3 text-sm'><img src="/assets/msg.svg" alt="Call" /><div style={{color:"var(--blue)"}}>{Email_ID}</div></div>
           </div>
-          <div className='flex flex-col justify-between gap-10'>
-            <div className='text-xl flex gap-2'><div className='sm:text-sm lg:text-xl font-bold' style={{color:"var(--blue)"}}>Balance : <span style={{color:"var(--pink"}}>$ {`${total}`}</span></div></div>
+          <div className='flex flex-col justify-between'>
+            <div className='text-xl flex gap-2'><div className='sm:text-sm lg:text-xl font-bold' style={{color:"var(--blue)"}}>Balance : <span style={{color:"var(--pink"}}>${`${total}`}</span></div></div>
+            <div className='lg:hidden flex items-end justify-end'>
+            { ConstCheckedData ? <>
+                <div className='flex flex-row items-center justify-between gap-2'>
+                  <div className='flex gap-1 items-end justify-end'><div style={{fontSize:'14px',color:"#A0A0A0"}}>Edit</div><UpdateEventDetails FetchCustomerData={FetchEventsByUUID} Data={ConstCheckedData}/></div>
+                  <div className='flex gap-1 items-end justify-end'><div style={{fontSize:'14px',color:"#A0A0A0"}}>Delete</div><img src='/assets/del.svg' style={{cursor:'pointer',width:"24px",height:"24px"}} onClick={HandelDelete}/></div>
+                </div>  </>: <></>
+            }
+            </div>
             <div><EventDetailsSendBtn name={name} ConstCheckedData={ConstCheckedData} Mobile={Mobile} /></div>
           </div>
           <div className='items-center lg:flex hidden'>

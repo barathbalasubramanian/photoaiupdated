@@ -4,6 +4,8 @@ import { sendsmscrmofcustomersetelement } from '../../SendSMS';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 
+import Styles from './edit.module.css'
+
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
@@ -27,8 +29,8 @@ function PaymentUpdateSendBtn({cusname,total,Mobile,name,totalAmount}) {
       }
 
     return (
-    <div>
-        <button onClick={()=>{handleClickOpen()}} style={{border:'none',borderRadius:'5px',fontSize:'13px',padding:'8px 3em', marginTop:'15px',cursor:'pointer',backgroundColor:'var(--pink)',color:'#fff'}}>Send Update</button>            
+    <div className={Styles.sendDiv}>
+        <button className={Styles.sendBtn} onClick={()=>{handleClickOpen()}} style={{border:'none',borderRadius:'5px',fontSize:'13px',padding:'8px 3em', marginTop:'15px',cursor:'pointer',backgroundColor:'var(--pink)',color:'#fff'}}>Send Update</button>            
         <Dialog open={open} TransitionComponent={Transition} transitionDuration={{ appear: 600, enter: 600, exit: 600 }} keepMounted onClose={handleClose} aria-describedby="alert-dialog-slide-description">
             <div style={{backgroundColor:'#1e2742',padding:'30px 50px',borderRadius:'0'}}>
                 <div style={{color:'white', fontSize:'20px'}}>Do You Want to Send Update</div>

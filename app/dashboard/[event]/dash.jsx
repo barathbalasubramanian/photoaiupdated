@@ -372,7 +372,6 @@ export default function Dashboard({ event}){
           loadderevalue(false)
     };
     const QueryVideos = async() => {
-      // console.log("Querying Videos...")
       pagetextvalue("All Videos");
       loadderevalue(true)
       stackonevalue([]);
@@ -401,8 +400,9 @@ export default function Dashboard({ event}){
     }
 
     const HandleDownload = async(item) => {
+      loadderevalue(true);
       console.log(item)
-      // const parts = item.split('/');
+      const parts = item.split('/');
       const folderName = parts[parts.length - 2]; 
       const imageName = parts[parts.length - 1];
       // console.log(imageName,folderName,"Download",process.env.NEXT_PUBLIC_AMPLIFY_URL,process.env.NEXT_PUBLIC_AWS_BUCKET_NAME)
@@ -416,17 +416,20 @@ export default function Dashboard({ event}){
       });
       if (response.status === 200) {
         const data = response.data
+        window.location.href = data.link;
         // console.log(data.link);
-        const link = document.createElement('a');
-        link.href = data.link;
-        link.target = '_blank';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        // const link = document.createElement('a');
+        // link.href = data.link;
+        // link.target = '_self';
+        // document.body.appendChild(link);
+        // link.click();
+        // document.body.removeChild(link);
+        loadderevalue(false);
       }
     }
 
     const HandleZip = async () => {
+      loadderevalue(true);
       const response = await axios.post(`https://clickai.anthillnetworks.com/downloadall`, {
         folderName: SelectedFolder,
       }, {
@@ -444,12 +447,17 @@ export default function Dashboard({ event}){
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+        loadderevalue(false);
+      }
+      else {
+        loadderevalue(false)
       }
     }
 
     const [selectedFiles, setSelectedFiles] = useState([]);
 
     const handleDownloadClick = async () => {
+      loadderevalue(true)
       if (selectedFiles.length === 0) {
         return;
       }
@@ -472,7 +480,9 @@ export default function Dashboard({ event}){
           link.click();
           document.body.removeChild(link);
           setSelectedFiles([]);
-      } catch (error) {
+          loadderevalue(false)
+        } catch (error) {
+          loadderevalue(false)
           // console.error('Error Download batch:', error);
       }
     };

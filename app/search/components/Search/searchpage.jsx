@@ -177,7 +177,6 @@ export default function Search({ AllEventData, SuperAdmin }) {
     // console.log('Creating folder with name:', folderName);
     // console.log(folderName,searchValue);
     let storeData = await Storefolder(folderName,searchValue.split(" ").join("_"))
-    loadderevalue(false);
 
     if (storeData === "Folder Already Exists") {
       toast.warning("Folder Aldready Exists Pls Provide Unique Name!");
@@ -202,6 +201,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
       setFolderName('');
       setCreateNew(false);
       setAllfoldersPage(true);
+      loadderevalue(false);
     }
 };
 
@@ -221,133 +221,247 @@ export default function Search({ AllEventData, SuperAdmin }) {
   const fileInputRef = useRef(null);
   const [uploadStatus, setUploadStatus] = useState([]);
 
-  const UploadImages = async (e) => {
-    LoaderStatsValue(true)
+  // const UploadImages = async (e) => {
+  //   LoaderStatsValue(true)
+  //   e.preventDefault();
+  //   uploadstatusvideo(true);
+  //   var UploadedArray = await FetchUploadedData(month);
+  //   const s3Client = new S3Client({
+  //     region: process.env.NEXT_PUBLIC_AWS_BUCKET_REGION,
+  //     credentials: {
+  //       accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY,
+  //       secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_KEY,
+  //     },
+  //   });
+
+  //   const options = {
+  //     maxSizeMB: 1,
+  //     maxWidthOrHeight: 1920,
+  //     useWebWorker: true,
+  //   };
+
+  //   const files = Array.from(fileInputRef.current.files);
+  //   const batchSize = 10;
+  //   let results = [];
+
+  //   for (let i = 0; i < files.length; i += batchSize) {
+  //     const batch = files.slice(i, i + batchSize);
+
+  //     const formData = new FormData();
+  //     batch.forEach((file) => {
+  //       formData.append('files', file);
+  //     });
+  //     formData.append('folderName', selectedFolder);
+
+  //     try {
+  //       const response = await axios.post(`http://localhost:3000/upload`, formData, {
+  //         headers: {
+  //           'Content-Type': 'multipart/form-data',
+  //         },
+  //       });
+
+  //       results = results.concat(response.data);
+  //       setUploadStatus(prevStatus => [...prevStatus, ...response.data]);
+  //       // console.log('Batch upload successful:', response.data);
+  //     } catch (error) {
+  //       // console.error('Error uploading batch:', error);
+  //     }
+  //   }
+
+  //   // console.log('All file uploads completed:', results);
+
+  //   for (let i = 0; i < upload.length; i++) {
+  //     if (UploadedArray.includes(upload[i].name)) {
+  //       const per = ((i + 1) / upload.length) * 100;
+  //       totaluploadedvalue(i + 1);
+  //       percentagevalue(Math.ceil(per));
+  //       continue;
+  //     }
+
+  //     let retries = 0;
+  //     let success = false;
+  //     while (!success && retries < 3) {
+  //       try {
+  //         const startTime = Date.now();
+  //         var Compresedimage = upload[i];
+  //         if (upload[i].size / (1024 * 1024) > 1) {
+  //           Compresedimage = await imageCompression(upload[i], options);
+  //         }
+  //         const name = upload[i].name
+  //         // console.log(name)
+  //         const uniqueFileName = new Date()
+  //           .toISOString()
+  //           .replace(/[-:.]/g, "")
+  //           .replace("T", "_");
+  //         const uploadCommand = new PutObjectCommand({
+  //           Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
+  //           Key: `${month}/COMPRESS_IMAGES/${selectedFolder}/${name}`,
+  //           Body: Compresedimage,
+  //           ACL: "public-read",
+  //         });
+  //         const respo = await s3Client.send(uploadCommand);
+  //           if (respo.$metadata.httpStatusCode == 200) {
+  //             UploadedArray.push(upload[i].name);
+  //             const uploadJaonPar = {
+  //               Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
+  //               Key: `${month}/Uploaded_Images.json`,
+  //               Body: JSON.stringify(UploadedArray),
+  //               ContentType: "application/json",
+  //               ACL: "public-read",
+  //             };
+  //             await s3Client.send(new PutObjectCommand(uploadJaonPar));
+  //             const per = ((i + 1) / upload.length) * 100;
+  //             totaluploadedvalue(i + 1);
+  //             percentagevalue(Math.ceil(per));
+  //             success = true;
+  //           }
+  //       } catch (error) {
+  //         // console.error("Error occurred during upload:", error);
+  //         // Retry after 1 minute
+  //         await new Promise((resolve) => setTimeout(resolve, 180000));
+  //         retries++;
+  //       }
+  //     }
+
+  //     if (!success) {
+  //       console.error(
+  //         "Upload failed after retrying multiple times:",
+  //         upload[i].name
+  //       );
+  //       // Handle failed upload here
+  //       // You might want to log or handle failed uploads differently
+  //     }
+  //   }
+
+  //   // setIsLoading(false);
+  //   inputboxvalue(false);
+  //   uploadvalue(null);
+  //   totaluploadedvalue(0);
+  //   percentagevalue(0);
+  //   // Toast.fire({ icon: "success", title: "Upload Success ..." });
+  //   toast.success("Upload Success ...");
+  //   uploadstatusvideo(false);
+  //   LoaderStatsValue(false)
+  // };
+
+
+const UploadImages = async (e) => {
+    LoaderStatsValue(true);
     e.preventDefault();
     uploadstatusvideo(true);
     var UploadedArray = await FetchUploadedData(month);
     const s3Client = new S3Client({
-      region: process.env.NEXT_PUBLIC_AWS_BUCKET_REGION,
-      credentials: {
-        accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY,
-        secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_KEY,
-      },
+        region: process.env.NEXT_PUBLIC_AWS_BUCKET_REGION,
+        credentials: {
+            accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY,
+            secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_KEY,
+        },
     });
 
     const options = {
-      maxSizeMB: 1,
-      maxWidthOrHeight: 1920,
-      useWebWorker: true,
+        maxSizeMB: 1,
+        maxWidthOrHeight: 1920,
+        useWebWorker: true,
     };
-
-    // const formData = new FormData();
-    // for (let i = 0; i < upload.length; i++) {
-    //   formData.append('files', upload[i]);
-    // }
 
     const files = Array.from(fileInputRef.current.files);
     const batchSize = 10;
     let results = [];
 
+    const totalFiles = files.length + files.length; // Considering both batch uploads and S3 uploads
+    let completedFiles = 0;
+
     for (let i = 0; i < files.length; i += batchSize) {
-      const batch = files.slice(i, i + batchSize);
+        const batch = files.slice(i, i + batchSize);
 
-      const formData = new FormData();
-      batch.forEach((file) => {
-        formData.append('files', file);
-      });
-      formData.append('folderName', selectedFolder);
-
-      try {
-        const response = await axios.post(`https://clickai.anthillnetworks.com/upload`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
+        const formData = new FormData();
+        batch.forEach((file) => {
+            formData.append('files', file);
         });
+        formData.append('folderName', selectedFolder);
 
-        results = results.concat(response.data);
-        setUploadStatus(prevStatus => [...prevStatus, ...response.data]);
-        // console.log('Batch upload successful:', response.data);
-      } catch (error) {
-        // console.error('Error uploading batch:', error);
-      }
+        try {
+            const response = await axios.post(`https://clickai.anthillnetworks.com/upload`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            results = results.concat(response.data);
+            setUploadStatus(prevStatus => [...prevStatus, ...response.data]);
+            completedFiles += batch.length;
+            const per = (completedFiles / totalFiles) * 100;
+            percentagevalue(Math.ceil(per));
+        } catch (error) {
+            console.error('Error uploading batch:', error);
+        }
     }
-
-    // console.log('All file uploads completed:', results);
 
     for (let i = 0; i < upload.length; i++) {
-      if (UploadedArray.includes(upload[i].name)) {
-        const per = ((i + 1) / upload.length) * 100;
-        totaluploadedvalue(i + 1);
-        percentagevalue(Math.ceil(per));
-        continue;
-      }
-
-      let retries = 0;
-      let success = false;
-      while (!success && retries < 3) {
-        try {
-          const startTime = Date.now();
-          var Compresedimage = upload[i];
-          if (upload[i].size / (1024 * 1024) > 1) {
-            Compresedimage = await imageCompression(upload[i], options);
-          }
-          const name = upload[i].name
-          // console.log(name)
-          const uniqueFileName = new Date()
-            .toISOString()
-            .replace(/[-:.]/g, "")
-            .replace("T", "_");
-          const uploadCommand = new PutObjectCommand({
-            Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
-            Key: `${month}/COMPRESS_IMAGES/${selectedFolder}/${name}`,
-            Body: Compresedimage,
-            ACL: "public-read",
-          });
-          const respo = await s3Client.send(uploadCommand);
-            if (respo.$metadata.httpStatusCode == 200) {
-              UploadedArray.push(upload[i].name);
-              const uploadJaonPar = {
-                Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
-                Key: `${month}/Uploaded_Images.json`,
-                Body: JSON.stringify(UploadedArray),
-                ContentType: "application/json",
-                ACL: "public-read",
-              };
-              await s3Client.send(new PutObjectCommand(uploadJaonPar));
-              const per = ((i + 1) / upload.length) * 100;
-              totaluploadedvalue(i + 1);
-              percentagevalue(Math.ceil(per));
-              success = true;
-            }
-        } catch (error) {
-          // console.error("Error occurred during upload:", error);
-          // Retry after 1 minute
-          await new Promise((resolve) => setTimeout(resolve, 180000));
-          retries++;
+        if (UploadedArray.includes(upload[i].name)) {
+            completedFiles++;
+            const per = (completedFiles / totalFiles) * 100;
+            totaluploadedvalue(i + 1);
+            percentagevalue(Math.ceil(per));
+            continue;
         }
-      }
 
-      if (!success) {
-        console.error(
-          "Upload failed after retrying multiple times:",
-          upload[i].name
-        );
-        // Handle failed upload here
-        // You might want to log or handle failed uploads differently
-      }
+        let retries = 0;
+        let success = false;
+        while (!success && retries < 3) {
+            try {
+                var Compresedimage = upload[i];
+                if (upload[i].size / (1024 * 1024) > 1) {
+                    Compresedimage = await imageCompression(upload[i], options);
+                }
+                const name = upload[i].name;
+                const uniqueFileName = new Date()
+                    .toISOString()
+                    .replace(/[-:.]/g, "")
+                    .replace("T", "_");
+                const uploadCommand = new PutObjectCommand({
+                    Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
+                    Key: `${month}/COMPRESS_IMAGES/${selectedFolder}/${name}`,
+                    Body: Compresedimage,
+                    ACL: "public-read",
+                });
+                const respo = await s3Client.send(uploadCommand);
+                if (respo.$metadata.httpStatusCode == 200) {
+                    UploadedArray.push(upload[i].name);
+                    const uploadJaonPar = {
+                        Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
+                        Key: `${month}/Uploaded_Images.json`,
+                        Body: JSON.stringify(UploadedArray),
+                        ContentType: "application/json",
+                        ACL: "public-read",
+                    };
+                    await s3Client.send(new PutObjectCommand(uploadJaonPar));
+                    completedFiles++;
+                    const per = (completedFiles / totalFiles) * 100;
+                    totaluploadedvalue(i + 1);
+                    percentagevalue(Math.ceil(per));
+                    success = true;
+                }
+            } catch (error) {
+                console.error("Error occurred during upload:", error);
+                await new Promise((resolve) => setTimeout(resolve, 180000));
+                retries++;
+            }
+        }
+
+        if (!success) {
+            console.error("Upload failed after retrying multiple times:", upload[i].name);
+        }
     }
 
-    // setIsLoading(false);
     inputboxvalue(false);
     uploadvalue(null);
     totaluploadedvalue(0);
     percentagevalue(0);
-    // Toast.fire({ icon: "success", title: "Upload Success ..." });
     toast.success("Upload Success ...");
     uploadstatusvideo(false);
-    LoaderStatsValue(false)
-  };
+    LoaderStatsValue(false);
+};
 
   const SendSMSFunction = async () => {
     // console.log("Sending...")
