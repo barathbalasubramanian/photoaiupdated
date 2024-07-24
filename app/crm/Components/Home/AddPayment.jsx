@@ -90,7 +90,7 @@ export default function AddPayment({MobileUI,UserID,uuid,name,cusname,Mobile,Eve
       <div  onClick={handleRefresh} className='hidden  lg:block'>
           <img src="assets/homeicon.svg" alt="Home" className={Style.homeIcon} />
       </div>    
-      <div className={`w-10/12 m-auto flex items-center flex-col pt-4 gap-4 min-h-screen lg:px-0 sm:px-8 ${Style.AddpayCon}`} style={{width:'80%',margin:"auto"}}>
+      <div className={`px-8 w-10/12 m-auto flex items-center flex-col pt-4 gap-4 min-h-screen lg:px-0 sm:px-8 ${Style.AddpayCon}`} style={{width:'80%',margin:"auto"}}>
         
         {/* Header */}
         <div className='flex w-full items-center justify-between lg:py-2' style={{borderBottom:"1px solid var(--blue)"}}>
@@ -108,14 +108,14 @@ export default function AddPayment({MobileUI,UserID,uuid,name,cusname,Mobile,Eve
           <div className='flex flex-col lg:gap-3 gap-1'>
             <div className='sm:text-lg lg:text-xl font-bold' style={{color:"var(--blue)"}}>{cusname}</div>
             <div className='sm:text-sm lg:text-xl font-bold' style={{color:"var(--blue)"}}>{Location}</div>
-            <div className='flex gap-1 text-sm'><img src="/assets/call.svg" style={{width:"12px !important"}} alt="Call" /><div style={{color:"var(--blue)"}}>{Mobile}</div></div>
-            <div className='flex gap-1 text-sm'><img src="/assets/msg.svg"  style={{width:"12px !important"}} alt="Call" /><div style={{color:"var(--blue)"}}>{Email_ID}</div></div>
+            <div className='flex gap-2 text-sm'><img src="/assets/call.svg" className={Style.ImageSize} alt="Call" /><div style={{color:"var(--blue)"}}>{Mobile}</div></div>
+            <div className='flex gap-2 text-sm'><img src="/assets/msg.svg" className={Style.ImageSize} alt="Call" /><div style={{color:"var(--blue)"}}>{Email_ID}</div></div>
             <div className='hidden lg:flex text-sm gap-2'><div className='text-sm font-bold' style={{color:"var(--blue)"}}>Paid :</div><div style={{color:"var(--pink)"}}>$ {total}</div></div>
             <div className='hidden lg:flex text-sm gap-2'><div className='text-sm font-bold' style={{color:"var(--blue)"}}>Balance :</div><div style={{color:"var(--pink)"}}>$ {totalAmount-total}</div></div>
           </div>
           <div className='flex flex-col justify-between lg:gap-10'>
-            <div>
-              <div className='text-sm lg:text-xl flex gap-2'><div className='text-sm lg:text-xl font-bold' style={{color:"var(--blue)"}}>Total Amount :</div><div style={{color:"var(--pink)"}}>$ {totalAmount}</div></div>
+            <div className='flex items-end flex-col'>
+              <div className='text-sm lg:text-xl flex gap-2'><div className='text-sm lg:text-xl font-bold' style={{color:"var(--blue)"}}>Amount :</div><div style={{color:"var(--pink)"}}>$ {totalAmount}</div></div>
               <div className='lg:hidden text-sm flex gap-2'><div className='text-sm font-bold' style={{color:"var(--blue)"}}>Paid :</div><div style={{color:"var(--pink)"}}>$ {total}</div></div>
               <div className='lg:hidden text-sm flex gap-2'><div className='text-sm font-bold' style={{color:"var(--blue)"}}>Balance :</div><div style={{color:"var(--pink)"}}>$ {totalAmount-total}</div></div>
             </div>
@@ -197,13 +197,13 @@ export default function AddPayment({MobileUI,UserID,uuid,name,cusname,Mobile,Eve
               !verbose ? (
                 !MobileUI ? (
                   <>
-                    <div className={verbose ? Style.customTableCell2 : Style.customTableCell1} style={{ minWidth: "10em" }}>
+                    <div className={verbose ? Style.customTableCell2 : Style.customTableCell1} style={{width:"10em",maxWidth:"10em",overflow:"scroll"}}>
                       {name.split('-')[1].split('_').join(' ')}
                     </div>
-                    <div className={Style.customTableCell1} style={{ minWidth: "10em" }}>{EventDate}</div>
-                    <div className={Style.customTableCell1} style={{ minWidth: "10em" }}>{Full_Amount}</div>
-                    <div className={Style.customTableCell1} style={{ minWidth: "10em" }}>{AdvanceAmount}</div>
-                    <div className={Style.customTableCell1} style={{ minWidth: "10em" }}>{Bal}</div>
+                    <div className={Style.customTableCell1} style={{width:"10em",maxWidth:"10em",overflow:"scroll"}}>{EventDate}</div>
+                    <div className={Style.customTableCell1} style={{width:"10em",maxWidth:"10em",overflow:"scroll"}}>{Full_Amount}</div>
+                    <div className={Style.customTableCell1} style={{width:"10em",maxWidth:"10em",overflow:"scroll"}}>{AdvanceAmount}</div>
+                    <div className={Style.customTableCell1} style={{width:"10em",maxWidth:"10em",overflow:"scroll"}}>{Bal}</div>
                   </>
                 ) : <></>
               ) : (

@@ -84,7 +84,7 @@ export default function AddPaymentModes({uuid,name,GetAllAmount}) {
                       <input type='text' onChange={(e)=>{SetAmount(e.target.value)}} style={{width:'90%',backgroundColor:'var(--white)',border:'none',padding:'.4em .6em',borderRadius:'5px',fontSize:'15px',outline:'none',color:'black',margin:'5px 0',border:"1px solid var(--blue)"}}  placeholder="Event Name" required/>
                     </div>
 
-                    <button type='submit' style={{border:'none',borderRadius:'5px',fontSize:'13px',width:'150px',padding:'15px 20px', marginTop:'50px',cursor:'pointer',backgroundColor:'#A240E5',color:'#fff'}}>Add Amount</button>
+                    <button type='submit' style={{border:'none',borderRadius:'5px',fontSize:'13px',width:'150px',padding:'6px 20px', marginTop:'30px',cursor:'pointer',backgroundColor:'var(--pink)',color:'#fff'}}>Add Amount</button>
                 </form>
             </div>
         </div>

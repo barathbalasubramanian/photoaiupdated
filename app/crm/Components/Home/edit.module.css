@@ -459,6 +459,10 @@
     left: 5%;
     cursor: pointer;
   }
+
+  .ImageSize{
+    width: 15px !important;
+  }
   
   @media (max-width: 768px) {
     .customTableCell {
@@ -475,6 +479,13 @@
   }
 
   @media only screen and (max-width:800px) {
+    .SearchModelGreet {
+      width: 70% !important;
+    }
+    .allGreet{
+      padding: 2em 0 2em 2em;
+      width: 100% !important;
+    }
     .MobileUiEdit{
       width: 100% !important;
     }
@@ -499,8 +510,12 @@
       width: 100% !important;
       margin: 0 !important;
     }
+    .greetImg {
+      width: 5em !important;
+      height: 5em !important;
+    }
     .AddpayCon{
-      padding: 1em;
+      padding: 1em 2em;
       width: 100% !important;
     }
     .SeeDetCon{
@@ -536,7 +551,7 @@
       gap: 10px !important;
     }
     .DetailsCon{
-      width: 100% !important;
+      width: 95% !important;
     }
     .line{
       border-bottom: 1px solid #DDDDDD;
@@ -582,9 +597,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-    .SearchModel{
-      width: 90vw !important;
     }
     .AddModelButton{
       display: flex;

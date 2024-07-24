@@ -40,7 +40,7 @@ export const TableCkeckBox = ({UserID,item,ConstCheckedData,cusname,SetConstChec
         <div className={Style.customTableCell}>
           <select
             className={Style.customSelect}
-            style={{...ColorAndBGcolor(StatusValue), border: 'none', outline: 'none',color:"white",cursor: 'pointer', fontSize: '16px',borderRadius:"5px",padding:"4px"}}
+            style={{...ColorAndBGcolor(StatusValue), border: 'none', outline: 'none',color:"black",cursor: 'pointer', fontSize: '16px',borderRadius:"5px",padding:"4px"}}
             value={StatusValue}
             onChange={(e) => {
               SetStatusValue(e.target.value);
@@ -66,7 +66,7 @@ export const TableCkeckBox = ({UserID,item,ConstCheckedData,cusname,SetConstChec
           />
         </div>
 
-        <div className={Style.customTbodyMob}>
+        <div className={`${Style.customTbodyMob} pr-4`}>
           <div className='flex justify-between'>
             <div className='flex flex-col gap-1 '>
               <div className={`flex gap-3 justify-between py-2`}>
@@ -378,11 +378,11 @@ export default function EventDetailsToDownload({UserID,id,name,Mobile,Location,E
             <div className={Style.customTableHeader}>
               <div className={Style.customTableRow}>
                 <div style={{borderBottom:"1px solid var(--blue)",padding:"0px 20px",fontWeight:"bold"}}>
-                  <div className={Style.customTableCell1} style={{minWidth:"10em"}}>Event Name</div>
-                  <div className={Style.customTableCell1} style={{minWidth:"10em"}}>Date</div>
-                  <div className={Style.customTableCell1} style={{minWidth:"10em"}}>Full Amount</div>
-                  <div className={Style.customTableCell1} style={{minWidth:"10em"}}>Paid Amount</div>
-                  <div className={Style.customTableCell1} style={{minWidth:"10em"}}>Balance</div>
+                  <div className={Style.customTableCell1} style={{width:"10em",maxWidth:"10em",overflow:"scroll"}}>Event Name</div>
+                  <div className={Style.customTableCell1} style={{width:"10em",maxWidth:"10em",overflow:"scroll"}}>Date</div>
+                  <div className={Style.customTableCell1} style={{width:"10em",maxWidth:"10em",overflow:"scroll"}}>Full Amount</div>
+                  <div className={Style.customTableCell1} style={{width:"10em",maxWidth:"10em",overflow:"scroll"}}>Paid Amount</div>
+                  <div className={Style.customTableCell1} style={{width:"10em",maxWidth:"10em",overflow:"scroll"}}>Balance</div>
                 </div>
                 <div className={Style.customTableCell} >Status</div>
                 <div className={Style.customTableCell}></div>
@@ -417,11 +417,11 @@ export default function EventDetailsToDownload({UserID,id,name,Mobile,Location,E
         MobileUi != true ? (
           <React.Fragment key={anchor}>
             <div onClick={toggleDrawer(anchor, true)} className='cursor-pointer'>
-              <div className={Style.customTd} style={{minWidth: "10em"}}>{name}</div>
-              <div className={Style.customTd} style={{minWidth: "8em"}}>{Mobile}</div>
-              <div className={Style.customTd} style={{minWidth: "18em"}}>{Email_ID}</div>
-              <div className={Style.customTd} style={{minWidth: "8em"}}>{Location}</div>
-              <div className={Style.customTd} style={{minWidth: "10em"}}>{Balance.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</div>
+              <div className={Style.customTd} style={{width:"10em",maxWidth:"10em",overflow:"scroll"}}>{name}</div>
+              <div className={Style.customTd} style={{width:"8em",maxWidth:"8em",overflow:"scroll"}}>{Mobile}</div>
+              <div className={Style.customTd} style={{width:"18em",maxWidth:"18em",overflow:"scroll"}}>{Email_ID}</div>
+              <div className={Style.customTd} style={{width:"8em",maxWidth:"8em",overflow:"scroll"}}>{Location}</div>
+              <div className={Style.customTd} style={{width:"10em",maxWidth:"10em",overflow:"scroll"}}>{Balance.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</div>
             </div>
             <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} transitionDuration={{ appear: 1000, enter: 1000, exit: 1000 }}>
               {list(anchor)}

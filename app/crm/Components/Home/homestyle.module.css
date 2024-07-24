@@ -197,6 +197,10 @@
 }
 
   @media screen and (min-width: 0px) and (max-width: 600px) {
+    .MainContent{
+      align-items: start !important;
+      margin: 0 0 0 1em !important;
+    }
     .NavOptions{
       display: flex;
       flex-direction: column;

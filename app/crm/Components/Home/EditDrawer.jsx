@@ -127,18 +127,18 @@ export default function EditLeftDrawer(UserID) {
                 </div>  
             </div>
 
-            <div className={Style.TableTag} style={{maxHeight: "60vh", overflow: "scroll" }}>
+            <div className={Style.TableTag} style={{maxHeight: "65vh", overflow: "scroll" }}>
               <div className={Style.customTable} style={{width:"fit-content",backgroundColor:"var(--white)",borderRadius:"10px"}}>
                 <div className={`${Style.customThead}`}>
                   <div className={Style.customTr}>
                     <div className={Style.customTh} style={{borderBottom:"1px solid #9AC5F4"}}>#</div>
                     <div>
                       <div style={{borderBottom:"1px solid #9AC5F4"}}>
-                        <div className={Style.customTh} style={{minWidth:"10em"}}>Customer Name</div>
-                        <div className={Style.customTh} style={{minWidth:"8em"}}>Mobile</div>
-                        <div className={Style.customTh} style={{width:"18em"}} >Mail</div>
-                        <div className={Style.customTh} style={{minWidth:"8em"}}>Location</div>
-                        <div className={Style.customTh} style={{minWidth:"10em"}}>Balance</div>
+                        <div className={Style.customTh} style={{width:"10em",maxWidth:"10em",overflow:"scroll"}}>CustomerName</div>
+                        <div className={Style.customTh} style={{width:"8em",maxWidth:"8em",overflow:"scroll"}}>Mobile</div>
+                        <div className={Style.customTh} style={{width:"18em",maxWidth:"18em",overflow:"scroll"}} >Mail</div>
+                        <div className={Style.customTh} style={{width:"8em",maxWidth:"8em",overflow:"scroll"}}>Location</div>
+                        <div className={Style.customTh} style={{width:"10em",maxWidth:"10em",overflow:"scroll"}}>Balance</div>
                       </div>
                     </div>
                   </div>
