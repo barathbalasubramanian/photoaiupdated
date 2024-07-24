@@ -78,14 +78,14 @@ export default function EditLeftDrawer(UserID) {
 
   const list = (anchor) => (
     <Box className={`${Style.DrawerCenter} min-h-screen`} style={{backgroundColor:"var(--bg)"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
-        <div  onClick={handleRefresh}>
+        <div className='lg:flex hidden' onClick={handleRefresh}>
           <img src="assets/homeicon.svg" alt="Home" className={Style.homeIcon} />
         </div>
         <div className={`m-auto flex flex-col pt-4 gap-4 min-h-screen ${Style.MainCon}`} style={{width:"65em",margin:"auto"}}>
 
             {/* Header */}
             <div className='flex w-full items-center justify-between py-2 px-3'>
-              <div className='w-full px-4 py-2 flex gap-4 items-center'>
+              <div className='w-full lg:px-4 py-2 flex gap-4 items-center'>
                 <div className={Style.ForBackButton} onClick={()=>{setState({ ...state, [anchor]: false })}}>
                   <img src="/assets/backbtn.svg" alt="Back" style={{width:"20px",height:"20px"}}/>
                 </div>
@@ -98,7 +98,7 @@ export default function EditLeftDrawer(UserID) {
             <div className={`${Style.NavSearchModel} mb-4 px-3`}>
                 <div className={Style.SearchModel} style={{width:"68%"}}>
                     <input type="text" placeholder="Search" onChange={(e)=>{SetData(searchFun(e.target.value,ConstData))}}/>
-                    <div className={Style.searchBtn}>Search</div>
+                    <div className={Style.searchBtn} style={{margin:"0em"}}>Search</div>
                 </div>
                 <div className={Style.AddModelButton}>
                   <div style={{ position: 'relative', display: 'inline-block' }}>
@@ -195,7 +195,7 @@ export default function EditLeftDrawer(UserID) {
                                 </div>
                                 <div>{item.Customer_Name}</div>
                               </div>
-                              <div style={{paddingLeft:"24px"}}>
+                              <div style={{paddingLeft:"4px"}}>
                                 <div className='flex gap-2 items-center' style={{fontSize:"13px"}}><img src="/assets/phoneui1.svg" alt="1" />{item.Mobile}</div>
                                 <div className='flex gap-2 items-center' style={{fontSize:"13px"}}><img src="/assets/phoneui2.svg" alt="2" />{item.Location}</div>
                                 <div className='flex gap-2 items-center' style={{fontSize:"13px"}}><img src="/assets/phoneui3.svg" alt="3" />{item.Email_ID}</div>

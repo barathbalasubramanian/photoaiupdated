@@ -38,8 +38,8 @@ export default function CreateEvent({id,FetchEventsByUUID}){
   }
   const list = (anchor) => (
     <Box className={Style.DrawerCenter} style={{backgroundColor:"var(--bg)"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
-        <div style={{width:'100vw',height:'100svh',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-            <div style={{position:"relative",boxShadow:"0px 72px 80px -48px rgba(0, 0, 0, 0.5)",backgroundColor:'var(--white)',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',width:"50em",padding:"2em 5em",borderRadius:"20px"}}>
+        <div className={Style.MobileUiEdit} style={{width:'100vw',height:'100svh',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+            <div className={Style.MobileUiEdit2} style={{position:"relative",boxShadow:"0px 72px 80px -48px rgba(0, 0, 0, 0.5)",backgroundColor:'var(--white)',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',width:"50em",padding:"2em 5em",borderRadius:"20px"}}>
                 <form onSubmit={HandelSubmit} style={{maxWidth:'500px',width:'100%',display:'flex',flexDirection:'column'}}>
                     
                     <div style={{display:'flex',justifyContent:'space-between',width:'100%',marginBottom:'10px'}}>

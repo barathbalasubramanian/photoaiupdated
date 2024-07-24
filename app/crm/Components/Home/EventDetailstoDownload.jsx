@@ -67,73 +67,73 @@ export const TableCkeckBox = ({UserID,item,ConstCheckedData,cusname,SetConstChec
         </div>
 
         <div className={Style.customTbodyMob}>
-			<div className='flex w-full justify-between'>
-				<div className='flex flex-col gap-1 '>
-					<div className={`flex gap-3 justify-between py-2`}>
-						<div className='flex flex-col pl-4 py-2 gap-2'>
-							<div className='flex gap-2'>
-								<div>
-									<img
-										className={Style.customImage}
-										style={{width: '20px', cursor: 'pointer'}}
-										onClick={() => {if(ConstCheckedData){SetConstCheckedData(null)}else{SetConstCheckedData(item)}}}
-										src={ConstCheckedData?.EventID !== item.EventID ? '/svg/CheckedFalse.svg' : '/svg/CheckedTrue.svg'}
-										alt=""
-									/>
-								</div>
-								<div>{item.EventName.split("-")[1]}</div>
-							</div>
-							<div style={{paddingLeft:"4px"}}>
-								<div className='flex gap-2 items-center' style={{fontSize:"13px"}}><img src="/assets/phoneui1.svg" alt="1" />{Mobile}</div>
-								<div className='flex gap-2 items-center' style={{fontSize:"13px"}}><img src="/assets/phoneui2.svg" alt="2" />{Location}</div>
-								<div className='flex gap-2 items-center' style={{fontSize:"13px"}}><img src="/assets/phoneui3.svg" alt="3" />{Email_ID}</div>
-								<div className='flex gap-2 items-center mt-3'>
-									<select
-										className={Style.customSelect}
-										style={{...ColorAndBGcolor(StatusValue), border: 'none', outline: 'none',color:"white",cursor: 'pointer', fontSize: '16px',borderRadius:"5px",padding:"4px"}}
-										value={StatusValue}
-										onChange={(e) => {
-										SetStatusValue(e.target.value);
-										OnStatusChange(item.EventID, e.target.value);
-										}}
-									>
-										<option value="">Status</option>
-										<option value="Lead" style={ColorAndBGcolor('Lead')}>Lead</option>
-										<option value="Advance paid" style={ColorAndBGcolor('Advance paid')}>Advance paid</option>
-										<option value="Editing" style={ColorAndBGcolor('Editing')}>Editing</option>
-										<option value="Event completed" style={ColorAndBGcolor('Event completed')}>Event completed</option>
-										<option value="Balance settled" style={ColorAndBGcolor('Balance settled')}>Balance settled</option>
-										<option value="Delivered" style={ColorAndBGcolor('Delivered')}>Delivered</option>
-									</select>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className='pr-6 pb-4 flex flex-col items-center justify-between'>
-					<div style={{paddingTop:"1em"}}>
-						<div style={{fontSize:"13px",fontWeight:"bold"}}>Full amount - <span style={{color:"var(--pink)"}}>{item.Full_Amount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}</span></div>
-						<div style={{fontSize:"13px",fontWeight:"bold"}}>Paid amount - <span  style={{color:"var(--pink)"}}>{AdvanceAmount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}</span> </div>
-						<div style={{fontSize:"13px",fontWeight:"bold"}}>Balance - <span  style={{color:"var(--pink)"}}>{(item.Full_Amount - AdvanceAmount).toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}</span></div>
-					</div>
-					<div>
-						<AddPayment uuid={item.Customer_ID_UUID} name={item.EventName} cusname={cusname} OnStatusChange={OnStatusChange} 
-							Mobile={Mobile} EventDate={item.EventDate} ConstCheckedData={ConstCheckedData} 
-							SetConstCheckedData={SetConstCheckedData} Location={Location} Email_ID={Email_ID} 
-							Full_Amount={item.Full_Amount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})} 
-							AdvanceAmount={AdvanceAmount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
-							Bal={(item.Full_Amount - AdvanceAmount).toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
-							verbose={verbose}
-							UserID={UserID}
-							MobileUI={true}
-						/>
-					</div>
-				</div>
-			</div>
-			<div className='flex items-center justify-center'>
-				<div className={Style.line}></div>
-			</div>
-		</div>
+          <div className='flex justify-between'>
+            <div className='flex flex-col gap-1 '>
+              <div className={`flex gap-3 justify-between py-2`}>
+                <div className='flex flex-col pl-4 py-2 gap-2'>
+                  <div className='flex gap-2'>
+                    <div>
+                      <img
+                        className={Style.customImage}
+                        style={{width: '20px', cursor: 'pointer'}}
+                        onClick={() => {if(ConstCheckedData){SetConstCheckedData(null)}else{SetConstCheckedData(item)}}}
+                        src={ConstCheckedData?.EventID !== item.EventID ? '/svg/CheckedFalse.svg' : '/svg/CheckedTrue.svg'}
+                        alt=""
+                      />
+                    </div>
+                    <div>{item.EventName.split("-")[1]}</div>
+                  </div>
+                  <div style={{paddingLeft:"4px"}}>
+                    <div className='flex gap-2 items-center' style={{fontSize:"13px"}}><img src="/assets/phoneui1.svg" alt="1" />{Mobile}</div>
+                    <div className='flex gap-2 items-center' style={{fontSize:"13px"}}><img src="/assets/phoneui2.svg" alt="2" />{Location}</div>
+                    <div className='flex gap-2 items-center' style={{fontSize:"13px"}}><img src="/assets/phoneui3.svg" alt="3" />{Email_ID}</div>
+                    <div className='flex gap-2 items-center mt-3'>
+                      <select
+                        className={Style.customSelect}
+                        style={{...ColorAndBGcolor(StatusValue), border: 'none', outline: 'none',color:"white",cursor: 'pointer', fontSize: '16px',borderRadius:"5px",padding:"4px"}}
+                        value={StatusValue}
+                        onChange={(e) => {
+                        SetStatusValue(e.target.value);
+                        OnStatusChange(item.EventID, e.target.value);
+                        }}
+                      >
+                        <option value="">Status</option>
+                        <option value="Lead" style={ColorAndBGcolor('Lead')}>Lead</option>
+                        <option value="Advance paid" style={ColorAndBGcolor('Advance paid')}>Advance paid</option>
+                        <option value="Editing" style={ColorAndBGcolor('Editing')}>Editing</option>
+                        <option value="Event completed" style={ColorAndBGcolor('Event completed')}>Event completed</option>
+                        <option value="Balance settled" style={ColorAndBGcolor('Balance settled')}>Balance settled</option>
+                        <option value="Delivered" style={ColorAndBGcolor('Delivered')}>Delivered</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='lg:pr-6 pb-4 flex flex-col items-end justify-between'>
+              <div className='flex flex-col items-end' style={{paddingTop:"1em"}}>
+                <div style={{fontSize:"13px",fontWeight:"bold"}}>Full amount - <span style={{color:"var(--pink)"}}>{item.Full_Amount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}</span></div>
+                <div style={{fontSize:"13px",fontWeight:"bold"}}>Paid amount - <span  style={{color:"var(--pink)"}}>{AdvanceAmount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}</span> </div>
+                <div style={{fontSize:"13px",fontWeight:"bold"}}>Balance - <span  style={{color:"var(--pink)"}}>{(item.Full_Amount - AdvanceAmount).toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}</span></div>
+              </div>
+              <div>
+                <AddPayment uuid={item.Customer_ID_UUID} name={item.EventName} cusname={cusname} OnStatusChange={OnStatusChange} 
+                  Mobile={Mobile} EventDate={item.EventDate} ConstCheckedData={ConstCheckedData} 
+                  SetConstCheckedData={SetConstCheckedData} Location={Location} Email_ID={Email_ID} 
+                  Full_Amount={item.Full_Amount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})} 
+                  AdvanceAmount={AdvanceAmount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
+                  Bal={(item.Full_Amount - AdvanceAmount).toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
+                  verbose={verbose}
+                  UserID={UserID}
+                  MobileUI={true}
+                />
+              </div>
+            </div>
+          </div>
+          <div className='flex items-center justify-center'>
+            <div className={Style.line}></div>
+          </div>
+        </div>
       </div>
   )
 }
@@ -289,7 +289,7 @@ export default function EventDetailsToDownload({UserID,id,name,Mobile,Location,E
         
         {/* Header */}
         <div className='flex w-full items-center justify-between py-2 px-2' style={{borderBottom:"1px solid var(--blue)"}}>
-          <div className='w-full px-4 py-2 flex gap-4 items-center'>
+          <div className='w-full pr-4 lg:px-4 py-2 flex gap-4 items-center'>
             <div className={Style.ForBackButton} onClick={()=>{setState({ ...state, [anchor]: false })}}>
               <img src="/assets/backbtn.svg" alt="Back" style={{width:"20px",height:"20px"}}/>
             </div>
@@ -307,7 +307,7 @@ export default function EventDetailsToDownload({UserID,id,name,Mobile,Location,E
             <div className='flex gap-3 text-sm'><img src="/assets/msg.svg" alt="Call" /><div style={{color:"var(--blue)"}}>{Email_ID}</div></div>
           </div>
           <div className='flex flex-col justify-between'>
-            <div className='text-xl flex gap-2'><div className='sm:text-sm lg:text-xl font-bold' style={{color:"var(--blue)"}}>Balance : <span style={{color:"var(--pink"}}>${`${total}`}</span></div></div>
+            <div className='text-xl flex gap-2'><div className={`lg:text-xl font-bold ${Style.balanceDiv}`} style={{color:"var(--blue)"}}>Balance : <span style={{color:"var(--pink"}}>${`${total}`}</span></div></div>
             <div className='lg:hidden flex items-end justify-end'>
             { ConstCheckedData ? <>
                 <div className='flex flex-row items-center justify-between gap-2'>
@@ -406,7 +406,6 @@ export default function EventDetailsToDownload({UserID,id,name,Mobile,Location,E
               ))}
             </div>
           </div>
-
         </div>
       </div>
     </Box>

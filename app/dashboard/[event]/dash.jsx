@@ -23,7 +23,6 @@ import Skeleton from '@mui/material/Skeleton';
 import Image from "next/image"
 import { resolveStyleConfig } from "@chakra-ui/react"
 import MapData_ from "./Components/MapData/photos"
-// import { google } from 'googleapis';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

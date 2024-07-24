@@ -7,6 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import sendsmscrm, { sendsmscrmofcustomer } from '../../SendSMS';
+import Style from './edit.module.css'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -34,7 +35,7 @@ export default function Confirm({ConstCheckedData}) {
   }
   return (
     <React.Fragment>
-      <div variant="outlined" onClick={handleClickOpen}>Send Update</div>
+      <div variant="outlined" onClick={handleClickOpen} className={Style.SendBtnUi}>Send Update</div>
       <Dialog open={open} TransitionComponent={Transition} transitionDuration={{ appear: 600, enter: 600, exit: 600 }} keepMounted onClose={handleClose} aria-describedby="alert-dialog-slide-description">
         <div style={{backgroundColor:'#1e2742',padding:'30px 50px',borderRadius:'0'}}>
             <div style={{color:'white', fontSize:'20px'}}>Do You Want to Send Update</div>

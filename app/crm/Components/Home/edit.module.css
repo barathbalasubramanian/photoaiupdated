@@ -6,7 +6,6 @@
 .NavSearchModel > div:nth-child(1){
     color: white;
     font-weight: bolder;
-    margin-left: 6px;
 }
 .NavSearchModel > div:nth-child(2){
     height: min-content;
@@ -466,19 +465,33 @@
       display: block;
       width: 100%;
     }
-  
     .customTableRow {
       display: block;
       margin-bottom: 10px;
     }
-  }
-  
+  }  
   .customTbodyMob {
     display: none;
   }
 
   @media only screen and (max-width:800px) {
-
+    .MobileUiEdit{
+      width: 100% !important;
+    }
+    .MobileUiEdit1{
+      padding: 2em 3em !important;
+      width: fit-content !important;
+    }
+    .MobileUiEdit2{
+      padding: 2em 1.5em !important;
+      width: fit-content !important;
+    }
+    .balanceDiv{
+      font-size: 16px !important;
+    }
+    .SendBtnUi{
+      font-size: 12px;
+    }
     .tableHeaderCellPLs{
       min-width: 150px !important;
     }
@@ -487,7 +500,8 @@
       margin: 0 !important;
     }
     .AddpayCon{
-      width: 90% !important;
+      padding: 1em;
+      width: 100% !important;
     }
     .SeeDetCon{
       padding: 4px 18px !important;
@@ -510,7 +524,7 @@
     }
     .SendBtn,.sendBtn{
       margin: 0 !important;
-      padding: 4px 2em !important;
+      padding: 4px 1em !important;
     }
     .Cusnam1{
       font-size: 22px !important;
@@ -532,6 +546,7 @@
       justify-content: center;
     }
     .Details,.SeeDetCon{
+      font-size: 12px;
       cursor: pointer;
       color: crimson;
       border-radius: 5px;
@@ -557,6 +572,7 @@
     .MainCon{
       width: 95% !important;
       overflow: hidden !important;
+      align-items: center;
     }
     .NavSearchModel{
       flex-direction: column;
@@ -583,6 +599,13 @@
   .MobileUiEvent{
     display: none;
   }
+  .searchBtn{
+    margin: 0 1em 0 0;
+  }
+  .searchBtn1{
+    margin: 0 !important;
+    font-size: 12px !important;
+  }
 
   @media screen and (min-width: 0px) and (max-width: 600px) {
     .MobileUiEvent {
@@ -596,7 +619,7 @@
     }
     .DetailsCon{
       width: fit-content;
-      padding: 0 1em !important;
+      padding: 0 0em !important;
     }
     .customTableHeader{
       display: none;

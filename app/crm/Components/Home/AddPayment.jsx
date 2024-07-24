@@ -108,8 +108,8 @@ export default function AddPayment({MobileUI,UserID,uuid,name,cusname,Mobile,Eve
           <div className='flex flex-col lg:gap-3 gap-1'>
             <div className='sm:text-lg lg:text-xl font-bold' style={{color:"var(--blue)"}}>{cusname}</div>
             <div className='sm:text-sm lg:text-xl font-bold' style={{color:"var(--blue)"}}>{Location}</div>
-            <div className='flex gap-3 text-sm'><img src="/assets/call.svg" alt="Call" /><div style={{color:"var(--blue)"}}>{Mobile}</div></div>
-            <div className='flex gap-3 text-sm'><img src="/assets/msg.svg" alt="Call" /><div style={{color:"var(--blue)"}}>{Email_ID}</div></div>
+            <div className='flex gap-1 text-sm'><img src="/assets/call.svg" style={{width:"12px !important"}} alt="Call" /><div style={{color:"var(--blue)"}}>{Mobile}</div></div>
+            <div className='flex gap-1 text-sm'><img src="/assets/msg.svg"  style={{width:"12px !important"}} alt="Call" /><div style={{color:"var(--blue)"}}>{Email_ID}</div></div>
             <div className='hidden lg:flex text-sm gap-2'><div className='text-sm font-bold' style={{color:"var(--blue)"}}>Paid :</div><div style={{color:"var(--pink)"}}>$ {total}</div></div>
             <div className='hidden lg:flex text-sm gap-2'><div className='text-sm font-bold' style={{color:"var(--blue)"}}>Balance :</div><div style={{color:"var(--pink)"}}>$ {totalAmount-total}</div></div>
           </div>
@@ -124,13 +124,12 @@ export default function AddPayment({MobileUI,UserID,uuid,name,cusname,Mobile,Eve
         </div>
 
         {/* Con */}
-        <div className='lg:pl-8 my-4 flex items-center justify-between w-full'>
+        <div className='lg:pl-8 my-4 flex gap-4 items-center justify-between w-full'>
           <div style={{color:"var(--blue)"}} className='text-lg capitalize lg:text-xl'>{name.split("-")[1]} Event</div>
-          <div className='flex gap-6'>
-            {/* <div onClick={()=>{downloadCSV(Data)}} className='flex items-center' style={{cursor:"pointer",border:"1px solid var(--pink)",borderRadius:"5px",padding:"4px 2em",fontSize:"14px",backgroundColor:"var(--bg)",color:"var(--pink)",outline:"none"}}> Download </div> */}
+          <div className='flex gap-2'>
             <div style={{ position: 'relative', display: 'inline-block' }}>
               <button 
-                  className={Style.searchBtn} 
+                  className={`${Style.searchBtn1} ${Style.searchBtn}`} 
                   style={{ display:"flex", gap:"1em",alignItems:"center",justifyContent:"space-between",border: "1px solid var(--pink)", color: "var(--pink)", backgroundColor: "var(--bg)" }}
                   onClick={() => setDropdownVisible(!dropdownVisible)} 
               >
