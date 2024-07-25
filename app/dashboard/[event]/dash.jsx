@@ -404,7 +404,7 @@ export default function Dashboard({ event}){
       const parts = item.split('/');
       const folderName = parts[parts.length - 2]; 
       const imageName = parts[parts.length - 1];
-      // console.log(imageName,folderName,"Download",process.env.NEXT_PUBLIC_AMPLIFY_URL,process.env.NEXT_PUBLIC_AWS_BUCKET_NAME)
+      console.log(folderName,imageName,"--")
       const response = await axios.post('https://clickai.anthillnetworks.com/downloadfile', {
         filename: imageName,
         folderName: folderName,
@@ -506,10 +506,10 @@ export default function Dashboard({ event}){
             </div>
             <div>
                 <div className={Styles.MakeNavFixed}>
-                    <div className={Styles.NavOneForMenu} style={{borderBottom:"1px solid var(--blue)"}}>
+                    <div className={`${Styles.NavOneForMenu} mb-2`} style={{borderBottom:"1px solid var(--blue)"}}>
                         <div style={{color:"var(--blue)"}}>{pagetext === 'All Photos' ? 'Event Photos' : pagetext === 'All Videos' ? 'Event Videos' : pagetext === 'Explore' ? "Find your moments with fav people" : pagetext === 'Favorites' ? 'Your Favorites' : '' }</div>
                         <div>
-                            <div className="flex items-center gap-4" style={{border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Styles.profile} /><div className="pr-6 text-sm font-bold">Studio name</div></div>
+                            <div className="flex items-center gap-4" style={{border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Styles.profile} /><div className="hidden lg:flex pr-6 text-sm font-bold">Studio name</div></div>
                         </div>
                     </div>
                     <div className={`${Styles.FoldersCss} text-black`}>
@@ -522,7 +522,7 @@ export default function Dashboard({ event}){
                       <div className="w-full flex items-center justify-between">
                           {
                             SelectedFolder ? 
-                            <div onClick={HandleZip} className={Styles.downloadZip}>Download As Zip</div> : <></>
+                            <div onClick={HandleZip} className={Styles.downloadZip}>Download All</div> : <></>
                           }
                           <div 
                               onClick={handleDownloadClick} 
@@ -537,79 +537,89 @@ export default function Dashboard({ event}){
                     <div className={Styles.NavOneForSearch}>
                         <div style={{marginBottom:"1em",width:"90%"}}>{pagetext === 'Explore'?<SearchModel constData={ExploreSlfies} SetConstData={SetConstData}/>:<>{pagetext == 'Favorites'?<Link href={`/dashboard/${event}/favorites/download`} className={Styles.NavBtn} style={{backgroundColor:"var(--pink)"}}>Download</Link>:<></>}</>}</div>
                     </div>
+                    {pagetext === 'Explore'?<div className={Styles.MainContaine}><ExploreComp Data={ConstData} EpxFun={OnExploreClickProfile}/></div>:<div  className={Styles.MainContaine}><span></span></div>}
+                    <div style={{overflow:'scroll !important'}}>
+                    {
+                      photos ? pagetext === "All Photos" ? 
+                      <>
+                      {screenframe === 4?<>
+                          <div className={Styles.MainContainer}>
+                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackone} ScrollBtn={scrollToPosition} /></div>
+                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stacktwo} ScrollBtn={scrollToPosition} /></div>
+                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackthree} ScrollBtn={scrollToPosition} /></div>
+                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackfour} ScrollBtn={scrollToPosition}/></div>
+                          </div>
+                        </>:<></>}
+                        {screenframe === 3?<>
+                          <div className={Styles.MainContainer}>
+                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackone} ScrollBtn={scrollToPosition} /></div>
+                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stacktwo} ScrollBtn={scrollToPosition} /></div>
+                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackthree} ScrollBtn={scrollToPosition} /></div>
+                          </div>
+                        </>:<></>}
+                        {screenframe === 2?<>
+                          <div className={Styles.MainContainer}>
+                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackone} ScrollBtn={scrollToPosition} /></div>
+                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stacktwo} ScrollBtn={scrollToPosition} /></div>
+                          </div>
+                        </>:<></>}
+                      </> :
+                      <>
+                          {screenframe === 4?<>
+                          <div className={Styles.MainContainer}>
+                            <div><MapData Data={stackone} ScrollBtn={scrollToPosition}/></div>
+                            <div><MapData Data={stacktwo} ScrollBtn={scrollToPosition}/></div>
+                            <div><MapData Data={stackthree} ScrollBtn={scrollToPosition}/></div>
+                            <div><MapData Data={stackfour} ScrollBtn={scrollToPosition}/></div>
+                          </div>
+                        </>:<></>}
+                        {screenframe === 3?<>
+                          <div className={Styles.MainContainer}>
+                            <div><MapData Data={stackone} ScrollBtn={scrollToPosition}/></div>
+                            <div><MapData Data={stacktwo} ScrollBtn={scrollToPosition}/></div>
+                            <div><MapData Data={stackthree} ScrollBtn={scrollToPosition}/></div>
+                          </div>
+                        </>:<></>}
+                        {screenframe === 2?<>
+                          <div className={Styles.MainContainer}>
+                            <div><MapData Data={stackone} ScrollBtn={scrollToPosition}/></div>
+                            <div><MapData Data={stacktwo} ScrollBtn={scrollToPosition}/></div>
+                          </div>
+                        </>:<></>}
+                      </> : 
+                      <>
+                        <div>
+                        {videos.length > 0 ? (
+                            <div className={`${Styles.videoCon}`}>
+                              {videos.map((videoKey) => (
+                                <video key={videoKey} controls style={{maxHeight:"20em",maxWidth:"20em",objectFit:"contain"}}> 
+                                  <source src={`https://${process.env.NEXT_PUBLIC_AWS_BUCKET_NAME}.s3.amazonaws.com/${videoKey}`} type="video/mp4" />
+                                  Your browser does not support the video tag.
+                                </video>
+                              )) }
+                            </div>
+                          ) : (
+                            <div className={`${Styles.empty}`} style={{color:"var(--blue)"}}>No Videos Found !</div>
+                          )}
+                        </div>  
+                      </>
+                    }
+                    </div>
+
+                    {/* Navigation Bar */}
+                    <div className={Styles.BelowNav}>
+                      <div className={`${Styles.LeftNavIconsUI} cursor-pointer flex w-full justify-between items-center gap-2`}>
+                          <div className="flex flex-col items-center" onClick={OnHomeClickFun}  style={pagetext === 'All Photos'?{color:'#fff',backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'All Photos'?'/assets/photo.svg':'/assets/inphoto.svg'}/><div>Photos</div></div>
+                          <div className="flex flex-col items-center" onClick={QueryVideos} style={pagetext === 'All Videos'?{color:'#fff',backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'All Videos'?'/assets/videos.svg':'/assets/invideos.svg'}/><div>Videos</div></div>
+                          <div className="flex flex-col items-center" onClick={OnExploreClickFun} style={pagetext === 'Explore'?{color:'#fff',backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'Explore'?'/assets/explore.svg':'/assets/inexplore.svg'}/><div>Explore</div></div>
+                          <div className="flex flex-col items-center" onClick={OnFavouriteClickFun} style={pagetext === 'Favorites'?{color:'#fff',backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'Favorites'?'/assets/fav.svg':'/assets/infav.svg'}/><div>Favorites</div></div>
+                      </div>
+                    </div>
                 </div>
-                <div>
-      {pagetext === 'Explore'?<div className={Styles.MainContaine}><ExploreComp Data={ConstData} EpxFun={OnExploreClickProfile}/></div>:<div  className={Styles.MainContaine}><span></span></div>}
-      
-      {
-        photos ? pagetext === "All Photos" ? 
-        <>
-        {screenframe === 4?<>
-            <div className={Styles.MainContainer}>
-              <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackone} ScrollBtn={scrollToPosition} /></div>
-              <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stacktwo} ScrollBtn={scrollToPosition} /></div>
-              <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackthree} ScrollBtn={scrollToPosition} /></div>
-              <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackfour} ScrollBtn={scrollToPosition}/></div>
             </div>
-          </>:<></>}
-          {screenframe === 3?<>
-            <div className={Styles.MainContainer}>
-              <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackone} ScrollBtn={scrollToPosition} /></div>
-              <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stacktwo} ScrollBtn={scrollToPosition} /></div>
-              <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackthree} ScrollBtn={scrollToPosition} /></div>
-            </div>
-          </>:<></>}
-          {screenframe === 2?<>
-            <div className={Styles.MainContainer}>
-              <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackone} ScrollBtn={scrollToPosition} /></div>
-              <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stacktwo} ScrollBtn={scrollToPosition} /></div>
-            </div>
-          </>:<></>}
-        </> :
-        <>
-            {screenframe === 4?<>
-            <div className={Styles.MainContainer}>
-              <div><MapData Data={stackone} ScrollBtn={scrollToPosition}/></div>
-              <div><MapData Data={stacktwo} ScrollBtn={scrollToPosition}/></div>
-              <div><MapData Data={stackthree} ScrollBtn={scrollToPosition}/></div>
-              <div><MapData Data={stackfour} ScrollBtn={scrollToPosition}/></div>
-            </div>
-          </>:<></>}
-          {screenframe === 3?<>
-            <div className={Styles.MainContainer}>
-              <div><MapData Data={stackone} ScrollBtn={scrollToPosition}/></div>
-              <div><MapData Data={stacktwo} ScrollBtn={scrollToPosition}/></div>
-              <div><MapData Data={stackthree} ScrollBtn={scrollToPosition}/></div>
-            </div>
-          </>:<></>}
-          {screenframe === 2?<>
-            <div className={Styles.MainContainer}>
-              <div><MapData Data={stackone} ScrollBtn={scrollToPosition}/></div>
-              <div><MapData Data={stacktwo} ScrollBtn={scrollToPosition}/></div>
-            </div>
-          </>:<></>}
-        </> : 
-        <>
-          <div>
-          {videos.length > 0 ? (
-              <div className={`${Styles.videoCon}`}>
-                {videos.map((videoKey) => (
-                  <video key={videoKey} controls style={{maxHeight:"20em",maxWidth:"20em",objectFit:"contain"}}> 
-                    <source src={`https://${process.env.NEXT_PUBLIC_AWS_BUCKET_NAME}.s3.amazonaws.com/${videoKey}`} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                )) }
-              </div>
-            ) : (
-              <div className={`${Styles.empty}`} style={{color:"var(--blue)"}}>No Videos Found !</div>
-            )}
-          </div>  
-        </>
-      }
-      </div>
         </div>
-        </div>
-          {Slider?<div className={Styles.OverflowScrollAnimation} ref={sliderRef}>
+
+        {Slider?<div className={Styles.OverflowScrollAnimation} ref={sliderRef}>
           {DobeMaped.map((item,index)=>{
             return <div key={index} className={Styles.FullscreenImage}>
               <span onClick={()=>{SliderValue(false)}}>&#x2716;</span>
@@ -630,21 +640,6 @@ export default function Dashboard({ event}){
             </div>
           })}
         </div>:<></>}
-        {window.innerWidth <= 800?<>
-          <Box sx={{ width: 500 }}>
-            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-              <BottomNavigation showLabels style={{backgroundColor:'var(--white)',borderRadius:'5px'}}>
-                <BottomNavigationAction onClick={OnHomeClickFun} style={pagetext === 'All Photos'?{backgroundColor:'var(--blue)',color:"#fff"}:{backgroundColor:'#ffffff'}} label="Photos" icon={<img src={pagetext === 'All Photos'?'/assets/pho1.svg':'/assets/pho.svg'} className={Styles.BottomImage}/>} />
-                <BottomNavigationAction onClick={QueryVideos} style={pagetext === 'All Videos'?{backgroundColor:'var(--blue)',color:"var(--white)"}:{backgroundColor:'#ffffff'}} label="Videos" icon={<img src={pagetext === 'All Videos'?'/assets/vid1.svg':'/assets/vid.svg'} className={Styles.BottomImage}/>} />
-                <BottomNavigationAction onClick={OnExploreClickFun} style={pagetext === 'Explore'?{backgroundColor:'var(--blue)',color:"var(--white)"}:{backgroundColor:'#ffffff'}} label="Explore" icon={<img src={pagetext === 'Explore'?'/assets/exp1.svg':'/assets/exp.svg'} className={Styles.BottomImage}/>} />
-                <BottomNavigationAction onClick={OnFavouriteClickFun} style={pagetext === 'Favorites'?{backgroundColor:'var(--blue)',color:"var(--white)"}:{backgroundColor:'#ffffff'}} label="Favorites" icon={<img src={pagetext === 'Favorites'?'/assets/favi1.svg':'/assets/favi.svg'} className={Styles.BottomImage}/>} />
-              </BottomNavigation>
-            </Paper>
-          </Box>
-        </>:<></>}
         </>
     )
 }
-
-
-// https://selife-bucket.s3.ap-south-1.amazonaws.com/farzin-testing/COMPRESS_IMAGES/five/farzin-testing20240713_070203636Z.jpgCOMPRESS_IMAGESundefined

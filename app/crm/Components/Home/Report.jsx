@@ -124,13 +124,13 @@ export default function ReportLeftDrawer(UserID) {
   const list = (anchor) => (
 
     <Box className={`${Style.DrawerCenter} min-h-screen`} style={{backgroundColor:"var(--bg)"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
-        <div  onClick={handleRefresh}>
+        <div className='hidden lg:block'  onClick={handleRefresh}>
           <img src="assets/homeicon.svg" alt="Home" className={Style.homeIcon} />
         </div>
-        <div className='w-10/12 m-auto flex items-center flex-col pt-4 gap-4 min-h-screen' style={{width:'70%',margin:"auto"}}>
+        <div className='lg:w-10/12 m-auto flex items-center flex-col pt-4 gap-4 min-h-screen' style={{margin:"auto"}}>
             {/* Header */}
-            <div className='flex w-full items-center justify-between py-2' style={{borderBottom:"1px solid #4F55C3"}}>
-              <div className='w-full px-4 py-2 flex gap-4 items-center'>
+            <div className='flex w-full px-3 items-center justify-between py-2' style={{borderBottom:"1px solid #4F55C3"}}>
+              <div className='w-full lg:px-4 py-2 flex gap-4 items-center'>
                 <div className={Style.ForBackButton} onClick={()=>{setState({ ...state, [anchor]: false })}}>
                   <img src="/assets/backbtn.svg" alt="Back" style={{width:"20px",height:"20px"}}/>
                 </div>
@@ -147,7 +147,7 @@ export default function ReportLeftDrawer(UserID) {
             </div>
 
             {/* Input */}
-            <div className={`${Style.ReportsFilters} flex w-full pl-6 items-center justify-between flex-wrap`}>
+            <div className={`${Style.ReportsFilters} flex w-full pl-8 lg:pl-6 items-center justify-between flex-wrap`}>
               <div className='flex flex-col'>
                   <label className={Style.label} for="inputField">Customer Name</label>
                   <input type="text" list='nameOptions' id="inputField" className={Style.inputCon} value={CusName} onChange={(e) =>{SetCusName(e.target.value);HandelSubmit(StartDate,EndDate,e.target.value)}}/>
@@ -192,7 +192,7 @@ export default function ReportLeftDrawer(UserID) {
 
             {/* Charts */}
             <div className='bg -white w-full mt-6 mb-4'>
-              <div className='flex items-start pl-8' style={{position:"relative",width:"32em"}}>
+              <div className={`flex items-start pl-8 ${Style.ChartCon}`} style={{position:"relative",width:"32em"}}>
                 <ExamplePieChart Bal={Bal} Tot={Tot} />
                 {/* Legends */}
                 <div style={{position:"absolute",top:"55%",right:"10%"}}>

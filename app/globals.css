@@ -115,7 +115,22 @@ h3 {
   z-index: 999 !important;
 }
 
+.css-1ez9utm {
+  z-index: 999 !important;
+}
+
 @media only screen and (max-width:800px) {
+  .Denote {
+    top: 48% !important;
+    right: 13% !important;
+  }
+  .recharts-wrapper{
+    width: 350px !important;
+  }
+  .recharts-surface{
+    width: 300px !important;
+    padding: 0 0 0 1em !important;
+  }
   .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root {
     top: 5em !important;
     left: -1em !important;

@@ -32,7 +32,7 @@ export default function SignIn({event}){
         <div className={Styles.SignInDiv}>
             <form className={Styles.SignInInnerDiv} onSubmit={(e)=>{e.preventDefault();HandelSubmit(e.target.UserID.value)}}>
                 <div className={Styles.SignInInneDiv}>
-                    <h1>Secret Key</h1>
+                    <h1 style={{color:'var(--blue)'}}>Secret Key</h1>
                     <input type="text" name="UserID" className={Styles.InputBox}placeholder="key" required/>
                     <div className={Styles.ForCheckAndForgot}></div>
                     <button type="submit">Visit Dashboard</button>

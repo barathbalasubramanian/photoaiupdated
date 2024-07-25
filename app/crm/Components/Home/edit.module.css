@@ -479,6 +479,12 @@
   }
 
   @media only screen and (max-width:800px) {
+    .pieDiv{
+      width: 400px;
+    }
+    .ChartCon{
+      width: 100% !important;
+    }
     .SearchModelGreet {
       width: 70% !important;
     }
@@ -697,13 +703,6 @@
     .ReportLeftDrawer{
       margin-left: 0;
       width: 100vw;
-    }
-    .ReportsFilters{
-      width: 100vw;
-      display: grid;
-    }
-    .ReportsFilters > div{
-      width: 95vw;
     }
     .PieChartCssFlex{
       flex-direction: column;

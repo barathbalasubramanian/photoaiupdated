@@ -15,16 +15,14 @@
     width: 80vw;
     margin: 0 2vw 0 20vw;
 }
-.MainContaine{
-      padding-top: 14vw;
-}
+
 .MainContainer{
     display: flex;
-    width: 80vw;
-    padding: 0 2em;
+    width: 75vw;
+    /* padding: 0 2em; */
     margin: auto;
     background-color: var(--bg);
-    margin: 2em 0;
+    /* margin: 2em 0; */
   }
   .MainContainer > div{
     width: 25%;
@@ -53,11 +51,11 @@
     margin-right: 2vw;
   }
   .MakeNavFixed{
-    position: fixed;
     background-color: var(--bg);
     z-index: 1000;
     width: 80vw;
     padding: 0 2em;
+    height: 100vh !important;
   }
   .SearchModel > input{
     background-color: var(--white);
@@ -250,7 +248,6 @@
   overflow: scroll;
 }
 .FoldersCss > div{
-  margin: 10px 0;
   padding: 5px 10px;
   color: var(--black);
   text-transform: capitalize;
@@ -292,38 +289,46 @@
 }
 
 .downloadZip.disabled {
-  opacity: 0.5;
-  pointer-events: none;
-  cursor: not-allowed;
+  display: none;
+}
+
+.BelowNav{
+  display: none;
 }
 
   @media screen and (min-width: 0px) and (max-width: 1100px) {
-    .MainContaine {
-      padding-top: 16vw;
-    }
+
   }
   @media screen and (min-width: 0px) and (max-width: 1000px) {
-    .MainContaine {
-      padding-top: 17vw;
-    }
     .MainContainer > div{
       width: 33%;
     }
   }
   @media screen and (min-width: 0px) and (max-width: 800px) {
+    .BelowNav{
+      display: flex;
+      width: 100%;
+    }
+    .LeftNavIconsUI{
+      position: absolute;
+      background-color: white;
+      bottom: 80%;
+      left: 0;
+    }
     .MainContaine {
-      padding-top: 20vw;
       width: 96vw;
     }
     .MainContainer {
       width: 96vw;
       margin-bottom: 60px;
+      padding: 0 .5em !important;
       margin: 1em 0 0 0;
     }
     .MainContainer > div{
       width: 33%;
     }
     .MakeNavFixed{
+        padding: 0 0.5em;
         width: 96vw;
     }
     .SearchModel{
@@ -340,7 +345,6 @@
   @media screen and (min-width: 0px) and (max-width: 650px) {
     .MainContaine {
       width: 95vw;
-      padding-top: 23vw;
     }
     .MainContainer {
       width: 96vw;
@@ -368,9 +372,6 @@
     }
   }
   @media screen and (min-width: 0px) and (max-width: 500px) {
-    .MainContaine {
-      padding-top: 30vw;
-    }
     .SearchModel{
         width: 55vw;
     }
