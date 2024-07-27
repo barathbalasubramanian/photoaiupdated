@@ -21,7 +21,7 @@ html, body{
   --bg: rgba(232, 242, 253, 1);
   --blue: rgb(23, 123, 229);
   --white: rgba(255, 255, 255, 1);
-  --pink: #ec2265;
+  --pink: rgb(236, 34, 101);
   --black: #000;
   --lightpink: #FFEAF1;
   --darkblue: #4F55C3;
@@ -134,10 +134,6 @@ h3 {
   .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root {
     top: 5em !important;
     left: -1em !important;
-  }
-  .page_empty____Z_C{
-    padding: 0 0 0 1.2em;
-    font-size: 20px;
   }
   .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root input {
     width: 9em !important;

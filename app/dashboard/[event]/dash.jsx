@@ -286,7 +286,7 @@ export default function Dashboard({ event}){
     window.onscroll = function(ev) {
       if ((window.innerHeight + window.scrollY + 200) >= document.body.offsetHeight && pagetext !== 'Favorites' && !isituser) {
         if (folderSelect == "") {
-          // console.log("Querying ...",folderSelect)
+          // console.log("Querying ...",folderSelect) 
           FetchDashboard(nexttoken);
         }
         else {
@@ -415,14 +415,13 @@ export default function Dashboard({ event}){
       });
       if (response.status === 200) {
         const data = response.data
-        window.location.href = data.link;
-        // console.log(data.link);
-        // const link = document.createElement('a');
-        // link.href = data.link;
-        // link.target = '_self';
-        // document.body.appendChild(link);
-        // link.click();
-        // document.body.removeChild(link);
+        console.log(data.link);
+        const link = document.createElement('a');
+        link.href = data.link;
+        link.target = '_self';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
         loadderevalue(false);
       }
     }
@@ -507,37 +506,62 @@ export default function Dashboard({ event}){
             <div>
                 <div className={Styles.MakeNavFixed}>
                     <div className={`${Styles.NavOneForMenu} mb-2`} style={{borderBottom:"1px solid var(--blue)"}}>
-                        <div style={{color:"var(--blue)"}}>{pagetext === 'All Photos' ? 'Event Photos' : pagetext === 'All Videos' ? 'Event Videos' : pagetext === 'Explore' ? "Find your moments with fav people" : pagetext === 'Favorites' ? 'Your Favorites' : '' }</div>
+                        <div className="text-xl sm:text-lg" style={{color:"var(--blue)"}}>{pagetext === 'All Photos' ? 'Event Photos' : pagetext === 'All Videos' ? 'Event Videos' : pagetext === 'Explore' ? "Find your moments with fav people" : pagetext === 'Favorites' ? 'Your Favorites' : '' }</div>
                         <div>
                             <div className="flex items-center gap-4" style={{border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Styles.profile} /><div className="hidden lg:flex pr-6 text-sm font-bold">Studio name</div></div>
                         </div>
                     </div>
                     <div className={`${Styles.FoldersCss} text-black`}>
                       {pagetext === 'All Photos'?<div className="flex flex-col gap-4" style={{width:"100%"}}>
-                      <div className="flex w-full gap-4 overflow-scroll">
+                      <div className="flex w-full gap-4 overflow-scroll lg:mb-2">
                         {AllFolders.map((item,index)=>{
-                            return <div onClick={()=>{FetchImagesByFolderName(null,item.split('/')[2],true);KeyStateValue(index)}} style={KeyState == index?{borderBottom:'2px solid var(--blue)'}:{}}>{item.split('/')[2]}</div>
+                            return <div className={Styles.FolderName} onClick={()=>{FetchImagesByFolderName(null,item.split('/')[2],true);KeyStateValue(index)}} style={KeyState == index?{borderBottom:'2px solid var(--blue)'}:{}}>{item.split('/')[2]}</div>
                         })}
                       </div>
-                      <div className="w-full flex items-center justify-between">
-                          {
-                            SelectedFolder ? 
-                            <div onClick={HandleZip} className={Styles.downloadZip}>Download All</div> : <></>
-                          }
-                          <div 
-                              onClick={handleDownloadClick} 
-                              className={`${Styles.downloadZip} ${selectedFiles.length === 0 ? Styles.disabled : ''}`}
-                              style={{ cursor: selectedFiles.length === 0 ? 'not-allowed' : 'pointer' }}
-                          >
-                              Download Selected Files
-                          </div>
-                      </div>
+                      {
+                        SelectedFolder || selectedFiles.length != 0  ?
+                        <div className="w-full flex items-center justify-between">
+                              {
+                                SelectedFolder ? 
+                                <div onClick={HandleZip} className={Styles.downloadZip}>Download All</div> : <></>
+                              }
+                              <div 
+                                  onClick={handleDownloadClick} 
+                                  className={`${Styles.downloadZip} ${selectedFiles.length === 0 ? Styles.disabled : ''}`}
+                                  style={{ cursor: selectedFiles.length === 0 ? 'not-allowed' : 'pointer' }}
+                              >
+                                  Download Selected Files
+                              </div>
+                        </div> 
+                        : <></>
+                      }
                       </div>:<></>}
                     </div>
-                    <div className={Styles.NavOneForSearch}>
-                        <div style={{marginBottom:"1em",width:"90%"}}>{pagetext === 'Explore'?<SearchModel constData={ExploreSlfies} SetConstData={SetConstData}/>:<>{pagetext == 'Favorites'?<Link href={`/dashboard/${event}/favorites/download`} className={Styles.NavBtn} style={{backgroundColor:"var(--pink)"}}>Download</Link>:<></>}</>}</div>
-                    </div>
-                    {pagetext === 'Explore'?<div className={Styles.MainContaine}><ExploreComp Data={ConstData} EpxFun={OnExploreClickProfile}/></div>:<div  className={Styles.MainContaine}><span></span></div>}
+
+                    {
+                      pagetext === 'Favorites' || pagetext === 'Explore' ?
+                      <div className={`${Styles.NavOneForSearch}`}>
+                        <div className={Styles.DownFav} style={{marginBottom:"1em",width:"90%"}}>
+                          {pagetext === 'Explore'?<SearchModel constData={ExploreSlfies} SetConstData={SetConstData}/>
+                          :
+                          <>{pagetext == 'Favorites'? 
+                          <div className="sm: mt-4">
+                            <Link href={`/dashboard/${event}/favorites/download`} className={Styles.NavBtn} style={{backgroundColor:"var(--pink)"}}>Download</Link>
+                          </div>
+                          :<></>
+                          }</>
+                          }
+                        </div>
+                      </div> : <></>
+                    }
+
+                    {
+                      pagetext === 'Explore'
+                      ?
+                      <div className={`${Styles.MainContaine}`}><ExploreComp Data={ConstData} EpxFun={OnExploreClickProfile}/></div>
+                      :<></>
+                    }
+
                     <div style={{overflow:'scroll !important'}}>
                     {
                       photos ? pagetext === "All Photos" ? 
@@ -608,11 +632,11 @@ export default function Dashboard({ event}){
 
                     {/* Navigation Bar */}
                     <div className={Styles.BelowNav}>
-                      <div className={`${Styles.LeftNavIconsUI} cursor-pointer flex w-full justify-between items-center gap-2`}>
-                          <div className="flex flex-col items-center" onClick={OnHomeClickFun}  style={pagetext === 'All Photos'?{color:'#fff',backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'All Photos'?'/assets/photo.svg':'/assets/inphoto.svg'}/><div>Photos</div></div>
-                          <div className="flex flex-col items-center" onClick={QueryVideos} style={pagetext === 'All Videos'?{color:'#fff',backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'All Videos'?'/assets/videos.svg':'/assets/invideos.svg'}/><div>Videos</div></div>
-                          <div className="flex flex-col items-center" onClick={OnExploreClickFun} style={pagetext === 'Explore'?{color:'#fff',backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'Explore'?'/assets/explore.svg':'/assets/inexplore.svg'}/><div>Explore</div></div>
-                          <div className="flex flex-col items-center" onClick={OnFavouriteClickFun} style={pagetext === 'Favorites'?{color:'#fff',backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'Favorites'?'/assets/fav.svg':'/assets/infav.svg'}/><div>Favorites</div></div>
+                      <div className={`${Styles.LeftNavIconsUI} py-2 px-4 cursor-pointer flex w-full justify-between items-center gap-2`}>
+                          <div className="flex flex-col items-center" onClick={OnHomeClickFun}  style={pagetext === 'All Photos'?{color:'#fff',padding:"4px",borderRadius:"5px",backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'All Photos'?'/assets/photo.svg':'/assets/inphoto.svg'}/><div style={{fontSize:"15px"}}>Photos</div></div>
+                          <div className="flex flex-col items-center" onClick={QueryVideos} style={pagetext === 'All Videos'?{color:'#fff',padding:"4px",borderRadius:"5px",backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'All Videos'?'/assets/videos.svg':'/assets/invideos.svg'}/><div style={{fontSize:"15px"}}>Videos</div></div>
+                          <div className="flex flex-col items-center" onClick={OnExploreClickFun} style={pagetext === 'Explore'?{color:'#fff',padding:"4px",borderRadius:"5px",backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'Explore'?'/assets/explore.svg':'/assets/inexplore.svg'}/><div style={{fontSize:"15px"}}>Explore</div></div>
+                          <div className="flex flex-col items-center" onClick={OnFavouriteClickFun} style={pagetext === 'Favorites'?{color:'#fff',padding:"4px",borderRadius:"5px",backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'Favorites'?'/assets/fav.svg':'/assets/infav.svg'}/><div style={{fontSize:"15px"}}>Favorites</div></div>
                       </div>
                     </div>
                 </div>

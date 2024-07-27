@@ -12,7 +12,7 @@ export default function Welcome({is_PrimeUser,UserID,Logo}){
               <div style={{color:"var(--blue)",fontSize:"20px"}}>Anthill Networks</div>
             </div>
             <div className={`${Style.Con2} p-6`} style={{backgroundColor:"var(--white)",width:"100%", borderRadius:"0 20px 20px 0"}}>
-              <div><Image src="/assets/rect.svg" alt="Rect" width={100} height={100} className={Style.rectImg}/></div>
+              <div className={Style.ImageRect}><Image src="/assets/aiimg.svg" alt="Rect" width={100} height={100} className={Style.rectImg}/></div>
               <div className={`w-10/12 ${Style.content}`} style={{color:"var(--darkblue)",fontSize:"14px"}}>An AI-based photo distribution platform crafted to elevate event engagement</div>
               <div className="flex gap-4 mt-4" style={{borderBottom:"1px solid #000"}}>
                 <Link href="/create-event">
