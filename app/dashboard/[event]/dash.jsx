@@ -511,9 +511,9 @@ export default function Dashboard({ event}){
                             <div className="flex items-center gap-4" style={{border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Styles.profile} /><div className="hidden lg:flex pr-6 text-sm font-bold">Studio name</div></div>
                         </div>
                     </div>
-                    <div className={`${Styles.FoldersCss} text-black`}>
+                    <div className={`${Styles.FoldersCss} text-black mb-1`}>
                       {pagetext === 'All Photos'?<div className="flex flex-col gap-4" style={{width:"100%"}}>
-                      <div className="flex w-full gap-4 overflow-scroll lg:mb-2">
+                      <div className="flex w-full gap-4 overflow-scroll lg:mb-1">
                         {AllFolders.map((item,index)=>{
                             return <div className={Styles.FolderName} onClick={()=>{FetchImagesByFolderName(null,item.split('/')[2],true);KeyStateValue(index)}} style={KeyState == index?{borderBottom:'2px solid var(--blue)'}:{}}>{item.split('/')[2]}</div>
                         })}
