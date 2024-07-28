@@ -387,12 +387,9 @@ export default function Dashboard({ event, UserID }){
         });
         try {
             const response = await s3Client.send(command);
-            // console.log(response)
             const videoKeys = response.Contents.map((content) => content.Key);
-            // console.log(videoKeys);
             setVideos(videoKeys);
         } catch (error) {
-            // console.error('Error listing Videos:', error);
             loadderevalue(false);      
         }
       loadderevalue(false);
@@ -405,7 +402,7 @@ export default function Dashboard({ event, UserID }){
       const folderName = parts[parts.length - 2]; 
       const imageName = parts[parts.length - 1];
       console.log(folderName,imageName,"--")
-      const response = await axios.post('https://clickai.anthillnetworks.com/downloadfile', {
+      const response = await axios.post('http://localhost:8000/downloadfile', {
         filename: imageName,
         folderName: folderName,
         UserID: UserID
@@ -429,7 +426,7 @@ export default function Dashboard({ event, UserID }){
 
     const HandleZip = async () => {
       loadderevalue(true);
-      const response = await axios.post(`https://clickai.anthillnetworks.com/downloadall`, {
+      const response = await axios.post(`http://localhost:8000/downloadall`, {
         folderName: SelectedFolder,
         UserID: UserID
       }, {
@@ -462,7 +459,7 @@ export default function Dashboard({ event, UserID }){
         return;
       }
       try {
-          const response = await axios.post('https://clickai.anthillnetworks.com/selected', {
+          const response = await axios.post('http://localhost:8000/selected', {
               selectedFiles: selectedFiles,
               UserID: UserID
           }, {
@@ -470,9 +467,9 @@ export default function Dashboard({ event, UserID }){
                   'Content-Type': 'application/json',
               },
           });
-          // console.log(response.data);
+          console.log(response.data);
           const data = response.data
-          // console.log(data.link);
+          console.log(data.link);
           const link = document.createElement('a');
           link.href = data.link;
           link.target = '_blank';
