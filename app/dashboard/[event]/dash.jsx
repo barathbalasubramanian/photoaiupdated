@@ -26,7 +26,7 @@ import MapData_ from "./Components/MapData/photos"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function Dashboard({ event}){
+export default function Dashboard({ event, UserID }){
   const SuperValue = useSelector((state)=>state.Login.Is_SuperAdmin);
     const sliderRef = useRef(null);
     const [nexttoken,tokenvalue] = useState(null);
@@ -405,9 +405,10 @@ export default function Dashboard({ event}){
       const folderName = parts[parts.length - 2]; 
       const imageName = parts[parts.length - 1];
       console.log(folderName,imageName,"--")
-      const response = await axios.post('https://clickai.anthillnetworks.com/downloadfile', {
+      const response = await axios.post('http://localhost:8000/downloadfile', {
         filename: imageName,
         folderName: folderName,
+        UserID: UserID
       }, {
         headers: {
           'Content-Type': 'application/json',
@@ -418,7 +419,7 @@ export default function Dashboard({ event}){
         console.log(data.link);
         const link = document.createElement('a');
         link.href = data.link;
-        link.target = '_self';
+        link.target = '_blank';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -428,8 +429,9 @@ export default function Dashboard({ event}){
 
     const HandleZip = async () => {
       loadderevalue(true);
-      const response = await axios.post(`https://clickai.anthillnetworks.com/downloadall`, {
+      const response = await axios.post(`http://localhost:8000/downloadall`, {
         folderName: SelectedFolder,
+        UserID: UserID
       }, {
         headers: {
           'Content-Type': 'application/json',
@@ -459,10 +461,10 @@ export default function Dashboard({ event}){
       if (selectedFiles.length === 0) {
         return;
       }
-      // console.log(selectedFiles, "--"); 
       try {
-          const response = await axios.post('https://clickai.anthillnetworks.com/selected', {
+          const response = await axios.post('http://localhost:8000/selected', {
               selectedFiles: selectedFiles,
+              UserID: UserID
           }, {
               headers: {
                   'Content-Type': 'application/json',
@@ -508,7 +510,7 @@ export default function Dashboard({ event}){
                     <div className={`${Styles.NavOneForMenu} mb-2`} style={{borderBottom:"1px solid var(--blue)"}}>
                         <div className="text-xl sm:text-lg" style={{color:"var(--blue)"}}>{pagetext === 'All Photos' ? 'Event Photos' : pagetext === 'All Videos' ? 'Event Videos' : pagetext === 'Explore' ? "Find your moments with fav people" : pagetext === 'Favorites' ? 'Your Favorites' : '' }</div>
                         <div>
-                            <div className="flex items-center gap-4" style={{border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Styles.profile} /><div className="hidden lg:flex pr-6 text-sm font-bold">Studio name</div></div>
+                            <div className="flex items-center gap-4" style={{border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src={userInfo?.Logo || "/assets/profile.svg"} alt="Logo" width={100} height={100} className={Styles.profile} /><div className="hidden lg:flex pr-6 text-sm font-bold">{userInfo?.UserID}</div></div>
                         </div>
                     </div>
                     <div className={`${Styles.FoldersCss} text-black mb-1`}>
@@ -541,11 +543,11 @@ export default function Dashboard({ event}){
                     {
                       pagetext === 'Favorites' || pagetext === 'Explore' ?
                       <div className={`${Styles.NavOneForSearch}`}>
-                        <div className={Styles.DownFav} style={{marginBottom:"1em",width:"90%"}}>
+                        <div className={Styles.DownFav} style={{width:"90%"}}>
                           {pagetext === 'Explore'?<SearchModel constData={ExploreSlfies} SetConstData={SetConstData}/>
                           :
                           <>{pagetext == 'Favorites'? 
-                          <div className="sm: mt-4">
+                          <div className="sm: mt-4 mb-4">
                             <Link href={`/dashboard/${event}/favorites/download`} className={Styles.NavBtn} style={{backgroundColor:"var(--pink)"}}>Download</Link>
                           </div>
                           :<></>

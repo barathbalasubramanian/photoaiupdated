@@ -3,13 +3,15 @@ import Link from "next/link"
 import Style from "./page.module.css"
 import Image from "next/image"
 import TemporaryDrawer from "@/app/crm/Components/Home/RightDrawer"
+
 export default function Welcome({is_PrimeUser,UserID,Logo}){
+
     return(
         <div className={`${Style.con} min-h-screen w-full flex items-center justify-center`} style={{backgroundColor:"var(--bg)"}}>
           <div className={`${Style.mainCon} flex`} style={{borderRadius:"20px",boxShadow:"0px 72px 80px -48px rgba(0, 0, 0, 0.5)",backgroundColor:"var(--lightpink)"}}>
             <div className={`${Style.logoCon} flex flex-col gap-4 w-full p-5 items-center justify-center`}>
-              <div><Image src="/assets/samplelogo.svg" alt="Logo" width={100} height={100} className={Style.logoImg}/></div>
-              <div style={{color:"var(--blue)",fontSize:"20px"}}>Anthill Networks</div>
+              <div><Image src={Logo || "/assets/samplelogo.svg"} alt="Logo" width={100} height={100} className={Style.logoImg}/></div>
+              <div style={{color:"var(--blue)",fontSize:"20px"}}>{UserID}</div>
             </div>
             <div className={`${Style.Con2} p-6`} style={{backgroundColor:"var(--white)",width:"100%", borderRadius:"0 20px 20px 0"}}>
               <div className={Style.ImageRect}><Image src="/assets/aiimg.svg" alt="Rect" width={100} height={100} className={Style.rectImg}/></div>

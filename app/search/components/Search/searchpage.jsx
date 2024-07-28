@@ -22,9 +22,6 @@ import Loader from "@/app/loader/page";
 import { Dialog,DialogContent } from '@mui/material';
 import axios from 'axios'
 import { folder } from "jszip";
-
-
-
 import Storefolder from "./storeFolder";
 import { store } from "@/app/provider/store";
 import { ToastContainer, toast } from 'react-toastify';
@@ -35,7 +32,8 @@ import StoreKey from "./storeSecretkey";
 import Image from "next/image";
 import { Style } from "@mui/icons-material";
 
-export default function Search({ AllEventData, SuperAdmin }) {
+export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }) {
+  const UserID_ = UserID.value
   let form = useRef(null);
   const state = useSelector((state) => state.Login.Is_SuperAdmin);
   const dispatch = useDispatch();
@@ -184,17 +182,16 @@ export default function Search({ AllEventData, SuperAdmin }) {
     }
 
     else {
-      const response = await axios.post('https://clickai.anthillnetworks.com/createFolder', {
+      const response = await axios.post('http://localhost:8000/createFolder', {
         folderName: folderName,
+        UserID:UserID_
       }, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
-      // console.log(response)
       if (response.status === 200) {
         const data = response.data
-        // console.log(data);
       }
       setAllfolders(storeData.data[0]["Folders"])
       setIsDialogOpen(false);
@@ -203,7 +200,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
       setAllfoldersPage(true);
       loadderevalue(false);
     }
-};
+  };
 
   const GetAllEvent = async () => {
     dispatch(set_is_super_admin(SuperAdmin));
@@ -221,131 +218,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
   const fileInputRef = useRef(null);
   const [uploadStatus, setUploadStatus] = useState([]);
 
-  // const UploadImages = async (e) => {
-  //   LoaderStatsValue(true)
-  //   e.preventDefault();
-  //   uploadstatusvideo(true);
-  //   var UploadedArray = await FetchUploadedData(month);
-  //   const s3Client = new S3Client({
-  //     region: process.env.NEXT_PUBLIC_AWS_BUCKET_REGION,
-  //     credentials: {
-  //       accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY,
-  //       secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_KEY,
-  //     },
-  //   });
-
-  //   const options = {
-  //     maxSizeMB: 1,
-  //     maxWidthOrHeight: 1920,
-  //     useWebWorker: true,
-  //   };
-
-  //   const files = Array.from(fileInputRef.current.files);
-  //   const batchSize = 10;
-  //   let results = [];
-
-  //   for (let i = 0; i < files.length; i += batchSize) {
-  //     const batch = files.slice(i, i + batchSize);
-
-  //     const formData = new FormData();
-  //     batch.forEach((file) => {
-  //       formData.append('files', file);
-  //     });
-  //     formData.append('folderName', selectedFolder);
-
-  //     try {
-  //       const response = await axios.post(`http://localhost:3000/upload`, formData, {
-  //         headers: {
-  //           'Content-Type': 'multipart/form-data',
-  //         },
-  //       });
-
-  //       results = results.concat(response.data);
-  //       setUploadStatus(prevStatus => [...prevStatus, ...response.data]);
-  //       // console.log('Batch upload successful:', response.data);
-  //     } catch (error) {
-  //       // console.error('Error uploading batch:', error);
-  //     }
-  //   }
-
-  //   // console.log('All file uploads completed:', results);
-
-  //   for (let i = 0; i < upload.length; i++) {
-  //     if (UploadedArray.includes(upload[i].name)) {
-  //       const per = ((i + 1) / upload.length) * 100;
-  //       totaluploadedvalue(i + 1);
-  //       percentagevalue(Math.ceil(per));
-  //       continue;
-  //     }
-
-  //     let retries = 0;
-  //     let success = false;
-  //     while (!success && retries < 3) {
-  //       try {
-  //         const startTime = Date.now();
-  //         var Compresedimage = upload[i];
-  //         if (upload[i].size / (1024 * 1024) > 1) {
-  //           Compresedimage = await imageCompression(upload[i], options);
-  //         }
-  //         const name = upload[i].name
-  //         // console.log(name)
-  //         const uniqueFileName = new Date()
-  //           .toISOString()
-  //           .replace(/[-:.]/g, "")
-  //           .replace("T", "_");
-  //         const uploadCommand = new PutObjectCommand({
-  //           Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
-  //           Key: `${month}/COMPRESS_IMAGES/${selectedFolder}/${name}`,
-  //           Body: Compresedimage,
-  //           ACL: "public-read",
-  //         });
-  //         const respo = await s3Client.send(uploadCommand);
-  //           if (respo.$metadata.httpStatusCode == 200) {
-  //             UploadedArray.push(upload[i].name);
-  //             const uploadJaonPar = {
-  //               Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
-  //               Key: `${month}/Uploaded_Images.json`,
-  //               Body: JSON.stringify(UploadedArray),
-  //               ContentType: "application/json",
-  //               ACL: "public-read",
-  //             };
-  //             await s3Client.send(new PutObjectCommand(uploadJaonPar));
-  //             const per = ((i + 1) / upload.length) * 100;
-  //             totaluploadedvalue(i + 1);
-  //             percentagevalue(Math.ceil(per));
-  //             success = true;
-  //           }
-  //       } catch (error) {
-  //         // console.error("Error occurred during upload:", error);
-  //         // Retry after 1 minute
-  //         await new Promise((resolve) => setTimeout(resolve, 180000));
-  //         retries++;
-  //       }
-  //     }
-
-  //     if (!success) {
-  //       console.error(
-  //         "Upload failed after retrying multiple times:",
-  //         upload[i].name
-  //       );
-  //       // Handle failed upload here
-  //       // You might want to log or handle failed uploads differently
-  //     }
-  //   }
-
-  //   // setIsLoading(false);
-  //   inputboxvalue(false);
-  //   uploadvalue(null);
-  //   totaluploadedvalue(0);
-  //   percentagevalue(0);
-  //   // Toast.fire({ icon: "success", title: "Upload Success ..." });
-  //   toast.success("Upload Success ...");
-  //   uploadstatusvideo(false);
-  //   LoaderStatsValue(false)
-  // };
-
-
-const UploadImages = async (e) => {
+  const UploadImages = async (e) => {
     LoaderStatsValue(true);
     e.preventDefault();
     uploadstatusvideo(true);
@@ -379,9 +252,10 @@ const UploadImages = async (e) => {
             formData.append('files', file);
         });
         formData.append('folderName', selectedFolder);
+        formData.append('UserID', UserID_);
 
         try {
-            const response = await axios.post(`https://clickai.anthillnetworks.com/upload`, formData, {
+            const response = await axios.post(`http://localhost:8000/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -593,7 +467,7 @@ const UploadImages = async (e) => {
             <div className="flex w-full">
               <div className={`${Styles.sideBar} flex flex-col gap-4 px-6 py-4 w-fit items-center`}>
                 <div className="mt-6">
-                    <Image src="/assets/logorect.svg" alt="Logo" width={100} height={100} className={Styles.logoImg} />
+                    <Image src={Logo_ || "/assets/logorect.svg"} alt="Logo" width={100} height={100} className={Styles.logoImg} />
                 </div>
                 <div className="flex flex-col gap-3 mt-8 none">
                     { buttons.map((button) => (
@@ -623,7 +497,7 @@ const UploadImages = async (e) => {
               <div className="min-h-screen w-full" style={{backgroundColor:"var(--bg)"}}>
                 <div className="flex w-full items-center justify-between py-9 px-10">
                     <div className="text-2xl" style={{color:"var(--blue)"}}>Events</div>
-                    <div className="flex items-center gap-4" style={{border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Styles.profile} /><div className="pr-6 text-sm font-bold">Studio name</div></div>
+                    <div className="flex items-center gap-4" style={{border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src={Logo_ || "/assets/profile.svg"} alt="Logo" width={100} height={100} className={Styles.profile} /><div className="pr-6 text-sm font-bold">{name}</div></div>
                 </div>
                 <div className="flex items-center w-full"> 
                   <div className={`${Styles.inpDiv} flex items-center w-full`}>

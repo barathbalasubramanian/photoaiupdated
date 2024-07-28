@@ -290,10 +290,6 @@
 .BelowNav{
   display: none;
 }
-.DownFav{
-  margin-top: 1em;
-  margin-bottom: 1.5em !important;
-}
 .FolderName{
   min-width: fit-content;
   overflow: hidden;

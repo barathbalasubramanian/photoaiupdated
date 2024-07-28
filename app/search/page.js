@@ -14,7 +14,7 @@ export default async function Home() {
     return <SignIn/>
   }else{
     const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_KEY);
-    const data = await supabase.from('Studio-Admin').select('UserID,Password,is_verified').eq('UserID',UserID.value);
+    const data = await supabase.from('Studio-Admin').select('UserID,Password,is_verified,Logo').eq('UserID',UserID.value);
     if(data.data.length === 0){return <SignIn/>}
     if(data.data[0].Password == Password.value){
       if(UserID.value === 'superAIadmin' && Password.value ==='AdminSuper@123'){
@@ -22,7 +22,8 @@ export default async function Home() {
         return <Search AllEventData={res} SuperAdmin={true}/>
       }else{
       const AllEventData = await GetAllEvents();
-      return <Search AllEventData={AllEventData} SuperAdmin={false}/>
+      console.log(data.data[0].Logo)
+      return <Search AllEventData={AllEventData} SuperAdmin={false} UserID={UserID} name={data.data[0].UserID} Logo_={data.data[0].Logo}/>
       }
     }
     return <SignIn/>

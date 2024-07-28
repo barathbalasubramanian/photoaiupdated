@@ -304,6 +304,7 @@ export async function FetchUserInFo(){
     const User_Name = UserID.get('UserID').value;
     const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_KEY);
     const result = await supabase.from('Studio-Admin').select('*').eq('UserID',User_Name);
+    console.log(result,"RESULT")
     return result.data[0];
 }
 export async function UpdateUserInFo(Phone_No,Location,Website){

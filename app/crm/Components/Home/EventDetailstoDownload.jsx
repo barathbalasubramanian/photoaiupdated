@@ -16,7 +16,7 @@ import EventDetailsSendBtn from './EventDetailsSendBtn';
 import Image from 'next/image';
 import GetCustomerDetailsByName from './GetCustomerDetailsByName';
 import TemporaryDrawer_ from './UserProfile';
-export const TableCkeckBox = ({UserID,item,ConstCheckedData,cusname,SetConstCheckedData,OnStatusChange,Mobile,Location,Email_ID,verbose})=>{
+export const TableCkeckBox = ({Logo,UserID,item,ConstCheckedData,cusname,SetConstCheckedData,OnStatusChange,Mobile,Location,Email_ID,verbose})=>{
   const [StatusValue,SetStatusValue] = React.useState(item.Status);
   let AdvanceAmount = 0;
   item.Advance_Payment.map((it)=>{
@@ -25,7 +25,7 @@ export const TableCkeckBox = ({UserID,item,ConstCheckedData,cusname,SetConstChec
   return (
       <div className={Style.customTableRow}>
         <div className={Style.customTableCell}>
-          <AddPayment uuid={item.Customer_ID_UUID} name={item.EventName} cusname={cusname} OnStatusChange={OnStatusChange} 
+          <AddPayment Logo={Logo} uuid={item.Customer_ID_UUID} name={item.EventName} cusname={cusname} OnStatusChange={OnStatusChange} 
           Mobile={Mobile} EventDate={item.EventDate} ConstCheckedData={ConstCheckedData} 
           SetConstCheckedData={SetConstCheckedData} Location={Location} Email_ID={Email_ID} 
           Full_Amount={item.Full_Amount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})} 
@@ -138,7 +138,7 @@ export const TableCkeckBox = ({UserID,item,ConstCheckedData,cusname,SetConstChec
   )
 }
 
-export default function EventDetailsToDownload({UserID,id,name,Mobile,Location,Email_ID,Balance,verbose,MobileUi}) {
+export default function EventDetailsToDownload({Logo,UserID,id,name,Mobile,Location,Email_ID,Balance,verbose,MobileUi}) {
     const [Data,SetData] = React.useState([]);
     const [ConstData,SetConstData] = React.useState([]);
     const [csvData,SetcsvData] = React.useState([]);
@@ -295,7 +295,7 @@ export default function EventDetailsToDownload({UserID,id,name,Mobile,Location,E
             </div>
             <div style={{color:"var(--blue)",fontSize:"24px"}}>Customers Details</div>
           </div>
-          <div><TemporaryDrawer_ UserID={UserID}/></div>
+          <div><TemporaryDrawer_ UserID={UserID} Logo={Logo}/></div>
         </div>
 
         {/* Details */}

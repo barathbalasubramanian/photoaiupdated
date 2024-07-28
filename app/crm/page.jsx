@@ -13,9 +13,9 @@ export default async function CRM(){
       redirect(`/`)
     }else{
       const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_KEY);
-      const data = await supabase.from('Studio-Admin').select('UserID,Password,is_verified,Is_Prime_User').eq('UserID',UserID.value);
+      const data = await supabase.from('Studio-Admin').select('UserID,Password,is_verified,Is_Prime_User,Logo').eq('UserID',UserID.value);
       if(data.data.length === 0){redirect(`/`)}
-      if(data.data[0].Password == Password.value && data.data[0].Is_Prime_User){return <HomePage UserID={UserID.value}/>}
+      if(data.data[0].Password == Password.value && data.data[0].Is_Prime_User){return <HomePage UserID={UserID.value} Logo={data.data[0].Logo} />}
       redirect(`/`)
     }
 }

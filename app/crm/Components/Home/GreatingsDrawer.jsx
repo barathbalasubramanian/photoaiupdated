@@ -10,7 +10,7 @@ import { CreateCustomerGrettingsFuntion, GetCustomerGrettingsFuntion } from './A
 import ReadyToSendSMS from './RedyToSend';
 import Image from 'next/image';
 import TemporaryDrawer_ from './UserProfile';
-export default function GreatingsLeftDrawer(UserID) {
+export default function GreatingsLeftDrawer({UserID,Logo}) {
   const [Data,DataValue] = React.useState([]);
   const [ConstData,ConstDataValue] = React.useState([]);
   const [IfIsOk,SetIfIsOk] = React.useState(false);
@@ -69,7 +69,7 @@ export default function GreatingsLeftDrawer(UserID) {
                 </div>
                 <div style={{color:"var(--blue)",fontSize:"24px"}}>Send Greetings</div>
               </div>
-              <div><TemporaryDrawer_ UserID={UserID}/></div>
+              <div><TemporaryDrawer_ UserID={UserID} Logo={Logo}/></div>
             </div>  
 
             {/* Desc */}

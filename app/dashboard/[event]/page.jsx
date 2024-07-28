@@ -18,7 +18,7 @@ export default async function DashBoard({ params }){
       const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_KEY);
       const data = await supabase.from('Studio-Admin').select('UserID,Password,is_verified').eq('UserID',UserID.value);
       if(data.data.length === 0){return <SignIn event={params.event}/>}
-      if(data.data[0].Password == Password.value){return <Dashboard event={params.event.split("%20").join(" ")}/>}
+      if(data.data[0].Password == Password.value){return <Dashboard event={params.event.split("%20").join(" ")} UserID={UserID.value} />}
       return <SignIn event={params.event}/>
     }
 }

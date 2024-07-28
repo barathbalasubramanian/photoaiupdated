@@ -82,7 +82,7 @@ export default function HomePage({UserID}) {
             <div className={`hidden flex-col items-center pt-8 gap-6 md:flex ${Styles.SideBar}`} style={{width:'20em'}}>
                 <div className='hidden lg:block'><Image src={UsereInfo?.Logo||''} alt='Logo' width={100} height={100} style={{width:'100px',borderRadius:'5px'}}/></div>
                 {AddOpen?<div className={Styles.JustForFUN} style={{marginTop:'20px',height:'30svh',justifyContent:'space-around'}}>
-                    <EditLeftDrawer UserID={UserID}/>
+                    <EditLeftDrawer UserID={UserID} Logo={UsereInfo?.Logo}/>
                     <Link href="/">
                         <div className={`${Styles.albumMob} flex gap-2`} style={{cursor:"pointer"}}>
                             <div
@@ -94,8 +94,8 @@ export default function HomePage({UserID}) {
                             </div>
                         </div>
                     </Link>
-                    <GreatingsLeftDrawer UserID={UserID}/>
-                    <ReportLeftDrawer UserID={UserID}/>
+                    <GreatingsLeftDrawer UserID={UserID} Logo={UsereInfo?.Logo}/>
+                    <ReportLeftDrawer UserID={UserID} Logo={UsereInfo?.Logo}/>
                 </div>:<></>}
             </div>
             <div className={Styles.MainContent} style={{display:"flex",alignItems:"center",flexDirection:"column",width:'100%'}}>
@@ -126,7 +126,7 @@ export default function HomePage({UserID}) {
                             </select>
                             <div onClick={handleNextMonth}><ArrowRightIcon color="primary" style={{fontSize:"30px",color:'black',cursor:'pointer'}}/></div>
                     </div>
-                    <div><TemporaryDrawer_ UserID={UserID}/></div>
+                    <div><TemporaryDrawer_ UserID={UserID} Logo={UsereInfo?.Logo}/></div>
                     
                 </div>
                 <div className='gap-6 items-center w-full justify-end mb-4 hidden md:flex'>

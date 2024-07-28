@@ -19,7 +19,7 @@ import StarBorder from '@mui/icons-material/StarBorder';
 import Styles from "./homestyle.module.css"
 import { FetchUserInFo, Logout, UpdatePassword, UpdateUserInFo, UpdateUserInfoLogo } from './AllFunctions';
 import Image from 'next/image';
-export default function TemporaryDrawer_({UserID}) {
+export default function TemporaryDrawer_({UserID,Logo}) {
     const [state, setState] = React.useState({
         top: false,
         left: false,
@@ -68,6 +68,7 @@ export default function TemporaryDrawer_({UserID}) {
     const [PhoneNo,SetPhoneNo] = React.useState('');
     const [Location,SetLocation] = React.useState('');
     const [Website,SetWebsite] = React.useState('');
+    const [UserLogo,SetUserLogo] = React.useState({});
     const handleClick = () => {
         setOpen(!open);
     };
@@ -76,6 +77,8 @@ export default function TemporaryDrawer_({UserID}) {
         SetPhoneNo(res.Phone_No || '');
         SetLocation(res.Location || '');
         SetWebsite(res.Website || '');
+        SetUserLogo(res)
+        console.log(res.Logo,"-----------------")
     }
     React.useEffect(()=>{
         FetchInfo();
@@ -118,9 +121,9 @@ export default function TemporaryDrawer_({UserID}) {
                 <div className={Styles.ForBackButton} onClick={()=>{setState({ ...state, [anchor]: false })}}>
                   <img src="/assets/backbtn.svg" alt="Back" style={{width:"20px",height:"20px"}}/>
                 </div>
-                <div className={Styles.pro} style={{color:"var(--blue)",fontSize:"24px"}}>Studio Profile</div>
+                <div className={Styles.pro} style={{color:"var(--blue)",fontSize:"24px"}}>{UserID}</div>
               </div>
-              <div className="flex items-center gap-4 w-fit" style={{border:"1px solid #D8D8D8",borderRadius:'5px',minWidth:"fit-content"}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Styles.profile} /><div className="pr-6 text-sm font-bold hidden lg:block">Studio name</div></div>
+              <div className="flex items-center gap-4 w-fit" style={{border:"1px solid #D8D8D8",borderRadius:'5px',minWidth:"fit-content"}}><Image src={ UserLogo?.Logo || Logo } alt="" width={100} height={100} className={Styles.profile} /><div className="pr-6 text-sm font-bold hidden lg:block">{UserID}</div></div>
             </div> 
 
             <div className='flex flex-col-reverse w-full items-center px-4 py-6 gap-10 lg:flex-row'>
@@ -201,7 +204,7 @@ export default function TemporaryDrawer_({UserID}) {
                         </div>
                     </div>
                     <div className='w-full px-8'>
-                        <div style={{backgroundColor:"#ECEDFF",borderRadius:"5px"}} className='sm:px-0 lg:px-16 py-2  flex items-center justify-between w-full'>
+                        <div style={{backgroundColor:"#ECEDFF",borderRadius:"5px"}} className='sm:px-0 lg:px-16 py-2 gap-6 flex items-center justify-between w-full'>
                             <img src="/assets/insta.svg" alt="Insta"  style={{width:"35px"}}/>
                             <img src="/assets/utube.svg" alt="UTube" style={{width:"50px"}} />
                             <img src="/assets/fb.svg" alt="FB"  style={{width:"40px"}}/>
@@ -219,7 +222,7 @@ export default function TemporaryDrawer_({UserID}) {
       {['right'].map((anchor) => (
         <React.Fragment key={anchor}>
           <div onClick={toggleDrawer(anchor, true)}>
-            <div className="flex items-center gap-4 w-fit" style={{border:"1px solid #D8D8D8",borderRadius:'5px',minWidth:"fit-content"}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Styles.profile} /><div className="pr-6 text-sm font-bold text-black hidden lg:block ">Studio name</div></div>
+            <div className="flex items-center gap-4 w-fit" style={{border:"1px solid #D8D8D8",borderRadius:'5px',minWidth:"fit-content"}}><Image src={ UserLogo?.Logo || Logo } alt="" width={100} height={100} className={Styles.profile} /><div className="pr-6 text-sm font-bold text-black hidden lg:block ">{UserID}</div></div>
           </div>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} transitionDuration={{ appear: 500, enter: 500, exit: 500 }}>
             {list(anchor)}

@@ -12,7 +12,7 @@ import UpdateCustomer from './UpdateCustomer';
 import Image from 'next/image';
 import Link from 'next/link';
 import TemporaryDrawer_ from './UserProfile';
-export default function EditLeftDrawer(UserID) {
+export default function EditLeftDrawer({UserID,Logo}) {
   const [Data,SetData] = React.useState([]);
   const [ConstData,SetConstData] = React.useState([]);
   const [ConstCheckedData,SetConstCheckedData] = React.useState(null);
@@ -91,7 +91,7 @@ export default function EditLeftDrawer(UserID) {
                 </div>
                 <div style={{color:"var(--blue)",fontSize:"24px"}}>Customers</div>
               </div>
-              <div><TemporaryDrawer_ UserID={UserID}/></div>
+              <div><TemporaryDrawer_ UserID={UserID} Logo={Logo}/></div>
             </div>
 
             {/* Search */}
@@ -204,7 +204,7 @@ export default function EditLeftDrawer(UserID) {
                             <div className='flex flex-col items-start justify-evenly py-2' style={{gap:"10px",fontSize:"14px !important"}}>
                               <div style={{fontSize:"18px !important"}} > Balance : <span style={{color:"crimson"}}>${item.Balance}</span></div>
                               <button className={Style.searchBtn} style={{padding:"4px 16px",margin:'0 2em 0 0'}}><Confirm ConstCheckedData={ConstCheckedData}/></button>
-                              <EventDetailsToDownload MobileUi={true} UserID={UserID} id={item.Customer_ID} name={item.Customer_Name} Mobile={item.Mobile} Location={item.Location} Email_ID={item.Email_ID} Balance={item.Balance} verbose={false} />
+                              <EventDetailsToDownload Logo={Logo} MobileUi={true} UserID={UserID} id={item.Customer_ID} name={item.Customer_Name} Mobile={item.Mobile} Location={item.Location} Email_ID={item.Email_ID} Balance={item.Balance} verbose={false} />
                             </div>
                         </div>
                         <div className='flex items-center justify-center'>
