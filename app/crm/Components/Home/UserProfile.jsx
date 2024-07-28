@@ -217,13 +217,13 @@ export default function TemporaryDrawer_({UserID,Logo}) {
                             <div style={{fontSize:"16px",color:"var(--black)"}}>{UserLogo.Website}</div>
                         </div>
                     </div>
-                    <div className='w-full px-8'>
+                    {/* <div className='w-full px-8'>
                         <div style={{backgroundColor:"#ECEDFF",borderRadius:"5px"}} className='sm:px-0 lg:px-16 py-2 gap-6 flex items-center justify-between w-full'>
                             <img src="/assets/insta.svg" alt="Insta"  style={{width:"35px"}}/>
                             <img src="/assets/utube.svg" alt="UTube" style={{width:"50px"}} />
                             <img src="/assets/fb.svg" alt="FB"  style={{width:"40px"}}/>
                         </div>
-                    </div>
+                    </div> */}
                     <div></div>
                 </div>
             </div>

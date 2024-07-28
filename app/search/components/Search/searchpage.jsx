@@ -182,7 +182,7 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
     }
 
     else {
-      const response = await axios.post('http://localhost:8000/createFolder', {
+      const response = await axios.post('https://photoai.anthillnetworks.com/createFolder', {
         folderName: folderName,
         UserID:UserID_
       }, {
@@ -255,7 +255,7 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
         formData.append('UserID', UserID_);
 
         try {
-            const response = await axios.post(`http://localhost:8000/upload`, formData, {
+            const response = await axios.post(`https://photoai.anthillnetworks.com/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
