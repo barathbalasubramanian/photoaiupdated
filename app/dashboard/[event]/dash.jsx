@@ -402,7 +402,7 @@ export default function Dashboard({ event, UserID }){
       const folderName = parts[parts.length - 2]; 
       const imageName = parts[parts.length - 1];
       console.log(folderName,imageName,"--")
-      const response = await axios.post('http://localhost:8000/downloadfile', {
+      const response = await axios.post('https://clickai.anthillnetworks.com/downloadfile', {
         filename: imageName,
         folderName: folderName,
         UserID: UserID
@@ -426,7 +426,7 @@ export default function Dashboard({ event, UserID }){
 
     const HandleZip = async () => {
       loadderevalue(true);
-      const response = await axios.post(`http://localhost:8000/downloadall`, {
+      const response = await axios.post(`https://clickai.anthillnetworks.com/downloadall`, {
         folderName: SelectedFolder,
         UserID: UserID
       }, {
@@ -459,7 +459,7 @@ export default function Dashboard({ event, UserID }){
         return;
       }
       try {
-          const response = await axios.post('http://localhost:8000/selected', {
+          const response = await axios.post('https://clickai.anthillnetworks.com/selected', {
               selectedFiles: selectedFiles,
               UserID: UserID
           }, {
