@@ -12,7 +12,7 @@ import Image from 'next/image';
 import { Padding } from '@mui/icons-material';
 import ExamplePieChart from './Charts';
 import TemporaryDrawer_ from './UserProfile';
-export default function ReportLeftDrawer(UserID) {
+export default function ReportLeftDrawer({UserID,Logo}) {
   const [StartDate,SetStartDate] = React.useState('')
   const [Data,DataSet] = React.useState([]);
   const [EndDate,SetEndDate] = React.useState('')

@@ -26,7 +26,6 @@ export default function TemporaryDrawer_({UserID,Logo}) {
         bottom: false,
         right: false,
     });
-
     const toggleDrawer = (anchor, open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
         return;
@@ -57,6 +56,7 @@ export default function TemporaryDrawer_({UserID,Logo}) {
         if (respo.$metadata.httpStatusCode == 200) {
         const res = await UpdateUserInfoLogo(`https://selife-bucket.s3.ap-south-1.amazonaws.com/studio-logo/${uniqueNumber}.jpg`);
         if(res){
+            alert("Logo Updated Successfully")
             location.reload();
         }else{
             alert('Something Went Wrong...')
@@ -78,7 +78,6 @@ export default function TemporaryDrawer_({UserID,Logo}) {
         SetLocation(res.Location || '');
         SetWebsite(res.Website || '');
         SetUserLogo(res)
-        console.log(res.Logo,"-----------------")
     }
     React.useEffect(()=>{
         FetchInfo();
@@ -88,14 +87,16 @@ export default function TemporaryDrawer_({UserID,Logo}) {
     const [CurrentPassword,SetCurrentPassword] = React.useState('');
     const [NewPassword,SetNewPassword] = React.useState('');
     const [ConfirmPassword,SetConfirmPassword] = React.useState('');
-    const HandelSubmit = async(e)=>{
-    e.preventDefault();
+    const HandelSubmit = async()=>{
     if(NewPassword === ConfirmPassword){
       if(NewPassword == ''){
         alert('Please enter your new password')
       }else{
         const Pass = await UpdatePassword(CurrentPassword,NewPassword);
         alert(Pass);
+        SetCurrentPassword("")
+        SetNewPassword("")
+        SetConfirmPassword("")
       }
     }else{
       alert('Both Password need to same ...')
@@ -104,6 +105,10 @@ export default function TemporaryDrawer_({UserID,Logo}) {
 
   const handleRefresh = () => {
     window.location.reload();
+  };
+
+  const triggerFileInput = () => {
+    document.getElementById('hiddenFileInput').click();
   };
 
   const list = (anchor) => (
@@ -133,18 +138,43 @@ export default function TemporaryDrawer_({UserID,Logo}) {
                     <div className='p-4 bg-white flex flex-col gap-4 justify-between mb-4' style={{borderRadius:'10px'}}>
                         <div style={{fontSize:"18px",color:"var(--blue)"}}>Logos</div>
                         <div style={{fontSize:"12px",color:"var(--black)"}}>The logo should be of 56px height and 160px width and make sure it perfectly fit in the box</div>
-                        <div className='text-white px-4 py-2 w-fit' style={{borderRadius:"5px",textAlign:"center",fontSize:'14px',backgroundColor:"var(--pink)"}}>Upload</div>
+                        <div className='w-full flex items-center justify-between'>
+                          <div className='cursor-pointer text-white px-4 py-2 w-fit' style={{borderRadius:"5px",textAlign:"center",fontSize:'14px',backgroundColor:"var(--pink)"}} onClick={triggerFileInput}>Upload <input type="file" onChange={(e)=>{HandeLogoUpload(e.target.files[0])}} id="hiddenFileInput" style={{width:'80px',overflow:'hidden',display:"none"}}/></div>
+                          <div className='cursor-pointer text-white px-4 py-2 w-fit' style={{borderRadius:"5px",textAlign:"center",fontSize:'14px',backgroundColor:"var(--pink)"}} onClick={()=>Logout()}>Logout</div>
+                        </div>
+                    </div>
+                    {/* Password */}
+                    <div className='p-4 py-6 bg-white flex flex-col gap-4 justify-between mb-4' style={{borderRadius:'10px'}}>
+                        <div className='flex flex-col gap-.5'>
+                            <label htmlFor="name" style={{fontSize:"14px"}}>Current Password</label>
+                            <input className={Styles.inputDiv} type="text" value={CurrentPassword} onChange={(e)=>{SetCurrentPassword(e.target.value)}} placeholder='Current Password' required/>
+                        </div>
+                        <div className='flex flex-col gap-.5'>
+                            <label htmlFor="name" style={{fontSize:"14px"}}>New Password</label>
+                            <input className={Styles.inputDiv} type="text" value={NewPassword} onChange={(e)=>{SetNewPassword(e.target.value)}} placeholder='New Password' required/>
+                        </div>
+                        <div className='flex flex-col gap-.5'>
+                            <label htmlFor="name" style={{fontSize:"14px"}}>Confirm Password</label>
+                            <input className={Styles.inputDiv} type="text" value={ConfirmPassword} onChange={(e)=>{SetConfirmPassword(e.target.value)}} placeholder='Confirm Password' required/>
+                        </div>
+                        <div className='cursor-pointer text-white px-4 py-2 w-fit' style={{borderRadius:"5px",textAlign:"center",fontSize:'14px',backgroundColor:"var(--pink)"}} onClick={()=>HandelSubmit()}>Confirm</div>
                     </div>
                     {/* Profile */}
                     <div style={{fontSize:"16px",fontWeight:"bold",padding:"0 0 .3em .5em",color:"var(--blue)"}}>Profile</div>
                     <div className='p-4 py-6 bg-white flex flex-col gap-4 justify-between mb-4' style={{borderRadius:'10px'}}>
                         <div className='flex flex-col gap-.5'>
                             <label htmlFor="name" style={{fontSize:"14px"}}>Name</label>
-                            <input type="text" className={Styles.inputDiv} />
+                            <input className={Styles.inputDiv} type="text" value={UserLogo?.UserID} 
+                            // onChange={(e)=>{SetLocation(e.target.value);UpdateUserInFo(PhoneNo,e.target.value,Website)}} 
+                            placeholder='Location'/>
                         </div>
                         <div className='flex flex-col gap-.5'>
                             <label htmlFor="name" style={{fontSize:"14px"}}>Address</label>
-                            <input type="text" className={Styles.inputDiv} />
+                            <input className={Styles.inputDiv} type="text" value={Location} onChange={(e)=>{SetLocation(e.target.value);UpdateUserInFo(PhoneNo,e.target.value,Website)}} placeholder='Location'/>
+                        </div>
+                        <div className='flex flex-col gap-.5'>
+                            <label htmlFor="name" style={{fontSize:"14px"}}>Website</label>
+                            <input className={Styles.inputDiv} type="text" value={Website} onChange={(e)=>{SetWebsite(e.target.value);UpdateUserInFo(PhoneNo,Location,e.target.value)}} placeholder='Website'/>
                         </div>
                     </div>
                     {/* Contacts */}
@@ -152,31 +182,13 @@ export default function TemporaryDrawer_({UserID,Logo}) {
                     <div className='p-4  py-6 bg-white flex flex-col gap-4 justify-between mb-4' style={{borderRadius:'10px'}}>
                         <div className='flex flex-col gap-.5'>
                             <label htmlFor="name" style={{fontSize:"14px"}}>Phone</label>
-                            <input type="number" className={Styles.inputDiv} />
+                            <input type="text" className={Styles.inputDiv} value={PhoneNo} onChange={(e)=>{SetPhoneNo(e.target.value);UpdateUserInFo(e.target.value,Location,Website)}} placeholder='Phone Number'/>
                         </div>
                         <div className='flex flex-col gap-.5'>
                             <label htmlFor="name" style={{fontSize:"14px"}}>Email</label>
-                            <input type="email" className={Styles.inputDiv} />
-                        </div>
-                        <div className='flex flex-col gap-.5'>
-                            <label htmlFor="name" style={{fontSize:"14px"}}>Website</label>
-                            <input type="text" className={Styles.inputDiv} />
-                        </div>
-                    </div>
-                    {/* Social Profile Links */}
-                    <div style={{fontSize:"16px",fontWeight:"bold",padding:"0 0 .3em .5em",color:"var(--blue)"}}>Social Profiles</div>
-                    <div className='p-4 py-6 bg-white flex flex-col gap-4 justify-between mb-4' style={{borderRadius:'10px'}}>
-                        <div className='flex flex-col gap-0.5'>
-                            <label htmlFor="name" style={{fontSize:"14px"}}>Instagram</label>
-                            <input type="text" className={Styles.inputDiv} />
-                        </div>
-                        <div className='flex flex-col gap-.5'>
-                            <label htmlFor="name" style={{fontSize:"14px"}}>Facebook</label>
-                            <input type="text" className={Styles.inputDiv} />
-                        </div>
-                        <div className='flex flex-col gap-0.5'>
-                            <label htmlFor="name" style={{fontSize:"14px"}}>Youtube</label>
-                            <input type="text" className={Styles.inputDiv} />
+                            <input type="text" className={Styles.inputDiv} value={PhoneNo} 
+                            // onChange={(e)=>{SetPhoneNo(e.target.value);UpdateUserInFo(e.target.value,Location,Website)}} 
+                            placeholder='Phone Number'/>
                         </div>
                     </div>
                 </div>
@@ -186,21 +198,23 @@ export default function TemporaryDrawer_({UserID,Logo}) {
                     <div className='p-8' style={{borderBottom:"1px solid black"}}>
                         <div className='flex flex-col items-center justify-center gap-4'>
                             <img src="/assets/profileImg.svg" alt="Pro" className={Styles.profileImg} />
-                            <div style={{fontSize:"20px",color:"var(--blue)"}}>AnthillNetworks</div>
+                            <div style={{fontSize:"20px",color:"var(--blue)"}}>{UserLogo.UserID}</div>
                         </div>
                     </div>
                     <div className='flex flex-col gap-6 justify-between p-10'>
                         <div>
                             <div style={{fontSize:"16px",color:"var(--blue)"}}>Phone</div>
-                            <div style={{fontSize:"16px",color:"var(--black)"}}>9345615762</div>
+                            <div style={{fontSize:"16px",color:"var(--black)"}}>
+                              {PhoneNo}
+                            </div>
                         </div>
                         <div>
                             <div style={{fontSize:"16px",color:"var(--blue)"}}>Email</div>
-                            <div style={{fontSize:"16px",color:"var(--black)"}}>barathkumar.b2411@gmail.com</div>
+                            <div style={{fontSize:"16px",color:"var(--black)"}}>{UserLogo.Email_ID || "Doesn't Have Email"}</div>
                         </div>
                         <div>
                             <div style={{fontSize:"16px",color:"var(--blue)"}}>Website</div>
-                            <div style={{fontSize:"16px",color:"var(--black)"}}>anthill2020@gmail.com</div>
+                            <div style={{fontSize:"16px",color:"var(--black)"}}>{UserLogo.Website}</div>
                         </div>
                     </div>
                     <div className='w-full px-8'>
