@@ -630,16 +630,26 @@ export default function Dashboard({ event, UserID }){
                     </div>
 
                     {/* Navigation Bar */}
-                    <div className={Styles.BelowNav}>
+                    {/* <div className={Styles.BelowNav}>
                       <div className={`${Styles.LeftNavIconsUI} py-2 px-4 cursor-pointer flex w-full justify-between items-center gap-2`}>
                           <div className="flex flex-col items-center" onClick={OnHomeClickFun}  style={pagetext === 'All Photos'?{color:'#fff',padding:"4px",borderRadius:"5px",backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'All Photos'?'/assets/photo.svg':'/assets/inphoto.svg'}/><div style={{fontSize:"15px"}}>Photos</div></div>
                           <div className="flex flex-col items-center" onClick={QueryVideos} style={pagetext === 'All Videos'?{color:'#fff',padding:"4px",borderRadius:"5px",backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'All Videos'?'/assets/videos.svg':'/assets/invideos.svg'}/><div style={{fontSize:"15px"}}>Videos</div></div>
                           <div className="flex flex-col items-center" onClick={OnExploreClickFun} style={pagetext === 'Explore'?{color:'#fff',padding:"4px",borderRadius:"5px",backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'Explore'?'/assets/explore.svg':'/assets/inexplore.svg'}/><div style={{fontSize:"15px"}}>Explore</div></div>
                           <div className="flex flex-col items-center" onClick={OnFavouriteClickFun} style={pagetext === 'Favorites'?{color:'#fff',padding:"4px",borderRadius:"5px",backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'Favorites'?'/assets/fav.svg':'/assets/infav.svg'}/><div style={{fontSize:"15px"}}>Favorites</div></div>
                       </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
+        </div>
+
+        {/* Navigation Bar */}
+        <div className={Styles.BelowNav}>
+          <div className={`${Styles.LeftNavIconsUI} py-2 px-4 cursor-pointer flex w-full justify-between items-center gap-2`}>
+              <div className="flex flex-col items-center" onClick={OnHomeClickFun}  style={pagetext === 'All Photos'?{color:'#fff',padding:"4px",borderRadius:"5px",backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'All Photos'?'/assets/photo.svg':'/assets/inphoto.svg'}/><div style={{fontSize:"15px"}}>Photos</div></div>
+              <div className="flex flex-col items-center" onClick={QueryVideos} style={pagetext === 'All Videos'?{color:'#fff',padding:"4px",borderRadius:"5px",backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'All Videos'?'/assets/videos.svg':'/assets/invideos.svg'}/><div style={{fontSize:"15px"}}>Videos</div></div>
+              <div className="flex flex-col items-center" onClick={OnExploreClickFun} style={pagetext === 'Explore'?{color:'#fff',padding:"4px",borderRadius:"5px",backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'Explore'?'/assets/explore.svg':'/assets/inexplore.svg'}/><div style={{fontSize:"15px"}}>Explore</div></div>
+              <div className="flex flex-col items-center" onClick={OnFavouriteClickFun} style={pagetext === 'Favorites'?{color:'#fff',padding:"4px",borderRadius:"5px",backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'Favorites'?'/assets/fav.svg':'/assets/infav.svg'}/><div style={{fontSize:"15px"}}>Favorites</div></div>
+          </div>
         </div>
 
         {Slider?<div className={Styles.OverflowScrollAnimation} ref={sliderRef}>
