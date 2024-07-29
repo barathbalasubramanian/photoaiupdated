@@ -115,11 +115,11 @@ export default function TemporaryDrawer_({UserID,Logo}) {
     <Box className={`${Styles.DrawerCenter} min-h-screen`} style={{backgroundColor:"var(--bg)"}}  sx={{ width: "100vw",backgroundColor:'#1e2742',height:'100svh',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center' }} role="presentation">
         
         {/* Rewrite */}
-        <div  onClick={handleRefresh}>
+        <div className='hidden lg:block' onClick={handleRefresh}>
           <img src="assets/homeicon.svg" alt="Home" className={Styles.homeIcon} />
         </div>
 
-        <div className='flex flex-col pt-4 gap-4 min-h-screen lg:2/3 sm:4/5' style={{margin:"auto",overflow:'scroll'}}>
+        <div className='flex flex-col pt-4 gap-4 min-h-screen lg:w-2/3 sm:w-4/5' style={{margin:"auto",overflow:'scroll'}}>
             {/* Header */}
             <div className='flex w-full items-center justify-between py-2' style={{borderBottom:"1px solid #4F55C3"}}>
               <div className='w-full px-4 py-2 flex gap-4 items-center'>
@@ -131,7 +131,7 @@ export default function TemporaryDrawer_({UserID,Logo}) {
               <div className="flex items-center gap-4 w-fit" style={{border:"1px solid #D8D8D8",borderRadius:'5px',minWidth:"fit-content"}}><Image src={ UserLogo?.Logo || Logo } alt="" width={100} height={100} className={Styles.profile} /><div className="pr-6 text-sm font-bold hidden lg:block">{UserID}</div></div>
             </div> 
 
-            <div className='flex flex-col-reverse w-full items-center px-4 py-6 gap-10 lg:flex-row'>
+            <div className='flex flex-col-reverse w-full px-4 py-6 gap-10 lg:flex-row'>
                 {/* Left */}
                 <div className='flex flex-col sm:w-4/5 lg:1/2'>
                     {/* Logo */}
@@ -194,10 +194,10 @@ export default function TemporaryDrawer_({UserID,Logo}) {
                 </div>
 
                 {/* Right */}
-                <div style={{borderRadius:"10px",height:"fit-content",padding:"0 0 4em 0"}} className="lg:1/2 sm:4/5">
-                    <div className='p-8' style={{borderBottom:"1px solid black"}}>
+                <div style={{borderRadius:"10px",height:"fit-content"}} className="pb-2 lg:pb-4">
+                    <div className='pt-0 p-8' style={{borderBottom:"1px solid black"}}>
                         <div className='flex flex-col items-center justify-center gap-4'>
-                            <img src="/assets/profileImg.svg" alt="Pro" className={Styles.profileImg} />
+                            <img src={ UserLogo?.Logo || "/assets/profileImg.svg" } alt="Pro" className={Styles.profileImg} />
                             <div style={{fontSize:"20px",color:"var(--blue)"}}>{UserLogo.UserID}</div>
                         </div>
                     </div>

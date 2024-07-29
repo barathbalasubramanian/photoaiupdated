@@ -196,10 +196,25 @@
   background-color: var(--white);
 }
 
+.profileImg{
+  width: 8em;
+  height: 8em;
+  object-fit: contain;
+}
+
   @media screen and (min-width: 0px) and (max-width: 600px) {
+    .DrawerCenter > div {
+      width: 90%;
+    }
     .MainContent{
       align-items: start !important;
       margin: 0 0 0 1em !important;
+    }
+    .profileImg{
+      width: 6em;
+      height: 6em;
+      object-fit: contain;
+      overflow: hidden;
     }
     .NavOptions{
       display: flex;

@@ -426,7 +426,7 @@ export default function Dashboard({ event, UserID }){
 
     const HandleZip = async () => {
       loadderevalue(true);
-      const response = await axios.post(`https://clickai.anthillnetworks.com/downloadall`, {
+      const response = await axios.post(`https://localhost:8080/downloadall`, {
         folderName: SelectedFolder,
         UserID: UserID
       }, {
@@ -492,7 +492,7 @@ export default function Dashboard({ event, UserID }){
         <>
         {loadeer?<Loader/>:""}
         <ToastContainer className={Styles.toastDiv}/>
-        <div className={`${Styles.Dashboard} min-h-screen`}> 
+        <div className={`${Styles.Dashboard} min-h-screen max-h-screen overflow-hidden`}> 
             <div className="flex flex-col items-center justify-start gap-8">
                 <div className={Styles.Logo}><img src={userInfo?.Logo||''} style={{width:'100px',borderRadius:'5px'}}/></div>
                 <div className={`${Styles.LeftNavIcons} w-full flex flex-col items-center gap-2`}>

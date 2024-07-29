@@ -18,10 +18,10 @@ export default function Welcome({is_PrimeUser,UserID,Logo}){
               <div className={`w-10/12 ${Style.content}`} style={{color:"var(--darkblue)",fontSize:"14px"}}>An AI-based photo distribution platform crafted to elevate event engagement</div>
               <div className="flex gap-4 mt-4" style={{borderBottom:"1px solid #000"}}>
                 <Link href="/create-event">
-                  <div className={`px-12 mb-6 text-center flex items-center gap-4 md:px-0 ${Style.btns}`} style={{backgroundColor:"var(--pink)",color:"white",cursor:"pointer",fontSize:"12px",borderRadius:"4px",padding:"6px 28px"}}>Create Event <Image src="/assets/plus.svg" alt="Plus" width={100} height={100} className={Style.icon}/> </div>
+                  <div className={`px-12 mb-6 text-center flex items-center gap-2 lg:gap-4 md:px-0 ${Style.btns}`} style={{backgroundColor:"var(--pink)",color:"white",cursor:"pointer",fontSize:"12px",borderRadius:"4px",}}>Create Event <Image src="/assets/plus.svg" alt="Plus" width={100} height={100} className={Style.icon}/> </div>
                 </Link>
                 <Link href="/search">
-                  <div className={`px-12 mb-6 text-center flex items-center gap-4 ${Style.btns}`} style={{backgroundColor:"var(--pink)",color:"white",cursor:"pointer",fontSize:"12px",borderRadius:"4px",padding:"6px 28px"}}>Search Event <Image src="/assets/search.svg" alt="Plus" width={100} height={100} className={Style.icon}/> </div>
+                  <div className={`px-12 mb-6 text-center flex items-center gap-2 lg:gap-4 ${Style.btns}`} style={{backgroundColor:"var(--pink)",color:"white",cursor:"pointer",fontSize:"12px",borderRadius:"4px"}}>Search Event <Image src="/assets/search.svg" alt="Plus" width={100} height={100} className={Style.icon}/> </div>
                 </Link>
               </div>
               
