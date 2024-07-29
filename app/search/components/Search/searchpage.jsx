@@ -192,6 +192,7 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
       });
       if (response.status === 200) {
         const data = response.data
+        toast.success("Folder Created!");
       }
       setAllfolders(storeData.data[0]["Folders"])
       setIsDialogOpen(false);
