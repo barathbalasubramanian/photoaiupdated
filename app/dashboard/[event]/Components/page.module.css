@@ -400,9 +400,12 @@
   }
 
   @media screen and (min-width: 0px) and (max-width: 800px) {
+    .Dashboard {
+      min-height: 90vh !important;
+      max-height: 90vh !important;
+      overflow: hidden !important; 
+    }
     .SearchModel {
         width: 90vw !important;
     }
 }
-
-
