@@ -312,7 +312,7 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
                     Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
                     Key: `${month}/COMPRESS_IMAGES/${selectedFolder}/${name}`,
                     Body: Compresedimage,
-                    ACL: "public-read",~
+                    ACL: "public-read",
                 });
                 const respo = await s3Client.send(uploadCommand);
                 if (respo.$metadata.httpStatusCode == 200) {
