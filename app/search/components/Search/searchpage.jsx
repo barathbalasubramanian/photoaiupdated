@@ -31,6 +31,7 @@ import { useRouter } from 'next/navigation'
 import StoreKey from "./storeSecretkey";
 import Image from "next/image";
 import { Style } from "@mui/icons-material";
+import ProgressBar from './ProgressBar'
 
 export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }) {
   const UserID_ = UserID.value
@@ -75,7 +76,10 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
   const [secretKey, setSecretKey] = useState('');
   const [details, setDetails] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
- 
+  const [occupiedSpace, setOccupiedSpace] = useState(0);
+  const [fullSpace, setFullSpace] = useState(1);
+
+
   const buttons = [
     { id: "uploadFolder", label: "Upload Images", img:"assets/upimg.svg" },
     { id: "uploadVideos", label: "Upload Videos", img:"assets/upvid.svg"},
@@ -85,6 +89,17 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
     { id: "qrcode", label: "QR Code" , img:"assets/qr.svg"},
     { id: "generatesecret", label: "Secret Key", img:"assets/secret.svg"}
   ];
+
+  const fetchQuota = async () => {
+    const res = await axios.post('http://localhost:8080/getquota', {UserID:UserID_}, 
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    setOccupiedSpace(res.data.space);
+    setFullSpace(res.data.full);
+  };
 
   const handleOptionSelect = (item) => {
     // console.log(item);
@@ -111,10 +126,9 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
   };
 
   const handleClick = async (id) => {
-    // console.log("Clicked button:", id);
-    // console.log(selectedOption,"Sel")
     if (selectedOption) {
       if (id === "uploadFolder") {
+        await fetchQuota()
         if ( allFolders == null ) {
           setsearchPage(false);
           setCreateNew(true);
@@ -172,12 +186,12 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
 
   const handleCreateClick = async() => {
     loadderevalue(true)
-    // console.log('Creating folder with name:', folderName);
-    // console.log(folderName,searchValue);
+    if ( folderName === "") { toast.error("FolderName must not be Empty"); loadderevalue(false);return }
     let storeData = await Storefolder(folderName,searchValue.split(" ").join("_"))
 
     if (storeData === "Folder Already Exists") {
       toast.warning("Folder Aldready Exists Pls Provide Unique Name!");
+      loadderevalue(false);
       return
     }
 
@@ -298,7 +312,7 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
                     Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
                     Key: `${month}/COMPRESS_IMAGES/${selectedFolder}/${name}`,
                     Body: Compresedimage,
-                    ACL: "public-read",
+                    ACL: "public-read",~
                 });
                 const respo = await s3Client.send(uploadCommand);
                 if (respo.$metadata.httpStatusCode == 200) {
@@ -626,7 +640,10 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
             <div className="w-full flex min-h-screen items-center justify-center" style={{backgroundColor:"var(--bg)"}}>
               <div className={Styles.subCon}>
                   <div className={Styles.backfromcrt} onClick={() => {setCreateNew(false); setsearchPage(true); setopenDrawer(false); setAllfoldersPage(false)}}><img style={{ width: "8px" }} src="/assets/back.svg"></img> Back</div>
-                  <div className={Styles.allFolderstit} style={{marginBottom:"1em"}}>All Folders</div>
+                  <div className={`${Styles.allFolderstit} flex w-full items-center justify-between px-4`} style={{marginBottom:"1em"}}>
+                    <div>All Folders</div>
+                    <ProgressBar occupiedSpace={occupiedSpace} fullSpace={fullSpace} />
+                  </div>
                   <div className={Styles.FoldersCon}>
                     {allFolders.map((value, index) => (
                       <div key={index} className={Styles.folder} style={{cursor:"pointer"}} onDoubleClick={() => handleFolderDoubleClick(value)}>

@@ -405,6 +405,9 @@
       max-height: 90vh !important;
       overflow: hidden !important; 
     }
+    .Dashboard::-webkit-scrollbar {
+      display: none;
+    }
     .SearchModel {
         width: 90vw !important;
     }
