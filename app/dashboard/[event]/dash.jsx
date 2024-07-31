@@ -426,7 +426,7 @@ export default function Dashboard({ event, UserID }){
 
     const HandleZip = async () => {
       loadderevalue(true);
-      const response = await axios.post(`http://localhost:8080/downloadall`, {
+      const response = await axios.post(`https://clickai.anthillnetworks.com/downloadall`, {
         folderName: SelectedFolder,
         UserID: UserID
       }, {
