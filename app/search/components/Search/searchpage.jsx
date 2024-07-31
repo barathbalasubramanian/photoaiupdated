@@ -128,7 +128,7 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
   const handleClick = async (id) => {
     if (selectedOption) {
       if (id === "uploadFolder") {
-        await fetchQuota()
+        // await fetchQuota()
         if ( allFolders == null ) {
           setsearchPage(false);
           setCreateNew(true);
