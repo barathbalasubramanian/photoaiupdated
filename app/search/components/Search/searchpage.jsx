@@ -32,6 +32,7 @@ import StoreKey from "./storeSecretkey";
 import Image from "next/image";
 import { Style } from "@mui/icons-material";
 import ProgressBar from './ProgressBar'
+import TemporaryDrawer_ from "@/app/crm/Components/Home/UserProfile";
 
 export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }) {
   const UserID_ = UserID.value
@@ -79,19 +80,18 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
   const [occupiedSpace, setOccupiedSpace] = useState(0);
   const [fullSpace, setFullSpace] = useState(1);
 
-
   const buttons = [
-    { id: "uploadFolder", label: "Upload Images", img:"assets/upimg.svg" },
-    { id: "uploadVideos", label: "Upload Videos", img:"assets/upvid.svg"},
-    { id: "dashboard", label: "Dashboard" , img:"assets/des.svg"},
-    { id: "digitalInvite", label: "Digital Invite", img:"assets/dig.svg" },
-    { id: "report", label: "Report", img:"assets/rep.svg" },
-    { id: "qrcode", label: "QR Code" , img:"assets/qr.svg"},
-    { id: "generatesecret", label: "Secret Key", img:"assets/secret.svg"}
+    { id: "uploadFolder", label: "Upload Images", img:"assets/upimg.svg", img_:"assets/unupimg.svg" },
+    { id: "uploadVideos", label: "Upload Videos", img:"assets/upvid.svg", img_:"assets/unupvid.svg"},
+    { id: "dashboard", label: "Dashboard" , img:"assets/undes.svg", img_:"assets/des.svg"},
+    { id: "digitalInvite", label: "Digital Invite", img:"assets/dig.svg", img_:"assets/undig.svg" },
+    { id: "report", label: "Report", img:"assets/rep.svg" , img_:"assets/unrep.svg"},
+    { id: "qrcode", label: "QR Code" , img:"assets/qr.svg", img_:"assets/unqr.svg"},
+    { id: "generatesecret", label: "Secret Key", img:"assets/secret.svg",img_:"assets/unsecret.svg"}
   ];
 
   const fetchQuota = async () => {
-    const res = await axios.post('http://localhost:8080/getquota', {UserID:UserID_}, 
+    const res = await axios.post('https://clickai.anthillnetworks.com/getquota', {UserID:UserID_}, 
     {
       headers: {
         'Content-Type': 'application/json',
@@ -114,12 +114,12 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
     setbrideName(item.DigitalInvite[0]["bridename"])
     setloc_(item.DigitalInvite[0]["location_"])
     setOpen(false);
-  };
+  };  
 
   const handleSearchInputChange = (e) => {
     searchvalue(searchFun(e.target.value, AllEventData));
     setSearchValue(e.target.value);
-  };
+  };  
 
   const handleSearch = () => {
     setDetails(true);
@@ -128,7 +128,7 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
   const handleClick = async (id) => {
     if (selectedOption) {
       if (id === "uploadFolder") {
-        // await fetchQuota()
+        await fetchQuota()
         if ( allFolders == null ) {
           setsearchPage(false);
           setCreateNew(true);
@@ -196,17 +196,21 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
     }
 
     else {
-      const response = await axios.post('https://clickai.anthillnetworks.com/createFolder', {
-        folderName: folderName,
-        UserID:UserID_
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      if (response.status === 200) {
-        const data = response.data
-        toast.success("Folder Created!");
+      try {
+        const response = await axios.post('https://clickai.anthillnetworks.com/createFolder', {
+          folderName: folderName,
+          UserID:UserID_
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (response.status === 200) {
+          const data = response.data
+          toast.success("Folder Created!");
+        }
+      } catch (error) {
+        alert(error)
       }
       setAllfolders(storeData.data[0]["Folders"])
       setIsDialogOpen(false);
@@ -494,25 +498,15 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
                 </div>
               </div>
 
-              <div className={`${Styles.sideBar1} flex w-full justify-between items-center bg-white pt-2`}>
-                <div className="flex gap-3 items-center pb-1 ">
-                { buttons.map((button) => (
-                    <div onClick={() => handleClick(button.id)} className={`flex flex-col items-center justify-center gap-1 ${selectedOption ? Styles.selected1 : Styles.unselected1}`}>
-                      <div><img src={button.img} alt="Imgs" /></div>
-                      <button key={button.id}>
-                          {button.label}
-                      </button>
-                    </div>
-
-                    ))}
-                    {/* { SuperAdmin?<button className={Styles.btns} onClick={()=>{if(month === ''){Toast.fire({icon: 'warning',title: 'No Event Selected ...'})}else{SendSMSFunction()}}}>{sendmessage}</button>:<></>} */}
-                </div>
-              </div>
+              
 
               <div className="min-h-screen w-full" style={{backgroundColor:"var(--bg)"}}>
                 <div className="flex w-full items-center justify-between py-9 px-10">
                     <div className="text-2xl" style={{color:"var(--blue)"}}>Events</div>
-                    <div className="flex items-center gap-4" style={{border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src={Logo_ || "/assets/profile.svg"} alt="Logo" width={100} height={100} className={Styles.profile} /><div className="pr-6 text-sm font-bold">{name}</div></div>
+                    {/* <div className="flex items-center gap-4" style={{border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src={Logo_ || "/assets/profile.svg"} alt="Logo" width={100} height={100} className={Styles.profile} /><div className="pr-6 text-sm font-bold">{name}</div></div> */}
+                    <div className="cursor-pointer">
+                      <TemporaryDrawer_  UserID={name} Logo={Logo_} />
+                    </div>
                 </div>
                 <div className="flex items-center w-full"> 
                   <div className={`${Styles.inpDiv} flex items-center w-full`}>
@@ -540,6 +534,20 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
                   </button>
                   </div>
               </div>
+            </div>
+            <div className={`${Styles.sideBar1} flex justify-between items-center pt-2`}>
+                <div className="flex flex-wrap gap-3 items-center justify-center pb-1 ">
+                { buttons.map((button) => (
+                    <div onClick={() => handleClick(button.id)} className={`${Styles.OptionsUI}flex flex-col items-center justify-center gap-1 ${selectedOption ? Styles.selected1 : Styles.unselected1}`}>
+                      <div><img src={selectedOption ? button.img : button.img_} alt="Imgs" style={{width:"28px",height:"28px",objectFit:"contain"}} /></div>
+                      <button key={button.id}>
+                          {button.label}
+                      </button>
+                    </div>
+
+                    ))}
+                    {/* { SuperAdmin?<button className={Styles.btns} onClick={()=>{if(month === ''){Toast.fire({icon: 'warning',title: 'No Event Selected ...'})}else{SendSMSFunction()}}}>{sendmessage}</button>:<></>} */}
+                </div>
             </div>
             <div>
               {

@@ -224,11 +224,29 @@
 .selected1 {
     cursor: pointer;
     font-size: 12px;
+    width: 8em;
+    height: 8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 10px;
+    background-color: white;
+    border-radius: 5px;
 }
 
 .unselected1 {
     cursor: none;
     font-size: 12px;
+    width: 8em;
+    height: 8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 10px;
+    background-color: white;
+    border-radius: 5px;
 }
 
 @media only screen and (max-width:600px) {
@@ -244,9 +262,9 @@
         display: none;
     }
     .sideBar1{
-        position: fixed;
-        bottom: 0;
-        left: 0;
         display: block;
+        position: absolute;
+        margin: 0 1em;
+        top: 30%;
     }
 }

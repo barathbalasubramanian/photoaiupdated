@@ -25,6 +25,7 @@ import { resolveStyleConfig } from "@chakra-ui/react"
 import MapData_ from "./Components/MapData/photos"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import TemporaryDrawer_ from "@/app/crm/Components/Home/UserProfile"
 
 export default function Dashboard({ event, UserID }){
   const SuperValue = useSelector((state)=>state.Login.Is_SuperAdmin);
@@ -105,15 +106,15 @@ export default function Dashboard({ event, UserID }){
     const FetchDashboard = async(continuationtoken)=>{
       const listParams = {
         Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
-        MaxKeys: 30,
-        ContinuationToken: continuationtoken,
+        // MaxKeys: 30,
+        // ContinuationToken: continuationtoken,
         Prefix: `${event}/COMPRESS_IMAGES`
       };
       try {
         const FetchedImages = await s3Client.send(new ListObjectsV2Command(listParams));
         const fetchedImages = FetchedImages.Contents.map(obj => obj.Key).filter((key)=>{if(key != `${event}/COMPRESS_IMAGES/`){ return key}});
         DobeMappedData([...new Set([...DobeMaped,...fetchedImages])]);
-        tokenvalue(FetchedImages.NextContinuationToken);
+        // tokenvalue(FetchedImages.NextContinuationToken);
         PushToStacks(fetchedImages);
       } catch (error) {
         // console.error('Error fetching images:', error);
@@ -125,14 +126,14 @@ export default function Dashboard({ event, UserID }){
       setSelectedFolder(key)
       const listParams = {
         Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
-        MaxKeys: 10,
-        ContinuationToken: continuationtoken,
+        // MaxKeys: 10,
+        // ContinuationToken: continuationtoken,
         Prefix: `${event}/COMPRESS_IMAGES/${key}`
       };
       try {
         const FetchedImages = await s3Client.send(new ListObjectsV2Command(listParams));
         const fetchedImages = FetchedImages.Contents.map(obj => obj.Key);
-        tokenvalue(FetchedImages.NextContinuationToken);
+        // tokenvalue(FetchedImages.NextContinuationToken);
         if (firsttime){ 
           stackonevalue([]);
           stacktwovalue([]);
@@ -506,8 +507,9 @@ export default function Dashboard({ event, UserID }){
                 <div className={Styles.MakeNavFixed}>
                     <div className={`${Styles.NavOneForMenu} mb-2`} style={{borderBottom:"1px solid var(--blue)"}}>
                         <div className="text-xl sm:text-lg" style={{color:"var(--blue)"}}>{pagetext === 'All Photos' ? 'Event Photos' : pagetext === 'All Videos' ? 'Event Videos' : pagetext === 'Explore' ? "Find your moments with fav people" : pagetext === 'Favorites' ? 'Your Favorites' : '' }</div>
-                        <div>
-                            <div className="flex items-center gap-4" style={{border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src={userInfo?.Logo || "/assets/profile.svg"} alt="Logo" width={100} height={100} className={Styles.profile} /><div className="hidden lg:flex pr-6 text-sm font-bold">{userInfo?.UserID}</div></div>
+                        <div className="cursor-pointer">
+                            {/* <div className="flex items-center gap-4" style={{border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src={userInfo?.Logo || "/assets/profile.svg"} alt="Logo" width={100} height={100} className={Styles.profile} /><div className="hidden lg:flex pr-6 text-sm font-bold">{userInfo?.UserID}</div></div> */}
+                            <TemporaryDrawer_ UserID={userInfo?.UserID} Logo={userInfo?.Logo}/>
                         </div>
                     </div>
                     <div className={`${Styles.FoldersCss} text-black mb-1`}>

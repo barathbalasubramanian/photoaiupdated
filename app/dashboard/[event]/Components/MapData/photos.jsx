@@ -46,12 +46,25 @@ const MapData_ = ({ Data, ScrollBtn, sel, selectedFiles }) => {
                         const isSelected = selectedFiles.includes(file);
                         return (
                             <div key={item} className={Styles.OneDiv} style={{ position: 'relative' }}>
-                                <Checkbox
+                                {/* <Checkbox
                                     checked={isSelected}
                                     onChange={() => handleCheckboxChange(item)}
                                     className={Styles.CheckBox}
-                                    style={{ position: 'absolute', top: "4.5em", left: "0px", color: 'white', width:"35px", height:"35px",backgroundColor: 'var(--blue)' }}
-                                />
+                                    style={{ position: 'absolute', top: "3.5em", left: "0px", color: 'white', width:"15px", height:"15px",borderRadius:'50%',backgroundColor: 'var(--pink)' }}
+                                /> */}
+
+                                <div
+                                    onClick={() => handleCheckboxChange(item)}
+                                    style={{ position: 'absolute', top: "15px", left: "15px", cursor: 'pointer' }}
+                                >
+                                    <Image
+                                        src={isSelected ? "/assets/selected.svg" : "/assets/unselected.svg"}
+                                        width={18}
+                                        height={18}
+                                        alt={isSelected ? "Selected" : "Unselected"}
+                                    />
+                                </div>
+
                                 <Image
                                     src={`https://selife-bucket.s3.ap-south-1.amazonaws.com/${item}`}
                                     width={200}
