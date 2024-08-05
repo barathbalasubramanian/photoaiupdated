@@ -427,7 +427,7 @@ export default function Dashboard({ event, UserID }){
 
     const HandleZip = async () => {
       loadderevalue(true);
-      const response = await axios.post(`https://clickai.anthillnetworks.com/downloadall`, {
+      const response = await axios.post(`http://localhost:8080/downloadall`, {
         folderName: SelectedFolder,
         UserID: UserID
       }, {
@@ -569,23 +569,23 @@ export default function Dashboard({ event, UserID }){
                       <>
                       {screenframe === 4?<>
                           <div className={Styles.MainContainer}>
-                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackone} ScrollBtn={scrollToPosition} /></div>
-                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stacktwo} ScrollBtn={scrollToPosition} /></div>
-                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackthree} ScrollBtn={scrollToPosition} /></div>
-                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackfour} ScrollBtn={scrollToPosition}/></div>
+                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackone} ScrollBtn={scrollToPosition} event={event}/></div>
+                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stacktwo} ScrollBtn={scrollToPosition}  event={event}/></div>
+                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackthree} ScrollBtn={scrollToPosition} event={event} /></div>
+                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackfour} ScrollBtn={scrollToPosition} event={event}/></div>
                           </div>
                         </>:<></>}
                         {screenframe === 3?<>
                           <div className={Styles.MainContainer}>
-                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackone} ScrollBtn={scrollToPosition} /></div>
-                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stacktwo} ScrollBtn={scrollToPosition} /></div>
-                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackthree} ScrollBtn={scrollToPosition} /></div>
+                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackone} ScrollBtn={scrollToPosition} event={event} /></div>
+                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stacktwo} ScrollBtn={scrollToPosition} event={event} /></div>
+                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackthree} ScrollBtn={scrollToPosition} event={event} /></div>
                           </div>
                         </>:<></>}
                         {screenframe === 2?<>
                           <div className={Styles.MainContainer}>
-                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackone} ScrollBtn={scrollToPosition} /></div>
-                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stacktwo} ScrollBtn={scrollToPosition} /></div>
+                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stackone} ScrollBtn={scrollToPosition} event={event} /></div>
+                            <div><MapData_ sel={handleSelectionChange} selectedFiles={selectedFiles} Data={stacktwo} ScrollBtn={scrollToPosition}  event={event}/></div>
                           </div>
                         </>:<></>}
                       </> :
@@ -650,7 +650,22 @@ export default function Dashboard({ event, UserID }){
             return <div key={index} className={Styles.FullscreenImage}>
               <span onClick={()=>{SliderValue(false)}}>&#x2716;</span>
               <span className={Styles.FullscrennnnImage}>
-                <div><img src={AllSupaFavourite.includes(item)?'/svg/FavTrue.svg':'/svg/FavSelected.svg'} onClick={async()=>{if(AllSupaFavourite.includes(item)){const newArray = AllSupaFavourite.filter((element) => `${element}` !== item);const respos = await UpdateSupaData(newArray);AllSupaFavouritevalue(respos)}else{const respos = await UpdateSupaData([...AllSupaFavourite,`${item}`]);AllSupaFavouritevalue(respos)}}} className={Styles.CheckBox}/></div>
+                <div>
+                  <img 
+                      className={Styles.CheckBox}
+                      src={AllSupaFavourite.includes(item)? "/assets/addfav.svg" : "/assets/addedfav.svg" } 
+                      onClick={
+                        async()=>{
+                          if(AllSupaFavourite.includes(item)){
+                            const newArray = AllSupaFavourite.filter((element) => `${element}` !== item);
+                            const respos = await UpdateSupaData(newArray);
+                            AllSupaFavouritevalue(respos)
+                          }else{
+                            const respos = await UpdateSupaData([...AllSupaFavourite,`${item}`]);
+                            AllSupaFavouritevalue(respos)
+                          }}} 
+                  />
+                </div>
                 <div>
                   {SuperValue && pagetext === 'Explore'&& ExploreSlfieData.length!=0?<div style={{marginBottom:'10px'}}>
                     <input type="file" name="Image_Files" multiple onChange={(e)=>{uploadvalue(e.target.files)}}/>

@@ -140,7 +140,7 @@ export default function TemporaryDrawer_({UserID,Logo}) {
                         <div style={{fontSize:"12px",color:"var(--black)"}}>The logo should be of 56px height and 160px width and make sure it perfectly fit in the box</div>
                         <div className='w-full flex items-center justify-between'>
                           <div className='cursor-pointer text-white px-4 py-2 w-fit' style={{borderRadius:"5px",textAlign:"center",fontSize:'14px',backgroundColor:"var(--pink)"}} onClick={triggerFileInput}>Upload <input type="file" onChange={(e)=>{HandeLogoUpload(e.target.files[0])}} id="hiddenFileInput" style={{width:'80px',overflow:'hidden',display:"none"}}/></div>
-                          <div className='cursor-pointer text-white px-4 py-2 w-fit' style={{borderRadius:"5px",textAlign:"center",fontSize:'14px',backgroundColor:"var(--pink)"}} onClick={()=>Logout()}>Logout</div>
+                          {/* <div className='cursor-pointer text-white px-4 py-2 w-fit' style={{borderRadius:"5px",textAlign:"center",fontSize:'14px',backgroundColor:"var(--pink)"}} onClick={()=>Logout()}>Logout</div> */}
                         </div>
                     </div>
                     {/* Password */}
@@ -217,14 +217,9 @@ export default function TemporaryDrawer_({UserID,Logo}) {
                             <div style={{fontSize:"16px",color:"var(--black)"}}>{UserLogo.Website}</div>
                         </div>
                     </div>
-                    {/* <div className='w-full px-8'>
-                        <div style={{backgroundColor:"#ECEDFF",borderRadius:"5px"}} className='sm:px-0 lg:px-16 py-2 gap-6 flex items-center justify-between w-full'>
-                            <img src="/assets/insta.svg" alt="Insta"  style={{width:"35px"}}/>
-                            <img src="/assets/utube.svg" alt="UTube" style={{width:"50px"}} />
-                            <img src="/assets/fb.svg" alt="FB"  style={{width:"40px"}}/>
-                        </div>
-                    </div> */}
-                    <div></div>
+                    <div className='pl-8'>
+                      <div className='cursor-pointer text-white px-4 py-2 w-fit' style={{borderRadius:"5px",textAlign:"center",fontSize:'14px',backgroundColor:"var(--pink)"}} onClick={()=>Logout()}>Logout</div>
+                    </div>
                 </div>
             </div>
         </div>
