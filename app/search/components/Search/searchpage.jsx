@@ -128,7 +128,7 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
   const handleClick = async (id) => {
     if (selectedOption) {
       if (id === "uploadFolder") {
-        await fetchQuota()
+        // await fetchQuota()
         if ( allFolders == null ) {
           setsearchPage(false);
           setCreateNew(true);
@@ -237,6 +237,12 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
   const fileInputRef = useRef(null);
   const [uploadStatus, setUploadStatus] = useState([]);
 
+  const [drivePercentage, setDrivePercentage] = useState(0);
+  const [s3Percentage, setS3Percentage] = useState(0);
+
+  const drivePercentageValue = (value) => setDrivePercentage(value);
+  const s3PercentageValue = (value) => setS3Percentage(value);
+
   const UploadImages = async (e) => {
     LoaderStatsValue(true);
     e.preventDefault();
@@ -260,8 +266,11 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
     const batchSize = 10;
     let results = [];
 
-    const totalFiles = files.length + files.length; // Considering both batch uploads and S3 uploads
-    let completedFiles = 0;
+    let driveCompletedFiles = 0;
+    let s3CompletedFiles = 0;
+
+    const totalDriveFiles = files.length;
+    const totalS3Files = files.length;
 
     for (let i = 0; i < files.length; i += batchSize) {
         const batch = files.slice(i, i + batchSize);
@@ -282,9 +291,10 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
 
             results = results.concat(response.data);
             setUploadStatus(prevStatus => [...prevStatus, ...response.data]);
-            completedFiles += batch.length;
-            const per = (completedFiles / totalFiles) * 100;
-            percentagevalue(Math.ceil(per));
+            driveCompletedFiles += batch.length;
+            const drivePer = (driveCompletedFiles / totalDriveFiles) * 100;
+            drivePercentageValue(Math.ceil(drivePer));
+            totaluploadedvalue(driveCompletedFiles);
         } catch (error) {
             console.error('Error uploading batch:', error);
         }
@@ -292,10 +302,10 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
 
     for (let i = 0; i < upload.length; i++) {
         if (UploadedArray.includes(upload[i].name)) {
-            completedFiles++;
-            const per = (completedFiles / totalFiles) * 100;
-            totaluploadedvalue(i + 1);
-            percentagevalue(Math.ceil(per));
+            s3CompletedFiles++;
+            const s3Per = (s3CompletedFiles / totalS3Files) * 100;
+            // totaluploadedvalue(i + 1);
+            s3PercentageValue(Math.ceil(s3Per));
             continue;
         }
 
@@ -329,10 +339,9 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
                         ACL: "public-read",
                     };
                     await s3Client.send(new PutObjectCommand(uploadJaonPar));
-                    completedFiles++;
-                    const per = (completedFiles / totalFiles) * 100;
-                    totaluploadedvalue(i + 1);
-                    percentagevalue(Math.ceil(per));
+                    s3CompletedFiles++;
+                    const s3Per = (s3CompletedFiles / totalS3Files) * 100;
+                    s3PercentageValue(Math.ceil(s3Per));
                     success = true;
                 }
             } catch (error) {
@@ -350,7 +359,8 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
     inputboxvalue(false);
     uploadvalue(null);
     totaluploadedvalue(0);
-    percentagevalue(0);
+    drivePercentageValue(0);
+    s3PercentageValue(0);
     toast.success("Upload Success ...");
     uploadstatusvideo(false);
     LoaderStatsValue(false);
@@ -703,13 +713,25 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
                               <div style={{alignSelf:"start"}}> 
                                   Uploading - { `${tottaluploaded} /  ${upload.length} Photos` }
                               </div>
-                              <div className={Styles.UploadPercentage} style={{alignSelf:"start"}}>
-                                  <div className={Styles.UploadPercentagetext}>{percentage}% Uploaded ...</div>
-                                  <div>
-                                      <div className={Styles.lineclass}>
-                                        <Line percent={percentage} strokeWidth={3} strokeColor="#ec2265" trailColor="#ec2265"/>
+                              <div style={{alignSelf:"start"}} className="flex items-start justify-start gap-10">
+                                <div className={Styles.UploadPercentage} style={{ alignSelf: "start" }}>
+                                    <div className={Styles.UploadPercentagetext}>{drivePercentage}% Uploaded ...</div>
+                                    <div>
+                                        <div className={Styles.lineclass}>
+                                            <Line percent={drivePercentage} strokeWidth={3} strokeColor="#ec2265" trailColor="#ec2265" />
+                                        </div>
+                                    </div>
+                                </div>
+                                { s3Percentage > 0 ?
+                                  <div className={Styles.UploadPercentage} style={{ alignSelf: "start" }}>
+                                      <div className={Styles.UploadPercentagetext}>{s3Percentage}% Progressing ...</div>
+                                      <div>
+                                          <div className={Styles.lineclass}>
+                                              <Line percent={s3Percentage} strokeWidth={3} strokeColor="#2265ec" trailColor="#2265ec" />
+                                          </div>
                                       </div>
-                                  </div>
+                                  </div> : <></>
+                                }
                               </div>
                           </>:<></>}
                       </form>
@@ -731,8 +753,6 @@ export default function Search({ AllEventData, SuperAdmin, UserID, name, Logo_ }
                           <div className="text-black text-lg font-bold">Upload Videos</div>
                           <div onClick={() => { setvideoUpload(false) }}style={{cursor:"pointer",color:"var(--pink)"}}>&#x2716;</div>
                       </div>
-                      {/* <input type="file" name="Video_Files" accept=".mp4" multiple required onChange={(e) => { uploadvalue(e.target.files) }} />
-                      <button type="submit" disabled={uploadstatus}>{uploadstatus ? "Please wait ..." : "Upload"}</button> */}
                       <div className="flex flex-col items-center justify-center px-4 py-6" style={{ border: "1px dotted #384EB7", borderRadius: '10px' }}>
                         <label htmlFor="file-upload_" className="flex flex-col items-center justify-center cursor-pointer">
                           <div><img src="/assets/upload.svg" alt="Upload Image" /></div>

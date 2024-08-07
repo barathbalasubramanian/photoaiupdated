@@ -32,11 +32,11 @@ function PaymentUpdateSendBtn({cusname,total,Mobile,name,totalAmount}) {
     <div className={Styles.sendDiv}>
         <button className={Styles.sendBtn} onClick={()=>{handleClickOpen()}} style={{border:'none',borderRadius:'5px',fontSize:'13px',padding:'8px 3em', marginTop:'15px',cursor:'pointer',backgroundColor:'var(--pink)',color:'#fff'}}>Send Update</button>            
         <Dialog open={open} TransitionComponent={Transition} transitionDuration={{ appear: 600, enter: 600, exit: 600 }} keepMounted onClose={handleClose} aria-describedby="alert-dialog-slide-description">
-            <div style={{backgroundColor:'#1e2742',padding:'30px 50px',borderRadius:'0'}}>
-                <div style={{color:'white', fontSize:'20px'}}>Do You Want to Send Update</div>
+            <div style={{backgroundColor:'var(--bg)',padding:'30px 50px',borderRadius:'0'}}>
+                <div style={{color:'var(--blue)', fontSize:'20px'}}>Do You Want to Send Update</div>
             <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginTop:'30px'}}>
-                <button onClick={()=>{HandelSendSMSBTN()}} style={{border:'none',borderRadius:'5px',fontSize:'13px',width:'50px',padding:'10px 15px',cursor:'pointer',backgroundColor:'#13192f',color:'#fff'}}>Yes</button>
-                <button onClick={()=>{handleClose()}} style={{border:'none',borderRadius:'5px',fontSize:'13px',width:'50px',padding:'10px 15px',cursor:'pointer',backgroundColor:'#13192f',color:'#fff'}}>No</button>
+                <button onClick={()=>{HandelSendSMSBTN()}} style={{border:'none',borderRadius:'5px',fontSize:'13px',width:'50px',padding:'10px 15px',cursor:'pointer',backgroundColor:'var(--pink)',color:'#fff'}}>Yes</button>
+                <button onClick={()=>{handleClose()}} style={{border:'none',borderRadius:'5px',fontSize:'13px',width:'50px',padding:'10px 15px',cursor:'pointer',backgroundColor:'var(--pink)',color:'#fff'}}>No</button>
             </div>
             </div>
         </Dialog>

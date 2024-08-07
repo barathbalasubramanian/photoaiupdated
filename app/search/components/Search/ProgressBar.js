@@ -3,7 +3,6 @@ import "./progressBar.css";
 
 const ProgressBar = ({ occupiedSpace, fullSpace }) => {
     const percentageUsed = (occupiedSpace / fullSpace) * 100;
-    console.log(occupiedSpace, fullSpace)
     return (
     <div className="progress-container">
       <div className="progress-bar" style={{ width: `${Math.round(percentageUsed)}%` }}>
